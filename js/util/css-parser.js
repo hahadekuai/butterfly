@@ -3,9 +3,9 @@
  * 
  * @author qijun.weiqj
  */
-define('util.CssParser', ['jQuery', 'Class', 'Log', 'util.BaseParser'], 
+define('util.CssParser', ['jQuery', 'Class', 'Log', 'util.ParserModule'], 
 
-function($, Class, Log, BaseParser) {
+function($, Class, Log, ParserModule) {
 
 
 var log = new Log('util.CssParser');
@@ -38,10 +38,10 @@ var CssParser = new Class({
 		var css = this.css,
 			ret = this.result = [];
 		
-		this._skipp(/\s/);
+		this._skip('');
 		while (this.pos < css.length) {
 			ret.push(this.parseRuleset());	
-			this._skipp(/\s/);
+			this._skip('');
 		}
 
 		return ret;
@@ -82,7 +82,7 @@ var CssParser = new Class({
 
 		this._skip(':');
 
-		var value = this._untilp(/[;\}]/);
+		var value = this._until('[;\\}]');
 		if (!value) {
 			this.message = '无效的属性值: ' + value;
 			this._error('invalid property value');
@@ -110,7 +110,7 @@ var CssParser = new Class({
 });
 //~ CssParser
 
-BaseParser.mixin(CssParser);
+ParserModule.mixin(CssParser);
 
 
 $.extend(CssParser, {

@@ -30,9 +30,9 @@
  *		errorMessage = o.message;
  * }
  */
-define('util.HtmlParser', ['jQuery', 'Class', 'Log', 'util.BaseParser'], 
+define('util.HtmlParser', ['jQuery', 'Class', 'Log', 'util.ParserModule'], 
 
-function($, Class, Log, BaseParser) {
+function($, Class, Log, ParserModule) {
 
 var log = new Log('util.HtmlParser');
 
@@ -52,25 +52,13 @@ var Parser = new Class({
 			ret = this.result = [];
 
 		while (this.pos < html.length) {
-			if (inner && this._checkEndTag()) {
+			if (inner && this._check('<\\s*/')) {
 				break;
 			}
 			ret.push(this.parseNode());
 		}
 
 		return ret;
-	},
-
-	_checkEndTag: function() {
-		var last = this.pos;
-
-		if (this._check('<')) {
-			this._skip('<')
-			var check = this._check('/');
-			this.pos = last;
-			return check;
-		}
-		return false;
 	},
 
 	parseNode: function() {
@@ -88,7 +76,7 @@ var Parser = new Class({
 	parseComment: function() {
 		log.info('parse comment')
 		
-		var nodePos = this.pos;
+		var nodePos = this.pos + 1;
 
 		this._skip('<!--');
 		this.message = '注释未正常结束';
@@ -107,7 +95,7 @@ var Parser = new Class({
 	parseElement: function() {
 		log.info('parse element');
 
-		var nodePos = this.pos;
+		var nodePos = this.pos + 1;
 
 		this._skip('<');
 		var name = this.parseTag(),
@@ -124,7 +112,8 @@ var Parser = new Class({
 
 		if (!enclose && $.inArray(name.toLowerCase(), this._enclose) === -1) {
 			body = this.parseBody(name);
-			this._skipEndTag(name);
+			this.message = '缺少结束标签</' + name + '>';
+			this._skip('<\\s*/\\s*' + name + '\\s*>');
 		} else {
 			body = [];
 		}
@@ -141,7 +130,8 @@ var Parser = new Class({
 
 	parseTag: function() {
 		log.info('parse tag');
-		var name = this._untilp(/[^-\w]/);
+		this._skip('');
+		var name = this._until('[^-\\w]');
 		if (!name) {
 			this.message = '无效的标签名称';
 			this._error('invalid tag name');
@@ -154,8 +144,7 @@ var Parser = new Class({
 		log.info('parse attributes');
 		
 		var attrs = [];
-		while (!(this.pos >= this.html.length || 
-				this._check('/') || this._check('>'))) {
+		while (!(this.pos >= this.html.length || this._check('[/>]'))) {
 			attrs.push(this.parseAttribute());
 		}
 
@@ -165,9 +154,10 @@ var Parser = new Class({
 	parseAttribute: function() {
 		log.info('parse attribute');
 
-		var nodePos = this.pos;
-		
-		var name = this._untilp(/[^-\w]/),
+		this._skip('');
+
+		var nodePos = this.pos + 1,
+			name = this._until('[^-\\w]'),
 			value = undefined,
 			q = null;
 
@@ -192,7 +182,7 @@ var Parser = new Class({
 				this.message = '属性值缺少结束单引号';
 				this._skip(q);
 			} else {
-				value = this._untilp(/[\s\/>]/);
+				value = this._until('[\\s/>]');
 				if (!$.trim(value)) {
 					this.message = '缺少属性值';
 					this._error('invalid property value');
@@ -206,11 +196,9 @@ var Parser = new Class({
 
 	parseBody: function(name) {
 		log.info('parse body');
-		// there is an bug in here
-		// where end with '< /'
 		if ($.inArray(name.toLowerCase(), this._bodyText) !== -1) {
 			this.message = '缺少结束标签</' + name + '>';
-			var body = this._until('</' + name + '>', false, true);
+			var body = this._until('<\\s*/\\s*' + name + '\\s*>', true);
 			print(body);
 			return {
 				type: 'text',
@@ -224,8 +212,8 @@ var Parser = new Class({
 
 	parseText: function() {
 		log.info('parse text');
-		var nodePos = this.pos,
-			body = this._until('<', true, true);
+		var nodePos = this.pos + 1,
+			body = this._until('<|$', true);
 
 		print(body);
 
@@ -236,26 +224,12 @@ var Parser = new Class({
 		};
 	},
 
-	_skipEndTag: function(name) {
-		log.info('skip end tag: ' + name);
-		this.message = '缺少结束标签</' + name + '>';
-		var end = '</' + name + '>';
-		if (this._check(end)) {
-			this._skip(end);
-		} else {
-			this._skip('<');
-			this._skip('/');
-			this._skip(name);
-			this._skip('>');
-		}
-	},
-
 	_enclose: ['area', 'br', 'hr', 'img', 'input', 'meta', 'link'],
 	_bodyText: ['textarea', 'script']
 	
 });
 
-BaseParser.mixin(Parser);
+ParserModule.mixin(Parser);
 
 return Parser;
 
