@@ -77,7 +77,11 @@ var Uploader =  new Class({
 	_bindComplete: function() {
 		var self = this,
 			div = this.div,
-			options = this.options;
+			options = this.options,
+			error = function(message) {
+				log.warn('upload error: ' + message);
+				options.error && options.error(message);
+			};
 
 		div.bind('transferCompleteData.flash', function(e, o) {
 			var file = o.file;
@@ -88,12 +92,22 @@ var Uploader =  new Class({
 					log.info('upload success: ' + data.url);
 					options.success && options.success(data.url);
 				} else {
-					log.warn('upload error: ' + data.message);
-					options.error && options.error(data.message);
+					error(data.message);
 				}
 			}
-
+			
 			div.flash('clear');
+		});
+
+		div.bind('finish.flash', function() {
+			o = (div.flash('getFileStatuses') || [])[0] || {},
+				map = {
+					'SIZE_OVERFLOW': '抱歉，您上传的图片过大'
+				};
+			if (o.status === 'refused') {
+				error(map[o.msg] || '抱歉，由于网络或其它原因，上传失败');
+			}
+
 		});
 		
 	},

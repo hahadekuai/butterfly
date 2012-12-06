@@ -83,7 +83,6 @@ describe(this.id + ' - ÓÃÓÚ½âÎöHTML', function() {
 		expect(text.type).toBe('text');
 		expect(text.body).toBe(' Hi This Is ');
 	});
-
 });
 
 });

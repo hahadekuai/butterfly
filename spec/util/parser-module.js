@@ -38,6 +38,13 @@ describe(this.id + ' - Ö§³ÖParserµÄ±àÐ´', function() {
 		expect(parser.pos).toBe(3);
 	});
 
+	it('_skip ¿Õ°×', function() {
+		var parser = new Parser('   abc');
+		expect(parser.pos).toBe(0);
+		parser._skip('');
+		expect(parser.pos).toBe(3);
+	});
+
 	it('_until default', function() {
 		var body = ' 123456 < 123456',
 			parser = new Parser(body),

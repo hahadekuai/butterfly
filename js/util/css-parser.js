@@ -50,6 +50,8 @@ var CssParser = new Class({
 	parseRuleset: function() {
 		log.info('parse ruleset');
 
+		this.message = '无效的样式';
+
 		var css = this.css,
 			nodePos = this.pos,
 			selector = this._until('{'),

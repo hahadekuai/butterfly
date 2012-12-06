@@ -17,9 +17,7 @@ var CodeMirrorEditor =  new Class({
             theme: 'eclipse',
             lineNumbers: true,
             lineWrapping: true,
-            tabSize: 4,
-            indentUnit: 4,
-            indentWithTabs: true
+            tabSize: 4
 		}, options);
 
 		var defer = $.Deferred();
