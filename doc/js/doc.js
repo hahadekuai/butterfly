@@ -1,6 +1,6 @@
 define('Doc', 
-		['jQuery', 'vendor.Mustache', 'vendor.marked'], 
-		function($, Mustache, marked) {
+		['jQuery', 'ui.Autowire', 'vendor.Mustache', 'vendor.marked'], 
+		function($, Autowire, Mustache, marked) {
 
 return {
 	init: function() {
@@ -53,6 +53,7 @@ return {
 
 	loadPage: function(group, page) {
 		var elm = $('div.doc-container', '#content'),
+			div = $('<div>').appendTo(elm),
 			url = 'page/' + group + '/' + page + '.htm';
 
 		$.ajax(url, {
@@ -60,7 +61,8 @@ return {
 			cache: false,
 			dataType: 'html',
 			success: function(html) {
-				elm.html(marked(html));
+				div.html(marked(html));
+				new Autowire(div);
 			}
 		});
 	},
@@ -74,7 +76,7 @@ return {
 	data: {
 		lang: ['loader', 'class', 'log', 'context'],
 		ui: ['Widget', 'FileUploader'],
-		fx: ['tab', 'roll', 'popup', 'accordion', 'countdown']
+		fx: ['tabs', 'roll', 'popup', 'accordion', 'countdown']
 	}
 };
 		

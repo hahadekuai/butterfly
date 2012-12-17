@@ -4,7 +4,7 @@ new Uploader('#upload', {
 	filter: 'image',
 	url: 'upload.do',
 	before: function() {
-		alert('这仅仅是demo，你需要配置合适的上传接口才能完成上传');
+		alert('杩欎粎浠呮槸demo锛屼綘闇�瑕侀厤缃悎閫傜殑涓婁紶鎺ュ彛鎵嶈兘瀹屾垚涓婁紶');
 		return false;	
 	}
 });

@@ -95,3 +95,26 @@
 .doc-container {
 	padding-top: 30px;
 }
+
+.demo-container ul,
+.demo-container li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.demo-container h1,
+.demo-container h2,
+.demo-container h3,
+.demo-container h4,
+.demo-container h5,
+.demo-container h6{
+  font-size:100%; 
+  font-weight:normal;
+  margin:0;
+  padding:0;
+  line-height: normal;
+}
+.demo-container p{
+  padding:0;
+  margin:0;
+}

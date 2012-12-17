@@ -251,6 +251,7 @@ Validation.Validator = {
 				'taobao.net',
 				'taobaocdn.com',
 				'taobaocdn.net',
+				'tbcdn.cn',
 				'alipay.com',
 				'alipay.com.cn',
 				'alipay.net',

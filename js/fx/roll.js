@@ -2,34 +2,38 @@
  * 轮播功能
  * @author qijun.weiqj
  */
-define('fx.Roll', ['jQuery', 'Class', 'Log'], function($, Class, Log) {
+define('fx.Roll', ['jQuery', 'ui.Widget', 'Log'], function($, Widget, Log) {
 
 var log = new Log('fx.Roll');
 
-return new Class({
-	
-	/**
-	 * 构造一个Roll
-	 * @param {jquery} div 
-	 * @param options
-	 *	- count		item数量 可选, 默认会从宽度和item数量推算出个数	
-	 *	- contentSelector 内容选择器 .widgetx-roll-content
-	 *	- itemSelector	item选择器 默认为 li
-	 *	- speed		
-	 *	- delay		默认为 3000, 即延迟3秒轮播
-	 */
-	init: function(div, options) {	
-		this.div = $(div).eq(0);
-		this.options = options || {};
+return new Widget({
 
+	/**
+	 *	count		item数量 可选, 默认会从宽度和item数量推算出个数	
+	 *	body		内容选择器 默认为 fx-roll-body
+	 *	item		item选择器 默认为 li
+	 *	delay		轮播间隔时间
+	 *	duration	动画时间
+	 */
+	defaultOptions: {
+		body: '.fx-roll-body',
+		item: 'li',
+		delay: 3000
+	},
+
+	init: function() {	
 		// 数量不足时不轮播
 		var count = this.options.count || this._getCount();
 		if (!count || this._getItems().length <= count) {
 			return;
 		}
 		
-		var contentSelector = this.options.contentSelector || '.widgetx-roll-content';
-		this.content = $(contentSelector, this.div);
+		var body = $(this.options.body, this.element);
+		if (!body.length) {
+			log.error('invalid fx-roll-body');
+			return;
+		}
+		this.body = body;
 
 		this._prepare();	
 		this._handle();
@@ -37,7 +41,7 @@ return new Class({
 	},
 
 	_getItems: function() {
-		return $(this.options.selector || 'li', this.div);
+		return $(this.options.item, this.element);
 	},
 
 	_getCount: function() {
@@ -50,22 +54,22 @@ return new Class({
 			width = off2.left - off1.left;
 		}
 
-		return width > 0 ? parseInt(this.div.width() / width, 10) : 0;
+		return width > 0 ? parseInt(this.element.width() / width, 10) : 0;
 	},
 
 	_prepare: function() {
-		this.content.css('position', 'relative');
+		this.body.css('position', 'relative');
 	},
 
 	_handle: function() {
 		var self = this;
-		this.div.on('mouseenter', function() {
+		this.element.on('mouseenter', function() {
 			self.isHover = true;
-			self.div.addClass('widgetx-roll-hover');
+			self.element.addClass('fx-roll-hover');
 		});
-		this.div.on('mouseleave', function() {
+		this.element.on('mouseleave', function() {
 			self.isHover = false;
-			self.div.removeClass('widgetx-roll-hover');
+			self.element.removeClass('fx-roll-hover');
 		});
 	},
 
@@ -76,29 +80,31 @@ return new Class({
 		}
 
 		var self = this,
+			duration = this.options.duration,
+
 			items = this._getItems(),
 
 			first = items.eq(0),
 			second = items.eq(1),
 			left = second.offset().left - first.offset().left;
 
-		this.content.animate({
+		this.body.animate({
 			left: '-' + left
-		}, function() {
-			self.content.append(first);
-			self.content.css({
+		}, duration, function() {
+			self.body.append(first);
+			self.body.css({
 				left: 0
 			});
+
 			self._delay();
 		})
 	},
 
 	_delay: function() {
-		var self = this,
-			options = this.options;
+		var self = this;
 		setTimeout(function() {
 			self._play();	
-		}, options.delay || 3000);
+		}, this.options.delay);
 	}
 	
 });

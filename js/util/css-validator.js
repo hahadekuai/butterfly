@@ -76,7 +76,11 @@ var CssValidator = new Class({
     validate: function(css) {
 		for (var i = 0, c = css.length; i < c; i++) {
 			var ruleset = css[i],
-				selectors = $.trim(ruleset.selector).split(/\s*,\s*/);	
+				selectors = $.trim(ruleset.selector).split(/\s*,\s*/);
+
+			if (!this._validateGlobal(ruleset)) {
+				return false;
+			}
 
 			for (var j = 0, jc = selectors.length; j < jc; j++) {
 				if (!this._validateItem(selectors[j], ruleset)) {
@@ -85,6 +89,13 @@ var CssValidator = new Class({
 			}
 		}
 
+		return true;
+	},
+
+	_validateGlobal: function(ruleset) {
+		if (this._get('global')) {
+			return this._validateRuleset('global', ruleset);
+		}
 		return true;
 	},
 
@@ -130,7 +141,7 @@ var CssValidator = new Class({
 			this.result = {
 				code: 'invalid_ruleset',
 				message: o.message || '样式不符合规则',
-				node: ruleset
+				node: o.node || ruleset
 			};
 			return false;
 		}
@@ -191,7 +202,9 @@ var CssValidator = new Class({
 
 //~CssValidator
 
+
 CssValidator.Validator = {
+
 	'background-alibaba-link': function(value, o) {
 		var Validation = require('ui.Validation'),
 			pattern = /url\(['"]?([^\)]+)['"]?\)/,
@@ -202,8 +215,23 @@ CssValidator.Validator = {
 			return false;
 		}
 		return true;
+	},
+
+	'forbid-expression': function(ruleset, o) {
+		var pattern = /expression\s*\(/,
+			valid = true;	
+		$.each(ruleset.styles, function(index, style) {
+			if (pattern.test(style.value)) {
+				o.node = style;
+				o.message = '不允许使用css表达式';
+				valid = false;
+				return false;
+			}
+		});
+		return valid;
 	}
 };
+
 
 return CssValidator;
 

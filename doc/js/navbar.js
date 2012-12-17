@@ -18,8 +18,10 @@ var NavBar = {
 			widgetId: 'fx.Popup',
 			itemSelector: 'li.dropdown',
 
-			trigger: 'a.dropdown-toggle',
-			content: 'ul.dropdown-menu'
+			trigger: 'a.dropdown-toggle,ul.dropdown-menu',
+			body: 'ul.dropdown-menu',
+
+			hideDelay: 300
 		});
 
 		var lis = $('li', bar);

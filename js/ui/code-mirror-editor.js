@@ -57,7 +57,7 @@ var CodeMirrorEditor =  new Class({
     },
 
 	isDirty: function() {
-		return this.getLastValue() !== this.getValue();	
+		return this.getLastValue().replace(/\r\n/g,'\n').length !== this.getValue().replace(/\r\n/g,'\n').length;	
 	},
     
     saveToTextArea: function(){

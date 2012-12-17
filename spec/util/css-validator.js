@@ -109,6 +109,23 @@ describe(this.id + ' - 验证CSS对象符合一定的业务规则', function() {
 		expect(validator.validate(css)).toBeFalsy();
 	});
 
+	it('验证CSS不允许使用表达式', function() {
+		var validator = new CssValidator({ });
+
+        validator.add('global', 'forbid-expression');
+
+		var css = [
+			{
+				selector: '.hello2',
+				styles: [
+					{ property: 'left', value: 'expression(1 + 1)' }
+				]
+			}	
+		];
+
+		expect(validator.validate(css)).toBeFalsy();
+	});
+
 	it('验证ruleset符合一定的规则', function() {
 		var validator = new CssValidator({
 			'.hello': 'all'

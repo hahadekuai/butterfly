@@ -5,7 +5,9 @@
  *
  *	@author qijun.weiqj
  */
-define('ui.Widget', ['jQuery'], function($) {
+define('ui.Widget', ['jQuery', 'Log'], function($, Log) {
+
+var log = new Log('ui.Widget');
 
 var Widget = function(proto) {
 	var widget = function(div, options) {
@@ -21,7 +23,14 @@ var Widget = function(proto) {
 		return proto.init && proto.init.apply(this, arguments);
 	};
 
-	widget.prototype = $.extend({}, Proto, proto);
+	var getConfigObject = function(type, name) {
+		name = name || 'default';
+		ret = typeof name === 'string' ? widget[type][name] : name;
+		ret || log.warn('get return null for ' + type + ':' + name);
+		return ret;
+	};
+
+	widget.prototype = $.extend({ getConfigObject: getConfigObject }, Proto, proto);
 
 	return widget;
 };
@@ -44,9 +53,11 @@ var Proto = {
 	},
 
 	triggerHandler: function(type, data, flag) {
+		log.info('trigger ' + type);
+
 		var ret1,
 			ret2,
-			fn = this.options[type];
+			fn = this.options['on' + type] || this.options[type];
 
 		data = $.isArray(data) ? data : [data];
 
@@ -58,6 +69,7 @@ var Proto = {
 
 		return ret2 === undefined ? ret1 : ret2;
 	}
+
 };
 
 return Widget;

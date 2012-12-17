@@ -80,6 +80,7 @@ var props = [
     'opacity',
     'z-index',
     'cursor',
+	'filter',
     'zoom',
     'border-radius',
     'border-top-left-radius',

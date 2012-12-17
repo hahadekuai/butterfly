@@ -4,39 +4,35 @@
  */
 define('fx.Popup', ['jQuery', 'ui.Widget'], function($, Widget) {
 	
-return new Widget({
+var Popup = new Widget({
 
 	defaultOptions: {
-		event: 'mouseenter',		// 触发浮出效果事件
-		trigger: 'popup-trigger',	// 触发节点选择器
-		content: 'popup-content',	// 内容节点选择器
-		delay: 0,					// 延迟打开
-		delayForHide: 300			// 延迟关闭
+		trigger: '.fx-popup-trigger',		// 触发节点
+		//showTrigger: ,					// 显示触发节点选择器，默认和trigger相同
+		//hideTrigger: ,					// 隐藏触发节点选择器，默认和trigger相同
+		showEvent: 'mouseenter',			// 显示事件
+		hideEvent: 'mouseleave',			// 关闭事件
+
+		body: '.fx-popup-body',				// 内容节点选择器
+		effect: 'default',					// 浮出效果
+		active: 'fx-popup-active',			// 显示时具有的className
+
+		showDelay: 0,						// 延迟打开
+		hideDelay: 0						// 延迟关闭
 	},
 	
 	init: function() {
-		this._handleShow();
-		this._handleHide();
+		this.effect = this.getConfigObject('Effect', this.options.effect);
+		this._handle();
 	},
 
-	_handleShow: function() {
+	_handle: function() {
 		var options = this.options,
-			handler = this._delay($.proxy(this, 'show'), options.delay);
+			showHandler = this._delay($.proxy(this, 'show'), options.showDelay),
+			hideHandler = this._delay($.proxy(this, 'hide'), options.hideDelay);
 		
-		this.element.on(options.event, options.trigger, handler);
-	},
-
-	_handleHide: function() {
-		var options = this.options,
-			handler = this._delay($.proxy(this, 'hide'), options.delayForHide);
-
-		this.element.on('mouseleave', options.trigger, handler);
-
-		// 移出内容区, 需要隐藏 
-		this.element.on('mouseleave', options.content, handler);
-
-		// 移进内容区, 清除隐藏
-		this.element.on('mouseenter', options.content, $.proxy(this, '_clear'));
+		this.element.on(options.showEvent, options.showTrigger || options.trigger, showHandler);
+		this.element.on(options.hideEvent, options.hideTrigger || options.trigger, hideHandler);
 	},
 
 	_delay: function(action, delay) {
@@ -44,7 +40,10 @@ return new Widget({
 		return delay ? function() {
 			self._clear();
 			self._timer = setTimeout(action, delay);
-		} : action;
+		} : function() {
+			self._clear();	
+			action();
+		};
 	},
 
 	_clear: function() {
@@ -56,20 +55,28 @@ return new Widget({
 		if (this.isShow) {
 			return;
 		}
-			
 		this.isShow = true;
-		this.element.addClass('widget-popup-show');
-		$(this.options.content, this.element).show();
+
+		var self = this,
+			body = $(this.options.body, this.element);
+		this.effect.show(body, function() {
+			self.element.addClass(self.options.active);
+			self.trigger('show');
+		});
 	},
 
 	hide: function() {
 		if (!this.isShow) {
 			return;
 		}
-		
 		this.isShow = false;
-		this.element.removeClass('widget-popup-show');
-		$(this.options.content, this.element).hide();
+		
+		var self = this,
+			body = $(this.options.body, this.element);
+		this.effect.hide(body, function() {
+			self.element.removeClass(self.options.active);
+			self.trigger('hide');
+		});
 	},
 
 	toggle: function() {
@@ -77,5 +84,22 @@ return new Widget({
 	}
 
 });
+//~
+
+Popup.Effect = {
+	'default': {
+		show: function(elm, callback) {
+			elm.show();
+			callback();
+		},
+		hide: function(elm, callback) {
+			elm.hide();	
+			callback();
+		}
+	}
+			
+};
+
+return Popup;
 		
 });
