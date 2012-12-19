@@ -1,4 +1,3 @@
-butterfly
-=========
+## butterfly-1.0.0_pre
 
-开发过程中形成的部分业务无关前端组件
+1. lang/loader 优化检测依赖是否加载完成

@@ -164,13 +164,12 @@ var require = function(config, depends, callback) {
 			[];
 
 	var list = [],
+		count = 0,
 		n = depends.length,
 		
 		check = function() {
-			for (var j = 0; j < n; j++) {
-				if (list[j] === EMPTY) {
-					return;
-				}
+			if (count < n) {
+				return;
 			}
 			callback && callback.apply(null, list);
 		},
@@ -180,14 +179,11 @@ var require = function(config, depends, callback) {
 			loadModule(config, depend, function(o) {
 				assert(o !== FAIL, 'load ' + getId(config, depend) + ' error');
 				list[index] = o;
+				count++;
 				check();
 			});
 		};
 
-	for (var i = 0; i < n; i++) {
-		list[i] = EMPTY;
-	}
-	
 	check();
 	for (var i = 0; i < n; i++) {
 		load(i);
