@@ -1,0 +1,74 @@
+Roll
+=======
+
+## 描述
+
+滚动效果
+
+
+## API
+
+new Roll(element, config)
+
+## config
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="300">类型</th>
+		<th width="100">默认值</th>
+		<th width="600">说明</th>	
+	</tr>
+		<tr>
+		<td>body</td>
+		<td>string</td>
+		<td>.fx-roll-body</td>
+		<td>滚动节点的选择器<td>
+	</tr>
+	<tr>
+		<td>item</td>
+		<td>string</td>
+		<td>li</td>
+		<td>项的选择器</td>
+	</tr>
+	<tr>
+		<td>delay</td>
+		<td>number</td>
+		<td>3000</td>
+		<td>滚动间隔时间</td>
+	</tr>
+	<tr>
+		<td>duration</td>
+		<td>number</td>
+		<td></td>
+		<td>动画时间</td>
+	</tr>
+	<tr>
+		<td>count</td>
+		<td>number</td>
+		<td></td>
+		<td>正常情况下不需要设置， 当实际项数小于count时，不进行滚动<br />
+		如果不设置，这个值会自动由组件计算</td>
+	</tr>
+</table>
+
+<link rel="stylesheet" href="page/fx/roll.css" />
+
+## DEMO
+
+<div class="demo-container">
+
+<div class="design-roll-01" data-widget-type="fx.Roll">
+	<ul class="fx-roll-body ui-clr">
+		<li><a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121212/50.jpg" /></a></li>
+		<li><a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121212/51.jpg" /></a></li>
+		<li><a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121212/52.jpg" /></a></li>
+		<li><a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121212/53.jpg" /></a></li>
+		<li><a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121212/54.jpg" /></a></li>
+		<li><a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121212/55.jpg" /></a></li>
+		<li><a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121212/56.jpg" /></a></li>
+		<li><a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121212/57.jpg" /></a></li>
+	</ul>
+</div>
+
+</div>

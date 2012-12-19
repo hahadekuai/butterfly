@@ -1,0 +1,21 @@
+/**
+ * ±íµ¥
+ */
+
+/**
+ * input:text
+ */
+.ui-text {
+	padding: 3px 2px; 
+	border: 1px solid #A8ACAD; 
+	background: #fff url(http://img.china.alibaba.com/images/trade/quotation/100426/bg1.gif) repeat-x; 
+	width: 150px;
+	line-height: 1.2;
+}
+
+/**
+ * textarea
+ */
+.ui-textarea {
+	border: 1px solid #A8ACAD; 
+}

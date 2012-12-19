@@ -1,0 +1,162 @@
+<link rel="stylesheet" href="page/fx/accordion.css" />
+
+Accordion
+=======
+
+## 描述
+
+用于实现手风琴切换效果
+
+## API
+
+new Accordion(element, config)
+
+## config
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="300">类型</th>
+		<th width="100">默认值</th>
+		<th width="600">说明</th>	
+	</tr>
+	<tr>
+		<td>nav</td>
+		<td>string</td>
+		<td>.fx-accordion-header</td>
+		<td>nav选择器</td>
+	</tr>
+	<tr>
+		<td>pane</td>
+		<td>string</td>
+		<td>.fx-accordion-content</td>
+		<td>面板选择器</td>
+	</tr>
+	<tr>
+		<td>navHoverClass</td>
+		<td>string</td>
+		<td>fx-accordion-hhover</td>
+		<td>鼠标滑过nav部分时会添加的class名</td>
+	</tr>
+	<tr>
+		<td>navActiveClass</td>
+		<td>string</td>
+		<td>fx-accordion-hactive</td>
+		<td>nav被激活时会添加的class名</td>
+	</tr>
+	<tr>
+		<td>next</td>
+		<td>string</td>
+		<td>.next</td>
+		<td>下一页选择器</td>
+	</tr>
+	<tr>
+		<td>effect</td>
+		<td>string</td>
+		<td>updown</td>
+		<td>手风琴的类型,支持'updown','leftright'</td>
+	</tr>
+	<tr>
+		<td>duration</td>
+		<td>number</td>
+		<td>500</td>
+		<td>切换所花费的时间</td>
+	</tr>
+	<tr>
+		<td>index</td>
+		<td>number</td>
+		<td>0</td>
+		<td>当前选中项索引</td>
+	</tr>
+	<tr>
+		<td>event</td>
+		<td>string</td>
+		<td>mouseenter</td>
+		<td>切换触发事件</td>
+	</tr>
+
+</table>
+
+## DEMO
+
+### effect: updown
+<div class="demo-container">
+<div class="design-accordion-01">
+	<div class="fx-accordion" data-widget-type="fx.Accordion" data-widget-config='{}'>
+	    <h3 class="fx-accordion-header">产品展示1</h3>
+	    <div class="fx-accordion-content">
+	        <ul>
+	            <li>
+	                <a href="#" title="">
+	                    <img src="http://img.china.alibaba.com/cms/upload/2012/511/984/489115_681975369.png" alt="" />
+	                </a>
+	            </li>
+	            <li>
+	                <a href="#" title="">
+	                    <img src="http://img.china.alibaba.com/cms/upload/2012/711/984/489117_681975369.png" alt="" />
+	                </a>
+	            </li>
+	        </ul>
+	    </div>
+	    <h3 class="fx-accordion-header">产品展示2</h3>
+	    <div class="fx-accordion-content">
+	        <ul>
+	            <li>
+	                <a href="#" title="">
+	                    <img src="http://img.china.alibaba.com/cms/upload/2012/511/984/489115_681975369.png" alt="" />
+	                </a>
+	            </li>
+	            <li>
+	                <a href="#" title="">
+	                    <img src="http://img.china.alibaba.com/cms/upload/2012/711/984/489117_681975369.png" alt="" />
+	                </a>
+	            </li>
+	        </ul>
+	    </div>
+	    <h3 class="fx-accordion-header">产品展示3</h3>
+	    <div class="fx-accordion-content">
+	        <ul>
+	            <li>
+	                <a href="#" title="">
+	                    <img src="http://img.china.alibaba.com/cms/upload/2012/511/984/489115_681975369.png" alt="" />
+	                </a>
+	            </li>
+	            <li>
+	                <a href="#" title="">
+	                    <img src="http://img.china.alibaba.com/cms/upload/2012/711/984/489117_681975369.png" alt="" />
+	                </a>
+	            </li>
+	        </ul>
+	    </div>
+	</div>
+</div>
+</div>
+<!--/demo-container-->
+
+
+### effect: leftright
+<div class="demo-container">
+<div class="design-accordion-02">
+	<div class="fx-accordion" data-widget-type="fx.Accordion" data-widget-config='{"effect":"leftright"}'>
+	    <h3 class="fx-accordion-header fx-accordion-hactive">产品展示1</h3>
+	    <div class="fx-accordion-content">
+	        <a href="#" title="">
+	          <img src="http://img.china.alibaba.com/cms/upload/2012/380/094/490083_681975369.png" />
+	        </a>
+	    </div>
+	    <h3 class="fx-accordion-header">产品展示2</h3>
+	    <div class="fx-accordion-content">
+	        <a href="#" title="">
+	          <img src="http://img.china.alibaba.com/cms/upload/2012/380/094/490083_681975369.png" />
+	        </a>
+	    </div>
+	    <h3 class="fx-accordion-header">产品展示3</h3>
+	    <div class="fx-accordion-content">
+	        <a href="#" title="">
+	          <img src="http://img.china.alibaba.com/cms/upload/2012/380/094/490083_681975369.png" />
+	        </a>
+	    </div>
+	</div>
+</div>
+</div>
+<!--/demo-container-->

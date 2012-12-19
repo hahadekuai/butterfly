@@ -1,0 +1,56 @@
+/**
+ * °´Å¤
+ */
+
+/**
+ * Ä¬ÈÏ°´Å¤
+ */
+.ui-btn-default, .ui-btn-default:hover {
+	color: #333;
+	text-decoration: none;
+	cursor: pointer;
+}
+.ui-btn-default, .ui-btn-default span {
+	display: inline-block;
+	background: url(http://img.china.alibaba.com/cms/upload/2011/088/980/89880_719516335.png);
+}	
+.ui-btn-default {
+	padding-right: 16px;
+	background-position: right 0;
+}
+.ui-btn-default span {
+	height: 26px;
+	padding-left: 16px;
+	background-position: 0 0;
+	line-height: 26px;
+}
+
+.ui-btn-default:hover {
+	background-position: right -52px;
+}
+.ui-btn-default:hover span {
+	background-position: 0 -52px;
+}
+
+/**
+ * ui-btn-small
+ */
+.ui-btn-small, .ui-btn-small:hover {
+	color: #666;
+	text-decoration: none;
+	cursor: pointer;
+}
+.ui-btn-small, .ui-btn-small span {
+	display: inline-block;
+	background: url(http://img.china.alibaba.com/images/app/platform/winport/diy/diy-page-btn.png);
+}	
+.ui-btn-small {
+	padding-right: 8px;
+	background-position: right 0;
+}
+.ui-btn-small span {
+	height: 24px;
+	padding-left: 8px;
+	background-position: 0 0;
+	line-height: 23px;
+}

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="gbk" />
+	<title>demo</title>
+	<meta name="description" value="" />
+	<meta name="keywords" value="" />
+
+	<link rel="stylesheet" href="http://wpstatic.china.alibaba.com/css/export/lib.css" />
+
+<style>
+
+.demo-container ul,
+.demo-container li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+
+/**
+ * container
+ */
+.design-tabs-01 {
+	position: relative;
+	overflow: hidden;
+	width: 490px;
+	height: 170px;
+}
+
+.design-tabs-01 .fx-tab-pane {
+	overflow: hidden;
+	width: 490px;
+	height: 170px;
+}
+.design-tabs-01 .fx-tab-pane img {
+	display: block;
+}
+
+/**
+ * tab-nav
+ */
+.design-tabs-01 .fx-tab-nav {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+
+	zoom: 1;
+	z-index: 9;
+}
+.design-tabs-01 .fx-tab-nav li {
+	float: left;
+	overflow: hidden;
+
+	width: 18px;
+	height: 18px;
+
+	border: 1px solid #d8d8d8;
+	background: #fff;
+
+	color: #ff6600;
+	text-align: center;
+	line-height: 18px;
+
+	cursor: pointer;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+}
+.design-tabs-01 .fx-tab-nav li.active {	
+	background: #ff6600;
+	color: #fff;
+	font-weight: bold;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+
+/**
+ * design-tabs-02
+ */
+.design-tabs-02 {
+	position: relative;
+	overflow: hidden;
+	width: 515px;
+	height: 222px;
+	border: 1px solid #d2d2d2;
+}
+.design-tabs-02 .fx-tab-content {
+	float: left;
+	margin-right: 1px;
+}
+.design-tabs-02 .fx-tab-pane {
+	overflow: hidden;
+	width: 405px;
+	height: 220px;
+	padding: 1px;
+}
+
+.design-tabs-02 .fx-tab-nav {
+	float: left;
+	width: 106px;
+}
+.design-tabs-02 .fx-tab-nav li {
+	text-align: center;
+	border-bottom: 1px solid #ededed;
+	cursor: pointer;
+	line-height: 36px;
+}
+.design-tabs-02 .fx-tab-nav li.active {
+	background: #b83d3f;
+	color: #fff;
+}
+
+
+/**
+ * design-tabs-03
+ */
+.design-tabs-03 {
+	overflow: hidden;
+	height: 273px;
+	width: 546px;
+}
+
+.design-tabs-03 .fx-tab-content {
+	float: left;
+}
+
+.design-tabs-03 .fx-tab-pane {
+	width: 253px;
+	height: 253px;
+	padding: 10px;
+	background: #bbd9ff;
+}
+.design-tabs-03 .fx-tab-pane img {
+	display: block;
+	width: 253px;
+	height: 253px;
+}
+
+.design-tabs-03 .fx-tab-nav {
+	float: left;
+	width: 258px;
+	padding: 10px 5px 5px 10px;
+	background: #e3e3e3;
+}
+.design-tabs-03 .fx-tab-nav li {
+	overflow: hidden;
+	float: left;
+	width: 81px;
+	height: 81px;
+	margin: 0 5px 5px 0;
+	cursor: pointer;
+}
+.design-tabs-03 .fx-tab-nav li img {
+	display: block;
+	width: 81px;
+	height: 81px;
+}
+
+
+/**
+ * design-tabs-05
+ */
+.design-tabs-05 {
+	overflow: hidden;
+	border: 1px solid #d8d8d8;
+	width: 416px;
+	height: 347px;
+}
+.design-tabs-05 .fx-tab-nav {
+	padding: 4px 0 0 5px;
+	background: #eee;
+	border-bottom: 1px solid #e8e8e8;
+}
+.design-tabs-05 .fx-tab-nav li {
+	position: relative;
+	float: left;
+	bottom: -1px;
+	padding: 0 12px 5px;
+	margin-right: 5px;
+	border-top: 1px solid #eee;
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
+	border-bottom: 0;
+	line-height: 20px;
+	cursor: pointer;
+}
+.design-tabs-05 .fx-tab-nav li.active {
+	border-top: 1px solid #d8d8d8;
+	border-left: 1px solid #d8d8d8;
+	border-right: 1px solid #d8d8d8;
+	border-bottom: 0;
+	background: #fff;
+}
+
+.design-tabs-05 .fx-tab-pane {
+	overflow: hidden;
+	width: 400px;
+	height: 300px;
+	padding: 8px;
+}
+.design-tabs-05 .fx-tab-pane img {
+	display: block;
+	width: 400px;
+	height: 300px;
+}
+
+/**
+ * design-tabs-06
+ */
+.design-tabs-06 {
+	position: relative;
+	width: 440px;
+	padding: 0 26px 8px;
+	border: 1px solid #d8d8d8;
+}
+.design-tabs-06 .fx-tab-body {
+	position: relative;
+	overflow: hidden;
+	width: 440px;
+	height: 140px;
+	margin-bottom: 8px;
+}
+.design-tabs-06 .fx-tab-pane {
+	overflow: hidden;
+	width: 440px;
+	height: 140px;
+}
+.design-tabs-06 .fx-tab-pane img {
+	display: block;
+	width: 440px;
+	height: 140px;
+}
+
+.design-tabs-06 .fx-tab-nav li {
+	float: left;
+	overflow: hidden;
+	width: 139px;
+	height: 50px;
+	margin-right: 8px;
+	border: 1px solid #fff;
+	cursor: pointer;
+}
+.design-tabs-06 .fx-tab-nav li.fx-last {
+	margin-right: 0;
+}
+.design-tabs-06 .fx-tab-nav li.active {
+	border: 1px solid #ea3f33;
+}
+.design-tabs-06 .fx-tab-nav li img {
+	display: block;
+	width: 139px;
+}
+
+.design-tabs-06 .fx-prev,
+.design-tabs-06 .fx-next {
+	position: absolute;
+	display: block;
+	overflow: hidden;
+	width: 19px;
+	height: 19px;
+	top: 60px;
+	background: url(http://img.china.alibaba.com/cms/upload/2012/047/094/490740_646277519.png);
+	line-height: 5000px;
+}
+.design-tabs-06 .fx-prev {
+	left: 2px;
+	background-position: 0 0;
+}
+.design-tabs-06 .fx-next {
+	right: 2px;
+	background-position: -33px 0;
+}
+
+</style>
+
+
+
+</head>
+<body>
+
+
+<div id="doc">
+
+
+<div class="demo-container">
+
+<div class="design-tabs-01" data-widget-type="fx.Tabs" data-widget-config='{"autoSwitch": "liner"}'>
+	<ul class="fx-tab-content">
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/12.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/13.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/14.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/15.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/16.jpg" /></a>
+		</li>
+	</ul>
+	<ul class="fx-tab-nav ui-clr">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+</div>
+
+</div>
+<!--/demo-container-->
+
+
+### effect: leftright
+
+<div class="demo-container">
+
+<div class="design-tabs-01" data-widget-type="fx.Tabs" data-widget-config='{"effect": "leftright", "autoSwitch": "liner"}'>
+	<ul class="fx-tab-content">
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/12.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/13.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/14.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/15.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/16.jpg" /></a>
+		</li>
+	</ul>
+	<ul class="fx-tab-nav ui-clr">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+</div>
+
+</div>
+<!--/demo-container-->
+
+### effect: topdown
+
+<div class="demo-container">
+
+<div class="design-tabs-01" data-widget-type="fx.Tabs" data-widget-config='{"effect": "updown", "autoSwitch": "liner", "duration": 1000}'>
+	<ul class="fx-tab-content">
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/12.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/13.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/14.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/15.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/16.jpg" /></a>
+		</li>
+	</ul>
+	<ul class="fx-tab-nav ui-clr">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+</div>
+
+</div>
+<!--/demo-container-->
+
+### effect: fade
+
+<div class="demo-container">
+
+<div class="design-tabs-01" data-widget-type="fx.Tabs" data-widget-config='{"effect": "fade", "autoSwitch": "random"}'>
+	<ul class="fx-tab-content">
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/12.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/13.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/14.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/15.jpg" /></a>
+		</li>
+		<li class="fx-tab-pane">
+			<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121210/16.jpg" /></a>
+		</li>
+	</ul>
+	<ul class="fx-tab-nav ui-clr">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+</div>
+
+</div>
+<!--/demo-container-->
+
+
+### event: click
+
+<div class="demo-container">
+	<div class="design-tabs-02" data-widget-type="fx.Tabs" data-widget-config='{"event": "click", "effect": "updown", "autoSwitch": "liner"}'>
+		<ul class="fx-tab-content">
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/2012/105/984/489501_646277519.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/2012/205/984/489502_646277519.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/2012/305/984/489503_646277519.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/2012/405/984/489504_646277519.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/2012/505/984/489505_646277519.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/2012/605/984/489506_646277519.jpg" /></a>
+			</li>
+		</ul>
+		<ul class="fx-tab-nav">
+			<li>图片1</li>
+			<li>图片2</li>
+			<li>图片3</li>
+			<li>图片4</li>
+			<li>图片5</li>
+			<li>图片6</li>
+		</ul>
+
+	</div>
+</div>
+
+
+### grid
+
+<div class="demo-container">
+	<div class="design-tabs-03" data-widget-type="fx.Tabs" data-widget-config='{"event": "click", "effect":"fade"}'>
+		<ul class="fx-tab-nav">
+			<li><img src="http://img.china.alibaba.com/cms/upload/other/20121209/01.jpg" /></li>
+			<li><img src="http://img.china.alibaba.com/cms/upload/other/20121209/02.jpg" /></li>
+			<li><img src="http://img.china.alibaba.com/cms/upload/other/20121209/03.jpg" /></li>
+			<li><img src="http://img.china.alibaba.com/cms/upload/other/20121209/04.jpg" /></li>
+			<li><img src="http://img.china.alibaba.com/cms/upload/other/20121209/05.jpg" /></li>
+			<li><img src="http://img.china.alibaba.com/cms/upload/other/20121209/06.jpg" /></li>
+			<li><img src="http://img.china.alibaba.com/cms/upload/other/20121209/07.jpg" /></li>
+			<li><img src="http://img.china.alibaba.com/cms/upload/other/20121209/08.jpg" /></li>
+			<li><img src="http://img.china.alibaba.com/cms/upload/other/20121209/09.jpg" /></li>
+		</ul>
+		<ul class="fx-tab-content">
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121209/01.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121209/02.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121209/03.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121209/04.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121209/05.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121209/06.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121209/07.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121209/08.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="http://www.1688.com" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/20121209/09.jpg" /></a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+### tab
+
+<div class="demo-container">
+	<div class="design-tabs-05" data-widget-type="fx.Tabs" data-widget-config='{"event":"click"}'>
+		<ul class="fx-tab-nav ui-clr">
+			<li class="fx-tab-nav">第一页</li>
+			<li class="fx-tab-nav">第二页</li>
+			<li class="fx-tab-nav">第三页</li>
+			<li class="fx-tab-nav">第四页</li>
+		</ul>
+		<ul class="fx-tab-content">
+			<li class="fx-tab-pane">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121003/17.jpg" /></a>
+			</li>
+			<li class="fx-tab-pane">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121003/18.jpg" /></a>
+			</li>
+<li class="fx-tab-pane">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121003/19.jpg" /></a>
+			</li>
+<li class="fx-tab-pane">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121003/20.jpg" /></a>
+			</li>
+		</ul>	
+	</div>
+</div>
+
+### prev &amp; next
+
+<div class="demo-container">
+	<div class="design-tabs-06" data-widget-type="fx.Tabs" data-widget-config='{"effect":"leftright","event":"click"}'>
+		<div class="fx-tab-body">
+			<div class="fx-tab-content">
+				<div class="fx-tab-pane"><img src="http://img.china.alibaba.com/cms/upload/other/2012121103/21.jpg" /></div>
+				<div class="fx-tab-pane"><img src="http://img.china.alibaba.com/cms/upload/other/2012121103/22.jpg" /></div>
+				<div class="fx-tab-pane"><img src="http://img.china.alibaba.com/cms/upload/other/2012121103/23.jpg" /></div>
+			</div>
+		</div>
+		<ul class="fx-tab-nav ui-clr">
+			<li><img src="http://img.china.alibaba.com/cms/upload/other/2012121103/21.jpg" /></li>
+			<li><img src="http://img.china.alibaba.com/cms/upload/other/2012121103/22.jpg" /></li>
+			<li class="fx-last"><img src="http://img.china.alibaba.com/cms/upload/other/2012121103/23.jpg" /></li>
+		</ul>
+		<a href="#" class="fx-prev">Prev</a>
+		<a href="#" class="fx-next">Next</a>
+	</div>
+</div>
+
+
+</div>
+
+
+<script src="http://wpstatic.china.alibaba.com/js/export/lib.js"></script>
+<script>
+may.config({
+	id: 'may',
+	resolve: function(id) {
+		id = id.replace(/\./g, '/')
+				.replace(/([a-z])([A-Z])/g, function(s, m1, m2) {
+					return m1 + '-'	+ m2;
+				}).toLowerCase();
+	
+		return 'http://wpstatic.china.alibaba.com/js/' + id + '.js';
+	}
+});
+
+define(['jQuery', 'ui.Autowire'], function($, Autowire) {
+
+$(function() {
+		new Autowire('body');
+});
+	
+});
+
+</script>
+</body>
+</html>

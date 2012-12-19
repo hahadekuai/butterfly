@@ -1,0 +1,14 @@
+/**
+ * 通用样式
+ * @author qijun.weiqj
+ */
+.ui-overflow-hidden {
+	overflow: hidden;
+}
+
+.ui-clr {
+	zoom: 1;
+}
+.ui-clr:after {
+	display:block;clear:both;height:0;content:"\0020";
+}
