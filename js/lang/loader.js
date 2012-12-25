@@ -121,6 +121,8 @@ var define = function(config, id, depends, factory) {
 	if (id.indexOf('!') === 0) {
 		require(config, [id]);
 	}
+
+	return args;
 };
 
 
@@ -168,10 +170,8 @@ var require = function(config, depends, callback) {
 		n = depends.length,
 		
 		check = function() {
-			if (count < n) {
-				return;
-			}
-			callback && callback.apply(null, list);
+			count >= n && callback &&
+				callback.apply(null, list);
 		},
 		
 		load = function(index) {
@@ -266,60 +266,6 @@ var loadModuleFromDef = function(config, o, callback) {
 	});	
 };
 
-
-// load async module
-var rAbs = /^https?:\/\//,
-	loadList = {},
-	postLoadResource = null;
-
-var loadModuleFromScript = function(config, id, callback) {
-	var list = loadList[id] = loadList[id] || [],
-		path = null,
-		isAbsPath = false;
-
-	list.push(callback);
-	if (list.length > 1) {
-		return;
-	}
-	
-	if (rAbs.test(id)) {
-		path = id;
-		isAbsPath = true;
-	} else {
-		assert(config.resolve, 'should provider config.resolve for load script : ' + id);
-		path = config.resolve(id);
-	}
-
-	log('load module from : ' + path);
-	loadResource(path, {
-		config: config,
-
-		success: function() {
-			postLoadResource && postLoadResource(config);
-
-			// if id is AbsPath, we define an module manually
-			if (isAbsPath) {
-				define(config, id, EMPTY_DEPENDS);
-			}
-
-			var o = config.modules[id];
-			if (!o) {
-				log('load module error ' + getId(id));
-				return;
-			}
-
-			o.async = true; 
-			loadModuleFromDef(config, o, function(factory) {
-				for (var i = 0, c = list.length; i < c; i++) {
-					list[i](factory);
-				}
-			});
-			delete loadList[id];
-		}
-	});
-
-};
-
 var getId = function(config, id) {
 	return config.id + ':' + id; 	
 };
@@ -400,6 +346,64 @@ var popStack = function() {
 	return stack.pop();
 };
 
+//~ config
+
+
+
+// load async module
+var rAbs = /^https?:\/\//,
+	loadList = {},
+	postLoadResource = null;
+
+var loadModuleFromScript = function(config, id, callback) {
+	var list = loadList[id] = loadList[id] || [],
+		path = null,
+		isAbsPath = false;
+
+	list.push(callback);
+	if (list.length > 1) {
+		return;
+	}
+	
+	if (rAbs.test(id)) {
+		path = id;
+		isAbsPath = true;
+	} else {
+		path = config.resolve ? config.resolve(id) : defaultResolve(config, id);
+	}
+
+	log('load module from : ' + path);
+	loadResource(path, {
+		config: config,
+
+		success: function() {
+			// if id is AbsPath, we define an module manually
+			if (isAbsPath) {
+				define(config, id, EMPTY_DEPENDS);
+			}
+
+			var o = config.modules[id];
+			if (!o) {
+				log('load module error ' + getId(config, id));
+				return;
+			}
+
+			o.async = true; 
+			loadModuleFromDef(config, o, function(factory) {
+				for (var i = 0, c = list.length; i < c; i++) {
+					list[i](factory);
+				}
+			});
+			delete loadList[id];
+		}
+	});
+
+};
+//~ 
+
+var defaultResolve = function(config, id) {
+	assert(false, 'not implement for default resolve');
+};
 
 
 // global define
@@ -408,14 +412,14 @@ var isOpera = navigator.userAgent.indexOf('Opera') !== -1;
 var globalDefine = function(id, depends, factory) {
 	assert(stack.length > 0, 'current config not exist');
 
-	var config = stack[stack.length - 1];
-	config.define(id, depends, factory);
+	var config = stack[stack.length - 1],
+		mod = config.define(id, depends, factory);
 
 	postLoadResource = function(newConfig) {
 		if (config !== newConfig) {
-			log('postLoadResource for ' + getId(newConfig, id));
+			log('postLoadResource for ' + getId(newConfig, mod.id));
 			newConfig.define(id, depends, factory);	
-			delete config.modules[id];
+			delete config.modules[mod.id];
 		}
 		postLoadResource = null;
 	};
@@ -442,7 +446,7 @@ var processIeDefine = function() {
 
 
 // load resource
-var rCss = /\.css(\?[-\w]*)?$/;
+var rCss = /\.css(\?|$)/;
 var loadResource = function(url, options) {
 	if (rCss.test(url)) {
 		loadCss(url, options);
@@ -461,7 +465,13 @@ var currentlyAddingScript = null,
 var loadScript = function(url, options) {
     var node = document.createElement('script');
 
-	assetOnLoad(url, node, scriptOnload, options);
+	assetOnLoad(url, node, scriptOnload, {
+		success: function() {
+			postLoadResource && postLoadResource(options.config);
+			options.success();
+		},
+		error: options.error
+	});
 
 	node.async = 'async';
 	node.src = url;
