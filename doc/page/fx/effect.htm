@@ -1,0 +1,120 @@
+Effect
+=======
+
+## 描述
+
+常用辅助类交互，可用于实现一些效果
+
+## API
+
+~~~js
+new Effect(element, config)
+~~~
+
+## config
+
+
+## DEMO
+
+<link rel="stylesheet" href="page/fx/effect.css" />
+
+### toggle
+
+<div class="demo-container">
+	<div class="effect-toggle-demo" data-widget-type="fx.Effect" data-widget-config='toggle'>
+		<a href="#" class="fx-trigger">Click Me</a>
+		<div class="fx-body">butterfly effect toggle</div>
+	</div>
+</div>
+
+#### code
+
+~~~html
+&lt;div class="effect-toggle-demo" data-widget-type="fx.Effect" data-widget-config='toggle'&gt;
+	&lt;a href="#" class="fx-trigger">Click Me&lt;/a&gt;
+	&lt;div class="fx-body">butterfly effect toggle&lt;/div&gt;
+&lt;/div&gt;
+~~~
+
+~~~css
+.effect-toggle-demo .fx-body {
+	display: none;
+}
+.effect-toggle-demo.fx-toggle .fx-body {
+	display: block;
+}
+~~~
+
+### toggle muti item
+
+<div class="demo-container">
+<ul class="effect-toggle-demo-2" data-widget-type="fx.Effect" data-widget-config='{"type":"toggle", "trigger":"li a", "item":"li"}'>
+	<li>
+		<a href="#" class="trigger">+</a>
+		<div class="body">hello</div>
+	<li>
+	<li>
+		<a href="#" class="trigger">+</a>
+		<div class="body">hello</div>
+	<li>
+	<li>
+		<a href="#" class="trigger">+</a>
+		<div class="body">hello</div>
+	<li>
+	<li>
+		<a href="#" class="trigger">+</a>
+		<div class="body">hello</div>
+	<li>
+</ul>
+</div>
+
+#### code
+
+~~~html
+&lt;ul class="effect-toggle-demo-2" data-widget-type="fx.Effect" data-widget-config='{"type":"toggle", "trigger":"li a", "item":"li"}'&gt;
+	&lt;li&gt;
+		&lt;a href="#" class="trigger">Click&lt;/a&gt;
+		&lt;div class="body"&gt;hello&lt;/div&gt;
+	&lt;li&gt;
+&lt;/ul&gt;
+~~~
+
+~~~css
+.effect-toggle-demo-2 .body {
+	display: none;
+}
+.effect-toggle-demo-2 .fx-toggle .body {
+	display: block;
+}
+~~~
+
+
+### hover
+
+<div class="demo-container">
+	<ul class="effect-hover-demo" data-widget-type="fx.Effect" data-widget-config='{"type":"hover","item":"li"}'>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+</div>
+
+#### code
+
+~~~html
+&ltul class="effect-type-demo" data-widget-type="fx.Effect" data-widget-config='{"type":"hover","item":"li"}'&gt;
+	&lt;li&gt;1&lt;/li&gt;
+	&lt;li&gt;2&lt;/li&gt;
+	&lt;li&gt;3&lt;/li&gt;
+	&lt;li&gt;4&lt;/li&gt;
+	&lt;li&gt;5&lt;/li&gt;
+&lt;/ul&gt;
+~~~
+
+~~~css
+.effect-hover-demo li.hover {
+	background: #ddd;
+}
+~~~

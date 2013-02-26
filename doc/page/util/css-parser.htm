@@ -1,0 +1,27 @@
+CssParser
+=======
+
+## 描述
+
+简单解析/反解析css字符串
+
+解析css字符串生成json
+
+~~~js
+[
+	{ 
+		selector: 'div.custom-bg', 
+		styles:  [
+		{
+			property: 'background-color',
+			value: '#FFFFFF'
+		},
+		{
+			property: 'background-image',
+			value: url(...)
+		},
+		] 
+	},
+...
+]
+~~~

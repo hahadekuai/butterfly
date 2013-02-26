@@ -1,0 +1,36 @@
+HtmlParser
+=======
+
+## 描述
+
+用于将解析Html
+
+HtmlParser 用于将Html解析成以下结构
+
+~~~js
+[
+	{
+		type: 'element' | 'text' | 'comment'
+		name: {string}
+		attributes: [{ name: {string}, value: {string}, pos: {number}} ]
+		body: 
+			{array} if type == 'element'
+			{string} if type == 'text' || type == 'comment',
+		pos: {number}
+	},
+	...
+] 
+~~~
+
+## 使用
+
+~~~js
+var o = Parser.parse(html);
+if (o.success) {
+	var nodes = o.result;
+	...
+} else {
+	var errorPos = o.pos,
+		errorMessage = o.message;
+}
+~~~

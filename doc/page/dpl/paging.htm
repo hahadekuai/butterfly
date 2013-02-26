@@ -1,0 +1,40 @@
+###分页###
+
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|.ui-paging| 必选 | 分页的基础样式，子节点居左|
+|.ui-paging-center| 可选 | 配合.dpl-paging一起使用，可使分页子节点居中|
+|.ui-paging-right| 可选 | 配合.dpl-paging一起使用，可使分页子节点居右|
+
+`html：`
+
+    <div class="ui-paging">
+        <div class="paging">
+            <ul class="paging-list fd-clr">
+                <li><a href="#" class="pre pre-disabled">上一页</a></li>
+                <li><a href="#" class="current">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">6</a></li>
+                <li><a href="#">7</a></li>
+                <li><a href="#">8</a></li>
+                <li><a href="#">9</a></li>
+                <li><a href="#" class="omit">...</a></li>  
+                <li><a href="#" class="next">下一页</a></li>
+            </ul>
+            <div class="paging-form fd-clr">
+                <span>共<em class="pagenum">3</em>页</span>
+                <span>到<input type="text" class="ui-txt ui-txt-s pnum" autocomplete="off" maxlength="4">页</span>
+                <a title="确定" href="#" class="paging-btn">确 定</a>
+            </div>
+        </div>
+    </div>
+
+`示例：`
+
+<iframe class="auto-height" src="page/dpl/content/paging.htm" frameborder="0"></iframe>
+

@@ -1,0 +1,388 @@
+Loader
+======
+
+## 描述
+
+提供一种统一的方式来定义js模块，并解决异步加载，模块依赖等问题
+
+## API
+
+~~~js
+/**
+ * 定义一个模块
+ * @param {string} id		模块id，如果为空，或者前缀为!, 则为匿名模块(下面有说明)
+ * @param {array}  depends	模块的依赖
+ * @param {function} factory 模块工厂方法
+ */
+define(id, depends, factory)
+~~~
+
+
+## 示例- app view
+
+~~~js
+define(['jQuery', 'AppContext', 'Class', 'widget.Tabs'], function($, AppContext, Class, Tabs) {
+	
+	var View = new Class({
+		init: function() {
+				
+		}	
+	});	
+
+	AppContext.register('view', 'news', View);
+	
+});
+~~~
+
+上面示例
+
+1. 定义了一个匿名模块，这个模块在载入页面后，factory会自动调用
+
+2. 模块依赖于jQuery, AppContext, Class, widget.Tabs 模块
+
+3. 依赖模块在构造完毕后，将作为入参依次传递给factory
+
+
+## 示例- widget.Tabs
+
+~~~js
+define('widget.Tabs', ['jQuery', 'Class'], function($, Class) {
+
+	return new Class({
+		init: function(div, options) {
+			
+		}		
+	});
+	
+	
+});
+~~~
+
+上面示例：
+
+1. 定义了一个widget.Tabs模块
+
+2. 这个模块依赖于jQuery, Class
+
+3. 这个模块返回一个function (new Class()返回一个funtion对象)
+
+
+## 特性
+
+1. 非匿名模块在载入后，并不会马上构造（即 不会执行相应的factory）
+
+2. 匿名模块载入后，将会自动执行其factory(id以!开头的模块当作匿名模块对待)
+
+3. 模块在执行factory前，将会自动载入并执行所有依赖项
+
+4. 模块支持异步并行加载，解决传递依赖，并可以检测出循环依赖
+
+5. 可以从factory入参中取得所有依赖模块
+
+6. 模块只被构造一次(即factory只执行一次)，但可被使用多次
+
+7. 支持普通js/css文件的载入，即普通js文件和css文件也相当于模块使用
+
+8. 使用require按需加载
+
+9. 多应用的支持
+
+## 示例- 模块和模块的使用
+
+~~~js
+define(‘Calc’, function() {
+	return {
+        max: function(a, b) {
+			return a >= b ? a : b;
+		},
+        min: function(a, b) {
+			return a <= b ? a : b;	
+		}
+    }
+});
+
+define([‘Calc’], function(Calc) {
+   var a = Calc.max(100, 99);   // 100
+   var b = Calc.min(100, 20);   // 20 
+});
+~~~
+
+
+## 示例- 纯数据模块
+
+~~~js
+define('config', {
+	name: 'demo',
+	size: 1000	
+});
+~~~
+
+## 各种define形式
+
+~~~js
+define(id, depends, factory)
+define(id, factory{not array})
+define(id, depends{array})
+define(depends{array}, factory)
+define(factory{function})
+~~~
+
+
+## 异步加载
+
+模块支持异步加载，异步加载的策略是可配置的
+
+如旺铺中的配置是这样的
+
+~~~js
+// @see global/base.js
+
+var site = may.config({
+	id: 'site',
+	...
+	// 异步加载时，使用此方法得到url
+	resolve: function(id) {
+		id = id.replace(/\./g, '/')
+				.replace(/([a-z])([A-Z])/g, function(s, m1, m2) {
+					return m1 + '-'	+ m2;
+				}).toLowerCase();
+		return 'http://wpstatic.china.alibaba.com/js/module/' + id + '.js';
+	}
+});
+~~~
+
+所以
+widget.Tabs将会从 http://wpstatic.china.alibaba.com/js/module/widget/tabs.js载入js模块
+
+form.editor.ImageList 将会从http://wpstatic.china.alibaba.com/js/module/form/editor/image-list.js载入模块
+
+
+## app style资源的异步加载
+
+后续在实现app多js/css后，也将开放从app资源中异步加载style资源
+
+如
+
+~~~js
+define([‘app.topNav.Helper’], function(Helper) {
+
+});
+~~~
+如果Helper未载入，将期望从相应app目录下载入js资源
+
+
+## js/css文件的加载
+
+有时候一个模块需要依赖一个js文件(可能是一个库) 或 一个模块依赖一个css文件 
+那我们也可以使用define来加载js/css文件
+
+~~~js
+define('widget.ColorChooser', 
+
+    ['jQUery', 'http://wpstatic.china.alibaba.com/css/module/widget/offer-chooser.css'], 
+
+    function($) {
+
+    ...
+
+});
+~~~
+
+以上widget.ColorChooser组件依赖于一个css文件，当使用这个组件时将会自动加载offer-chooser.css
+
+~~~js
+define(‘widget.HtmlEditor’, [‘http://style.china.alibaba.com/js/....some.js’], function() {
+
+});
+~~~
+
+以上widget.HtmlEditor依赖于一个js文件，当使用这个模块时也会自动加载依赖的js文件
+
+
+## 按需加载
+
+模块在需要的时候才加载模块
+
+~~~js
+define([‘require’, ‘jQuery’, ‘widget.Tabs’], function(require, $, Tabs) {
+
+    return function(options) {
+		// 在延迟加载的时候，载入widget.LazyLoad组件
+        if (options.needLazyLoad) {
+			require(‘widget.LazyLoad’, function(LazyLoad) {
+
+			});  
+		} 
+
+   }
+
+});
+~~~
+
+备注： 匿名模块就相当于require 
+
+~~~js
+define([A, B, C], factory) --> require([A, B, C], factory)
+~~~
+
+
+## 多应用的支持
+
+loader支持namespace, 但由于公用一个define，所以是一种受限的，基于栈式的方法把模块隔离开
+在正常情况下可以使用默认的namespace
+
+~~~js
+在may/loader.js中
+
+// config system loader
+config({ id: 'may' });
+may.pushStack('may');
+~~~
+
+
+之后载入的所有模块都定义在may名字空间中
+如jQuery, Log, Class, Context等
+
+
+在 global/base中
+
+~~~js
+var site = may.config({
+	id: 'site',
+	...	
+});
+
+// set current config
+may.pushStack('site');
+~~~
+
+之后所有载入的模块都在site namespace中
+旺铺中的所有模块都是定义在site中的
+
+
+在 detail的相应配置文件中
+
+~~~js
+var detail = may.config({
+	id = 'detail',
+	...	
+});
+
+may.pushStack('detail');
+~~~
+
+detail中的模块在这里载入
+
+
+所以由于是基于这种实现，js模块在页面中的位置就不能是任意的，否则可能不能正常工作
+
+
+## 使用其他namespace中的模块
+
+~~~js
+define(['may:Context'], function(Context) {
+	
+});
+
+使用may名字空间中的Context模块
+
+define(['detail:widget.Tabs'], function(Tabs) {
+	
+});
+~~~
+
+使用detail名字空间中的widget.Tabs模块
+
+
+## may.config
+
+通过may.config, 我们可以配置一个Loader, 它返回一个对象
+
+~~~js
+var site = may.config({
+	id: 'site',
+	alias: {
+		jQuery: 'may:jQuery',
+		Class: 'may:Class',
+		Log: 'may:Log'
+	},
+
+	resolve: function(id) {
+		...
+		return path;
+	}
+});
+~~~
+
+1. id 给loader一个名称，方便后续引用
+2. alias 可以定义模块的别名，这样常用模块就可以更简短地引用
+3. resolve 定义需要加载的策略
+
+may.config返回一个对象
+
+~~~js
+{
+	/**
+	 * 用于定义一个模块
+	 */
+	define: function(),
+
+	/**
+	 * 用于载入一组模块
+	 */
+	require: function(),
+
+	/**
+	 * 用于判断一个模块是否已定义
+	 */
+	isDefine: function()
+}
+~~~
+
+所以可以使用site.require去载入site namespace的模块
+
+
+may.pushStack('site') 后
+
+define就相当于 site.define
+
+## 数据结构
+
+了解loader的数据结构有助于了解模块是如何被管理的
+
+备注：可以在FireBug的Dom视图中展开may对象
+
+![Loader数据结构](img/loader/01.png)
+
+1. _cache管理所有的模块，按namespace进行分组，如旺铺detail页面中就有 may, site, detail
+2. _stack是一个栈，用于表示各namespace模块的载入次序，上面表示
+	may中的模块最先被载入，其实是site，最后是detail
+
+
+
+![Loader数据结构](img/loader/02.png)
+
+1. may namespace中定义了模块: Class, Context, Log, jQuery等
+2. 可以通过config返回的对象调用 define(), isDefine() 或 require如
+
+~~~js
+site.define(...)
+site.isDefine(...)
+site.require(...)
+~~~
+
+3. 各字段含义
+
+~~~
+id: 模块id
+depends: 依赖
+load: 被require的次数
+data: 即模块的内容(factory返回的对象)
+factory: 工厂方法
+~~~
+
+
+![Loader数据结构](img/loader/03.png)
+
+1. alias
+2. 匿名模块的id都是!带头的，如果没有传递，则由框架生成一个

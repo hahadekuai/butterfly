@@ -1,0 +1,49 @@
+Log
+=====
+
+## 描述
+
+日志功能
+
+~~~js
+define('widget.Tabs', ['Log', 'Class'], function(Log, Class) {
+
+	var Log = new Log('widget.Tabs');
+
+	reutrn new Class({
+		init: function(div, config) {
+			log.info('log info demo');
+			log.warn('log warn demo');
+			log.error('log error demo');
+		}	
+	});
+	
+});
+~~~
+
+在URL中可以加参数 debug-log-level=info来查看日志
+
+
+### 日志的配置
+
+~~~js
+debug-log-level=info | error | warn | debug
+debug-log-filter=...
+~~~
+
+示例:
+
+http://sz99and1.cn.alibaba.com/?debug-log-level=info
+
+如果觉得日志比较多的话，可以使用 debug-log-filter=widget.Tabs进行过滤
+
+
+
+### 在IE下显示日志
+
+http://sz99and1.cn.alibaba.com/?debug-console=true&debug-log-level=info
+
+参数debug-console=true会在页面结尾渲染出日志内容
+有一个textarea可以允许我们在IE下运行js
+
+

@@ -1,0 +1,152 @@
+/**
+ * 按扭
+ */
+
+/**
+ * 默认按扭
+ */
+.ui-btn-default, .ui-btn-default:hover {
+	color: #333;
+	text-decoration: none;
+	cursor: pointer;
+}
+.ui-btn-default, .ui-btn-default span {
+	display: inline-block;
+	background: url(http://img.china.alibaba.com/cms/upload/2011/088/980/89880_719516335.png);
+}	
+.ui-btn-default {
+	padding-right: 16px;
+	background-position: right 0;
+}
+.ui-btn-default span {
+	height: 26px;
+	padding-left: 16px;
+	background-position: 0 0;
+	line-height: 26px;
+}
+
+.ui-btn-default:hover {
+	background-position: right -52px;
+}
+.ui-btn-default:hover span {
+	background-position: 0 -52px;
+}
+
+/**
+ * ui-btn-small
+ */
+.ui-btn-small, .ui-btn-small:hover {
+	color: #666;
+	text-decoration: none;
+	cursor: pointer;
+}
+.ui-btn-small, .ui-btn-small span {
+	display: inline-block;
+	background: url(http://img.china.alibaba.com/images/app/platform/winport/diy/diy-page-btn.png);
+}	
+.ui-btn-small {
+	padding-right: 8px;
+	background-position: right 0;
+}
+.ui-btn-small span {
+	height: 24px;
+	padding-left: 8px;
+	background-position: 0 0;
+	line-height: 23px;
+}
+
+
+/**
+ * 新按钮
+ **/
+
+.ui-btn, .ui-btn span,
+.ui-btn-disabled,.ui-btn-disabled span,
+.ui-btn-primary, .ui-btn-primary span, 
+.ui-btn-s, .ui-btn-s span,
+.ui-btn-s-primary, .ui-btn-s-primary span
+{
+	display: inline-block;
+	background:url(http://img.china.alibaba.com/cms/upload/2013/405/316/613504_681975369.png);
+}	
+.ui-btn, .ui-btn:hover {
+	color: #454545;
+	font-weight:700;
+	text-decoration: none;
+	cursor: pointer;
+}
+.ui-btn {
+	padding-right: 14px;
+	background-position: right -200px;
+}
+.ui-btn span {
+	height: 28px;
+	padding-left: 14px;
+	background-position: 0 -200px;
+	line-height: 28px;
+}
+.ui-btn:hover {
+	background-position: right -240px;
+}
+.ui-btn:hover span {
+	background-position: 0 -240px;
+}
+
+.ui-btn-disabled,.ui-btn-disabled:hover {
+	color:#ccc;
+	cursor:default;
+	background-position: right -280px;
+}
+.ui-btn-disabled span,.ui-btn-disabled:hover span {
+	background-position: 0 -280px;
+}
+.ui-btn-primary {
+	color:#fff;
+	background-position: right -120px;
+}
+.ui-btn-primary span{
+	background-position: 0 -120px;
+}
+.ui-btn-primary:hover{
+	color:#fff;
+	background-position: right -160px;
+}
+.ui-btn-primary:hover span {
+	background-position: 0 -160px;
+}
+
+.ui-btn-s, .ui-btn-s:hover {
+	color: #454545;
+	text-decoration: none;
+	cursor: pointer;
+}
+.ui-btn-s {
+	padding-right: 10px;
+	background-position: right -60px;
+}
+.ui-btn-s span {
+	height: 24px;
+	padding-left: 10px;
+	background-position: 0 -60px;
+	line-height: 24px;
+}
+.ui-btn-s:hover {
+	background-position: right -90px;
+}
+.ui-btn-s:hover span {
+	background-position: 0 -90px;
+}
+.ui-btn-s-primary {
+	color:#fff;
+	background-position: right 0;
+}
+.ui-btn-s-primary span{
+	background-position: 0 0;
+}
+.ui-btn-s-primary:hover{
+	color:#fff;
+	background-position: right -30px;
+}
+.ui-btn-s-primary:hover span {
+	background-position: 0 -30px;
+}

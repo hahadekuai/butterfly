@@ -1,0 +1,166 @@
+Util
+=====
+
+## 描述
+
+工具模块
+
+### formatUrl：拼接Url
+把json对象作为参数拼接到url中
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>url</td>
+		<td>string</td>
+		<td>''</td>
+		<td>url地址</td>
+	</tr>
+	<tr>
+		<td>param</td>
+		<td>object</td>
+		<td>''</td>
+		<td>url参数的json对象</td>
+	</tr>
+</table>
+测试代码
+~~~js
+$('a.formatUrl').on('click',function(e){
+	e.preventDefault();
+
+	var result = Util.formatUrl('http://wpstatic.china.alibaba.com/doc/index.htm',{"a":"b"});
+	$('div.formatUrl-result').html(result);
+});
+~~~
+
+<a href="#" class="formatUrl">测试</a>
+<div class="formatUrl-result"></div>
+
+### schedule：覆盖同一name名称的操作执行
+案例：阻止按钮连续点击
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>string</td>
+		<td></td>
+		<td>名称</td>
+	</tr>
+	<tr>
+		<td>action</td>
+		<td>function</td>
+		<td></td>
+		<td>需要执行的操作</td>
+	</tr>
+	<tr>
+		<td>delay</td>
+		<td>number</td>
+		<td>1000</td>
+		<td>延时时间</td>
+	</tr>
+</table>
+测试代码
+~~~js
+var scheduleNumber = 0;
+$('a.schedule').on('click',function(e){
+	e.preventDefault();
+			
+	Util.schedule('test',function(){
+		scheduleNumber++;
+		$('div.schedule-result').html(scheduleNumber);
+	},2000);
+});
+~~~
+<a href="#" class="schedule">测试</a>
+<div class="schedule-result"></div>
+
+### escape 对一些字符进行编码
+直接看源码
+~~~js
+escape: function(str){
+	return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+~~~
+
+### toCamelString 
+把a-b这样的字符串转成aB这样的驼峰形式
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>str</td>
+		<td>string</td>
+		<td></td>
+		<td>需要转的字符串</td>
+	</tr>
+</table>
+测试代码
+~~~js
+$('a.toCamelString').on('click',function(e){
+	e.preventDefault();
+			
+	var result = Util.toCamelString('aaa-bbb-cccc');
+	$('div.toCamelString-result').html(result);
+});
+~~~
+<a href="#" class="toCamelString">测试</a>
+<div class="toCamelString-result"></div>
+
+### toPascalString 
+把a-b这样的字符串转成AB
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>str</td>
+		<td>string</td>
+		<td></td>
+		<td>需要转的字符串</td>
+	</tr>
+</table>
+测试代码
+~~~js
+$('a.toPascalString').on('click',function(e){
+	e.preventDefault();
+			
+	var result = Util.toPascalString('aaa-bbb-cccc');
+	$('div.toPascalString-result').html(result);
+});
+~~~
+<a href="#" class="toPascalString">测试</a>
+<div class="toPascalString-result"></div>
+
+### getUrlParam:取得当前url中指定参数
+例如传入aaa取得http://wpstatic.china.alibaba.com/doc/index.htm?aaa=bbb中的bbb
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>string</td>
+		<td></td>
+		<td>参数名称</td>
+	</tr>
+</table>
+<script src="page/util/util.js"></script>

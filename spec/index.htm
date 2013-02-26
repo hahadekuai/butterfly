@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="gbk" />
+	<title>Butterfly Unittest</title>
+	<link rel="stylesheet" type="text/css" href="../vendor/jasmine/jasmine.css">
+</head>
+<body>
+<script src="../vendor/jasmine/jasmine.js"></script>
+<script src="../vendor/jasmine/jasmine-html.js"></script>
+
+<script src="../js/export/lib.js"></script>
+<script>
+may.config({
+	id: 'may',
+	resolve: function(id) {
+		id = id.replace(/\./g, '/')
+				.replace(/([a-z])([A-Z])/g, function(s, m1, m2) {
+					return m1 + '-'	+ m2;
+				}).toLowerCase();
+
+		var dir = id.indexOf('spec') === 0 ? '' : 'js/';
+		return 'http://wpstatic.china.alibaba.com/' + dir + id + '.js';
+	}
+});
+
+
+define(['jQuery', 'spec.Suite'], function($) {
+	var env = jasmine.getEnv();
+	env.updateInterval = 1000;
+
+	var reporter = new jasmine.HtmlReporter();
+	env.addReporter(reporter);
+
+	env.specFilter = function(spec) {
+		return reporter.specFilter(spec);
+	};
+	
+	$($.proxy(env, 'execute'));
+});
+</script>
+
+</body>
+</html>

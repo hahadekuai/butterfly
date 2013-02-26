@@ -1,0 +1,54 @@
+/**
+ * ͨ����ʽ
+ * @author qijun.weiqj
+ */
+
+.ui-font-beauty{
+	font-family: "Microsoft YaHei", /* 微软雅黑，默认特殊标题字体 */
+    SimHei, /* 黑体，win下替换字体 */
+    "WenQuanYi Micro Hei", /* 文泉驿微米黑，unix/linux下替换字体 */
+    STHeiti;/* 华文黑体，mac os下替换字体 */
+	font-size:16px;
+}
+.ui-overflow-hidden {
+	overflow: hidden;
+}
+
+.ui-clr {
+	zoom: 1;
+}
+.ui-clr:after {
+	display:block;clear:both;height:0;content:"\0020";
+}
+
+.ui-left {
+	float: left;
+}
+.ui-right {
+	float: right;
+}
+.ui-hide {
+	display: none !important;
+}
+
+/**
+ * ��ֱ���ж���
+ */
+.ui-vertical-img {
+	display: table;
+    text-align: center;
+	overflow: hidden;
+	font-size: 0;
+	*display: block;
+}
+.ui-vertical-img .img-box {
+	display: table-cell;
+    vertical-align: middle;
+    *display: inline;
+    *writing-mode: tb-rl;
+    *text-align: center;
+    *height: 100%;
+}
+.ui-vertical-img img {
+	vertical-align: middle;
+}

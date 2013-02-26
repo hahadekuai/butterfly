@@ -1,0 +1,150 @@
+/*
+* 分页组件
+* @author yefei.niuyf
+* @version 2012-12-21
+*/
+.ui-paging .paging-list a.pre,
+.ui-paging .paging-list a.pre-disabled,
+.ui-paging .paging-list a.next,
+.ui-paging .paging-list a.next-disabled {
+background: url(http://img.china.alibaba.com/cms/upload/winport/dpl/20130109/dpl-bg.png) no-repeat;
+}
+.ui-paging{
+zoom: 1
+}
+.ui-paging:after {
+clear: both;
+content: " ";
+display: block;
+height: 0;
+}
+.ui-paging .paging {
+float:left;
+}
+.ui-paging-right .paging {
+float:right;
+}
+.ui-paging-center .paging {
+margin:0 auto;
+}
+.ui-paging ul.paging-list {
+float:left;
+}
+.paging-list li {
+float: left;
+height: 22px;
+overflow: hidden;
+padding: 0 2px;
+color: #444;
+font-family: Tahoma;
+}
+.ui-paging .paging-list a {
+display: inline-block;
+border: solid 1px #b7b7b7;
+background-color:#fff;
+margin-right: 3px;
+padding:0 4px;
+min-width: 12px;
+_width: 12px;
+height: 20px;
+color: #444;
+text-decoration: none !important;
+line-height: 20px;
+text-align:center;
+word-break: keep-all;
+}
+.ui-paging .paging-list a:hover {
+border-color: #5f8acf;
+color: #5f8acf;
+}
+.ui-paging .paging-list a.omit,
+.ui-paging .paging-list a.indic {
+background:none;
+padding: 1px 4px;
+border: 0 none;
+color: #444 !important;
+cursor: default;
+}
+.ui-paging .paging-list a.current {
+border-color: #5f8acf;
+background-color: #5f8acf;
+font-weight: bold;
+color: #fff;
+cursor: default;
+}
+.ui-paging .paging-list a.pre,
+.ui-paging .paging-list a.pre-disabled,
+.ui-paging .paging-list a.next,
+.ui-paging .paging-list a.next-disabled{
+background-color:#fff;
+overflow:hidden;
+}
+.ui-paging .paging-list a.pre {
+width: 10px;
+background-position: -8px -150px;
+overflow:hidden;
+line-height: 500%;
+}
+.ui-paging .paging-list a.pre:hover {
+border-color: #ff7300;
+background-position: -8px -169px;
+}
+.ui-paging .paging-list a.pre-disabled {
+border-color: #ddd !important;
+background-position: -8px -189px;
+color: #ddd;
+width: 10px;
+cursor: default;
+line-height: 500%;
+}
+.ui-paging .paging-list a.next {
+background-position: 43px -150px;
+padding-right: 16px;
+line-height: 23px\0;
+*line-height: 23px;
+_line-height: 20px;
+}
+.ui-paging .paging-list a.next:hover {
+border-color: #5f8acf;
+background-position: 43px -169px;
+}
+.ui-paging .paging-list a.next-disabled {
+border-color: #ddd;
+background-position: 43px -189px;
+padding-right: 16px;
+color: #ddd;
+cursor: default;
+}
+.ui-paging .paging-form {
+float:left;
+line-height:20px;
+}
+.ui-paging .paging-form span {
+float:left;
+margin-right:4px;
+}
+.ui-paging .paging-form input {
+margin: 0 2px;
+width: 30px;
+line-height:18px;
+text-align: right;
+margin-top:-1px;
+}
+.ui-paging .paging-btn,.ui-paging .paging-btn:link {
+background-color: #F5F5F5;
+background-image: -moz-linear-gradient(center top , #FCFCFC, #EEEEEE);
+border-radius: 3px 3px 3px 3px;
+border:1px solid #B7B7B7;
+color: #444;
+display: inline-block;
+overflow: hidden;
+height: 20px;
+line-height: 20px;
+padding: 0 10px;
+}
+
+.ui-paging .paging-btn:hover {
+background-color: #F5F5F5;
+background-image: -moz-linear-gradient(center top , #F2F2F2, #E1E1E1);
+text-decoration: none;
+}

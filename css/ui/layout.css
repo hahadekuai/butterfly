@@ -1,0 +1,37 @@
+/**
+ *  布局
+ *  @author yefei.niuyf
+ *  @version 2012-12-19
+ */
+
+/**
+ * 30-10的栅格布局
+ */
+.ui-layout-p10m30 {zoom:1;}
+.ui-layout-p10m30:after {display:block;clear:both;height:0;content:"\0020";}
+.ui-layout-p10m30 .grid-1{ float:left; width:30px; margin-right:10px; }
+.ui-layout-p10m30 .grid-2{ float:left; width:70px; margin-right:10px; }
+.ui-layout-p10m30 .grid-3{ float:left; width:110px; margin-right:10px; }
+.ui-layout-p10m30 .grid-4{ float:left; width:150px; margin-right:10px; }
+.ui-layout-p10m30 .grid-5{ float:left; width:190px; margin-right:10px; }
+.ui-layout-p10m30 .grid-6{ float:left; width:230px; margin-right:10px; }
+.ui-layout-p10m30 .grid-7{ float:left; width:270px; margin-right:10px; }
+.ui-layout-p10m30 .grid-8{ float:left; width:310px; margin-right:10px; }
+.ui-layout-p10m30 .grid-9{ float:left; width:350px; margin-right:10px; }
+.ui-layout-p10m30 .grid-10{ float:left; width:390px; margin-right:10px; }
+.ui-layout-p10m30 .grid-11{ float:left; width:430px; margin-right:10px; }
+.ui-layout-p10m30 .grid-12{ float:left; width:470px; margin-right:10px; }
+.ui-layout-p10m30 .grid-13{ float:left; width:510px; margin-right:10px; }
+.ui-layout-p10m30 .grid-14{ float:left; width:550px; margin-right:10px; }
+.ui-layout-p10m30 .grid-15{ float:left; width:590px; margin-right:10px; }
+.ui-layout-p10m30 .grid-16{ float:left; width:630px; margin-right:10px; }
+.ui-layout-p10m30 .grid-17{ float:left; width:670px; margin-right:10px; }
+.ui-layout-p10m30 .grid-18{ float:left; width:710px; margin-right:10px; }
+.ui-layout-p10m30 .grid-19{ float:left; width:750px; margin-right:10px; }
+.ui-layout-p10m30 .grid-20{ float:left; width:790px; margin-right:10px; }
+.ui-layout-p10m30 .grid-21{ float:left; width:830px; margin-right:10px; }
+.ui-layout-p10m30 .grid-22{ float:left; width:870px; margin-right:10px; }
+.ui-layout-p10m30 .grid-23{ float:left; width:910px; margin-right:10px; }
+.ui-layout-p10m30 .grid-24{ float:left; width:950px; margin-right:10px; }
+.ui-layout-p10m30 .grid-25{ float:left; width:990px; }
+.ui-layout-p10m30 .grid-fixed{ margin-right:0; }

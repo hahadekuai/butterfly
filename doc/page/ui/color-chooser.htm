@@ -1,0 +1,71 @@
+ColorChooser
+============
+
+## 描述
+
+颜色选择组件
+
+## API
+
+	new ColorChooser(element, config)
+
+## config
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>value</td>
+		<td>string</td>
+		<td></td>
+		<td>当前值</td>
+	</tr>
+	<tr>
+		<td>transparent</td>
+		<td>boolean</td>
+		<td>false</td>
+		<td>是否允许选择透明</td>
+	</tr>
+</table>
+
+
+## DEMO
+
+<style>
+.widget-color-chooser-container .row {
+	margin: 0;
+}
+</style>
+
+<div class="color-chooser-demo ui-clr">
+
+	<div class="box" style="background: '#ff0000'; width: 24px; height: 24px; border: 1px solid #ddd; cursor: pointer;"></div>
+
+</div>
+
+## 用法
+
+~~~js
+define(['jQuery', 'ui.ColorChooser'], function($, ColorChooser) {
+
+var box = $('div.box', 'div.color-chooser-demo');
+
+box.on('click', function() {
+	new ColorChooser(box, {
+		value: '#ff0000',
+		transparent: true,
+		confirm: function(o) {
+			box.css('background', o.color);
+		}
+	});
+});
+	
+		
+});
+~~~
+
+<script src="page/ui/color-chooser.js"></script>

@@ -1,0 +1,177 @@
+Aspect
+=====
+
+## 描述
+
+提供AOP的支持
+
+## API
+
+### 静态方法
+
+~~~js
+Aspect.before(target, pointcut, advice)
+// 可以能过修改adivce入参o.args的内容来修改入参
+// 也可以通过返回一个数组来修改传递给目录方法的入参
+
+Aspect.after(target, pointcut, advice)
+// advice可以返回一个新的值来代替方法的返回值
+
+Aspect.around(target, pointcut, advice)
+~~~
+
+### 实例方法
+
+~~~js
+Aspect#before(target, pointcut, advice)
+Aspect#after(target, pointcut, advice)
+Aspect#around(target, pointcut, advice)
+
+Aspect#attach()
+Aspect#detach()
+
+Aspect#isDetached
+~~~
+
+## 参数
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>target</td>
+		<td>object</td>
+		<td></td>
+		<td>目标对象，可以是window</td>
+	</tr>
+	<tr>
+		<td>pointcut</td>
+		<td>string | array&lt;string&gt; | pattern</td>
+		<td></td>
+		<td>切入点</td>
+	</tr>
+	<tr>
+		<td>advice</td>
+		<td>function(o)</td>
+		<td></td>
+		<td>Advice
+<pre>
+通过o可以取得目标方法的一些信息
+{
+	target: {object}		// 目标对象
+	name:	{string}			// 方法名称
+	args: {array}				// 入参
+	result: {any}				// 方法返回值，只在after中使用
+	method: {function}	// 目标方法
+}
+</pre>	
+		</td>
+	</tr>
+</table>
+
+
+## DEMO
+
+<style>
+.site-dialog h3 {
+	margin: 0;
+}
+</style>
+
+<a href="#" class="aspect-btn-alert ui-btn ui-btn-default"><span>Alert</span></a>
+
+
+<a href="#" class="aspect-btn-before ui-btn ui-btn-default"><span>before</span></a>
+<a href="#" class="aspect-btn-after ui-btn ui-btn-default"><span>after</span></a>
+<a href="#" class="aspect-btn-around ui-btn ui-btn-default"><span>around</span></a>
+
+
+<a href="#" class="aspect-btn-detach ui-btn ui-btn-default"><span>detach</span></a>
+<a href="#" class="aspect-btn-attach ui-btn ui-btn-default"><span>attach</span></a>
+
+
+## 示例代码
+
+### alert
+
+~~~js
+$('a.aspect-btn-alert').on('click', function(e) {
+	e.preventDefault();	
+
+	alert('Hello');
+});
+~~~
+
+### before
+
+~~~js
+var aspect = new Aspect();
+
+$('a.aspect-btn-before').on('click', function(e) {
+	e.preventDefault();
+
+	aspect.before(window, 'alert', function(o) {
+		var text = o.args[0];
+		return ['before ' + text];
+	});
+});
+~~~
+
+可以从advice的入参中获取一些信息
+~~~js
+{
+	target: {object}  // 目标对象
+	name:	{string}    // 方法名
+	args: {array}     // 参数
+	result: {any}     // 只在after pointcut时有效，表示方法返回值
+	method: {function} // 目标方法
+}
+~~~
+
+
+### after
+
+~~~js
+$('a.aspect-btn-after').on('click', function(e) {
+	e.preventDefault();
+
+	aspect.after(window, 'alert', function(o) {
+		var _alert = o.method,
+			msg = o.args[0];
+
+		_alert(msg + ' after');
+	});
+});
+~~~
+
+### around
+
+~~~js
+$('a.aspect-btn-around').on('click', function(e) {
+	e.preventDefault();
+
+	aspect.around(window, 'alert', function(o) {
+		Dialog.info(o.args[0]);
+	});
+});
+~~~
+
+### detach &amp; attach
+~~~js
+$('a.aspect-btn-detach').on('click', function(e) {
+	e.preventDefault();	
+	aspect.detach();
+});
+	
+
+$('a.aspect-btn-attach').on('click', function(e) {
+	e.preventDefault();	
+	aspect.attach();
+});
+~~~
+
+
+<script src="page/lang/aspect.js"></script>

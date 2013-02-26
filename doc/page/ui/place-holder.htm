@@ -1,0 +1,59 @@
+ColorChooser
+============
+
+## 描述
+
+PlaceHolder
+
+## API
+
+	new PlaceHolder(element, config)
+
+## config
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>placeholder</td>
+		<td>string</td>
+		<td></td>
+		<td>placeholder字符</td>
+	</tr>
+</table>
+
+
+## DEMO
+
+
+<div class="color-chooser-demo">
+	
+	<input type="text" data-placeholder="请输入您的用户名" data-widget-type="ui.PlaceHolder" />
+
+</div>
+
+## 用法
+
+### 使用Autowire
+
+~~~html
+&lt;input type="text" data-placeholder="请输入您的用户名" data-widget-type="ui.PlaceHolder" /&gt;
+~~~
+
+### 使用Javscript
+
+~~~js
+define(['jQuery', 'ui.PlaceHolder'], function($, PlaceHolder) {
+	
+	var input = $('input.mytext');
+	new PlaceHolder(input, {
+		placeholder: '请输入您的用户名'	
+	});
+		
+});
+~~~
+
