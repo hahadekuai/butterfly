@@ -131,6 +131,7 @@ text-align: right;
 margin-top:-1px;
 }
 .ui-paging .paging-btn,.ui-paging .paging-btn:link {
+float: left;
 background-color: #F5F5F5;
 background-image: -moz-linear-gradient(center top , #FCFCFC, #EEEEEE);
 border-radius: 3px 3px 3px 3px;

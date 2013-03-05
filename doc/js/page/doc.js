@@ -1,6 +1,6 @@
 define('page.Doc', 
-		['jQuery', 'ui.Autowire', 'vendor.Mustache', 'vendor.marked'], 
-		function($, Autowire, Mustache, marked) {
+		['jQuery', 'ui.Autowire', 'vendor.Mustache', 'vendor.marked', 'page.NavData'], 
+		function($, Autowire, Mustache, marked, NavData) {
 
 return {
 	init: function() {
@@ -15,7 +15,7 @@ return {
 	renderTemplate: function(group, page) {
 		var self = this,
 			list = [],
-			items = this.data[group] || [];
+			items = NavData[group] || [];
 
 		$.each(items, function(index, name) {
 			var alias = self.getAlias(name);
@@ -62,14 +62,6 @@ return {
 		return s.replace(/([a-z])([A-Z])/g, function(m, m1, m2) {
 			return m1 + '-' + m2;
 		}).toLowerCase();
-	},
-
-	data: {
-		lang: ['loader', 'Class', 'Log', 'Context', 'Aspect'],
-		util: ['Util', 'AddFavorite', 'ParserModule', 'HtmlParser', 'CssParser', 'LineInfo', 'CssValidator'],
-		dpl: ['index', 'layout', 'mod', 'button', 'paging', 'crumbs', 'tips', 'form', 'tabs', 'dialog', 'imagetext', 'table', 'other'],
-		ui: ['UI', 'Widget', 'PlaceHolder', 'ColorChooser', 'FileUploader'],
-		fx: ['Effect', 'Tabs', 'Roll', 'Popup', 'Accordion', 'CountDown', 'Marguee']
 	}
 };
 		

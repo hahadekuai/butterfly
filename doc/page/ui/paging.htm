@@ -1,0 +1,59 @@
+Paging 
+======
+
+## 描述
+
+用于动态分页条的创建
+
+## API
+
+~~~js
+new Paging(div, options)
+~~~
+
+## DEMO
+
+### 分页条由后端渲染
+
+
+#### HTML
+
+可参考DPL [paging](http://wpstatic.china.alibaba.com/doc/index.htm?_#doc/dpl/paging)
+
+~~~html
+&lt;div class="ui-paging" data-url="paging_.htm?page={page}"&gt;
+	&lt;div class="paging"&gt;
+		&lt;ul class="paging-list fd-clr"&gt;
+			&lt;li&gt;&lt;a href="paging_.htm?page=1" class="pre pre-disabled"&gt;上一页&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="paging_.htm?page=1" class="current"&gt;1&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="paging_.htm?page=9"&gt;9&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="paging_.htm?page=4" class="omit"&gt;...&lt;/a&gt;&lt;/li&gt;  
+			&lt;li&gt;&lt;a href="paging_.htm?page=2" class="next"&gt;下一页&lt;/a&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;div class="paging-form fd-clr"&gt;
+				&lt;span&gt;共&lt;em class="pagenum"&gt;3&lt;/em&gt;页&lt;/span&gt;
+				&lt;span&gt;到&lt;input type="text" class="ui-txt ui-txt-small pnum" autocomplete="off" maxlength="4"&gt;页&lt;/span&gt;
+				&lt;a title="确定" href="#" class="paging-btn"&gt;确 定&lt;/a&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+~~~
+
+#### js
+
+~~~js
+define(['jQuery', 'ui.Paging'], function($, Paging) {
+	var context = document, 
+		elm = $('div.ui-paging', context);
+	new Paging(elm);
+});
+~~~
+
+#### 效果
+
+<iframe src="page/ui/paging_.htm" frameborder="0" scrolling="no" style="width: 100%; height: 40px;"></iframe>
+
+
+### 分页条由前端渲染
+
+
