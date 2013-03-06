@@ -17,7 +17,13 @@
 define(['jQuery', 'ui.Paging'], function($, Paging) {
 	var context = document, 
 		elm = $('div.ui-paging', context);
-	new Paging(elm);
+	new Paging(elm, {
+		render: true,
+		renderForm: true,
+		pageCount: 0,
+		goTo: function(page) {
+		}
+	});
 });
 </script>
 </div>
