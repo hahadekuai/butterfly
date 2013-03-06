@@ -4,6 +4,7 @@
  */
 define('ui.Paging', ['jQuery', 'Class'], function($, Class) {
 
+'use strict';
 
 return Class({
 
@@ -14,11 +15,10 @@ return Class({
 	 *	- render {boolean|number}	是否由js渲染分页条，默认为false
 	 *	- listSize: {number}	分页条中页码数量, 默认为7
 	 *	- showForm {boolean}	是否显示分页表单, 默认为false
+	 *	- showPrevNext {boolean} 是否显示上一页和下一页
 	 *	- pageIndex {number}	当前页>=1，默认从节点推导
 	 *	- pageCount {number}	页面数量 -1 表示未知页数
 	 *							
-	 *	- linkTo (function(page))
-	 *	- formTo (function(page)) 
 	 *	- goTo {function(page)}
 	 */
 	init: function(div, options) {
@@ -49,7 +49,8 @@ return Class({
 	},
 
 	_render: function(page) {
-		if (!this.options.render) {
+		var opts = this.options;
+		if (!opts.render) {
 			return;
 		}
 
@@ -57,6 +58,11 @@ return Class({
 		
 		if (!this._rendered) {
 			this.element.html(this._tpl);
+			if (!opts.renderForm) {
+				$('div.paging-form', this.element).remove();
+			} else if (this.pageCount === -1) {
+				$('span.page-count', this.element).remove();
+			}
 			this._rendered = true;
 		}
 
@@ -69,11 +75,19 @@ return Class({
 			tpl = '<li><a href="{link}" data-page="{page}" class="{class}">${text}</a></li>',
 			pageIndex = this.pageIndex,
 			pageCount = this.pageCount || 1,
+			showPrev = this.options.showPrevNext,
 		
 			size = parseInt(this.options.listSize, 10) || 7,
 			from = pageIndex - Math.floor((size - 4) / 2),
 			to,
 			now;
+
+		if (pageCount === -1) {
+			pageCount = Number.MAX_VALUE;
+		}
+		if (showPrev === undefined) {
+			showPrev = true;
+		}
 
 		// 产生除去头尾4个页码的中间页码
 		if (from + size - 2 > pageCount) {
@@ -83,7 +97,7 @@ return Class({
 		from < 3 && (from = 3);	// 最少从第3页开始
 		to = from;
 		for (var i = 0; i < size - 4; i++) {
-			if (pageCount !== -1 && to > pageCount - 2) {
+			if (to > pageCount - 2) {
 				break;
 			}
 			html.push(this._createItem(to, to, '', true));
@@ -92,7 +106,7 @@ return Class({
 		to--;
 
 		// 产生页码2
-		if (pageCount === -1 || pageCount > 1) {
+		if (pageCount > 1) {
 			now = Math.floor((from + 1) / 2);
 			var item = from > now + 1 ? this._createItem('...', now, 'omit') :
 					this._createItem(now, now, '', true);
@@ -105,23 +119,27 @@ return Class({
 		}
 
 		// 上一页
-		html.unshift(this._createItem('上一页', 1, pageIndex === 1 ? 'pre pre-disabled' : 'pre'));
+		if (showPrev) {
+			html.unshift(this._createItem('上一页', pageIndex - 1, pageIndex === 1 ? 'pre pre-disabled' : 'pre'));
+		}
 
 		// 产生最后第2个页码
-		if (pageCount === -1 || pageCount > 2) {
-			now = Math.floor((pageCount + to + 1) / 2);
+		if (pageCount > 2) {
+			now = this.pageCount === -1 ? to + 10 : Math.floor((pageCount + to + 1) / 2);
 			var item = to < now - 1 ? this._createItem('...', now, 'omit') :
 					this._createItem(now, now, '', true);
 			html.push(item);
 		}
 
 		// 产生最后1个页码
-		if (pageCount > 3) {
+		if (this.pageCount !== -1 && pageCount > 3) {
 			html.push(this._createItem(pageCount, pageCount, '', true));
 		}
 
-		// 产生最后一页
-		html.push(this._createItem('下一页', pageCount, pageIndex === pageCount ? 'next next-disabled' : 'next'));
+		// 产生下一页
+		if (showPrev) {
+			html.push(this._createItem('下一页', pageIndex + 1, pageIndex === pageCount ? 'next next-disabled' : 'next'));
+		}
 		
 		$('ul.paging-list', this.element).html(html.join(''));
 	},
@@ -149,12 +167,26 @@ return Class({
 	 * 处理分页事件
 	 */
 	_handlePaging: function() {
-		var self = this;
+		var self = this,
+			opts = this.options;
 
 		this.element.on('click', 'ul.paging-list a', function(e) {
-			var page = $(this).data('page');
-			if (self._linkTo(page) !== false) {
+			var elm = $(this);
+			// 无效页
+			if (elm.hasClass('current') || 
+					elm.hasClass('pre-disabled') || elm.hasClass('next-disabled')) {
 				e.preventDefault();
+				return;
+			}
+
+			// 没提供goTo，作链接跳转
+			if (!opts.goTo) {
+				return;
+			}
+
+			e.preventDefault();
+			var page = elm.data('page');
+			if (opts.goTo(page) !== false) {
 				self._render(page);
 			}
 		});
@@ -162,23 +194,30 @@ return Class({
 		this.element.on('click', 'a.paging-btn', function(e) {
 			e.preventDefault();	
 			var page = $('input.pnum', self.element).val();
-			if (page && self._validate(page)) {
-				self._formTo(page);
-				self._render(page);
-			}
+			self.goTo(page);
 		});
 	},
 
-	_linkTo: function(page) {
+	goTo: function(page) {
+		page = parseInt(page, 10);
+
+		if (!this._validate(page)) {
+			return;
+		}
+
 		var opts = this.options;
-		return opts.linkTo ? opts.linkTo(page) :
-			opts.goTo ? opts.goTo(page) : false;
+		if (!opts.goTo) {
+			return this._goTo(page);
+		}
+
+		if (opts.goTo(page) !== false) {
+			this._render(page);
+		}
 	},
 
-	_formTo: function(page) {
-		var opts = this.options;
-		opts.formTo ? opts.formTo(page) :
-			opts.goTo ? opts.goTo(page) : this._goTo(page);
+	_validate: function(page) {
+		var pageCount = this.pageCount;
+		return pageCount === -1 || page > 0 && page <= pageCount;
 	},
 
 	_goTo: function(page) {
@@ -186,26 +225,6 @@ return Class({
 		if (url) {
 			window.location = url.replace('{page}', page);
 		}
-	},
-
-	goTo: function(page) {
-		if (!this._validate(page)) {
-			return;
-		}
-
-		var opts = this.options;
-		opts.formTo ? opts.formTo(page) :
-			opts.linkTo ? opts.linkTo(page) :
-			opts.goTo ? opts.goTo(page) :
-			this._goTo(page);
-
-		this._render(page);
-	},
-
-	_validate: function(page) {
-		var pageCount = this.options.pageCount;
-		page = parseInt(page, 10);
-		return pageCount === -1 || page > 0 && page <= pageCount;
 	},
 
 	_handlePnum: function() {
@@ -232,7 +251,7 @@ return Class({
 		'<div class="paging">',
 			'<ul class="paging-list fd-clr"></ul>',
 			'<div class="paging-form fd-clr">',
-				'<span>共<em class="pagenum"></em>页</span>',
+				'<span class="page-count">共<em class="pagenum"></em>页</span>',
 				'<span>到<input type="text" class="ui-txt ui-txt-small pnum" autocomplete="off" maxlength="4">页</span>',
 				'<a title="确定" href="#" class="paging-btn">确 定</a>',
 			'</div>',

@@ -11,6 +11,59 @@ Paging
 new Paging(div, options)
 ~~~
 
+## config
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>render</td>
+		<td>boolean</td>
+		<td>false</td>
+		<td>是否由js渲染分页条</td>
+	</tr>
+	<tr>
+		<td>listSize</td>
+		<td>number</td>
+		<td>7</td>
+		<td>分页条页码数目，当render为true时有效</td>
+	</tr>
+	<tr>
+		<td>showForm</td>
+		<td>boolean</td>
+		<td>false</td>
+		<td>是示显示分页表单，当render为true时有效</td>
+	</tr>
+	<tr>
+		<td>showPrevNext</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>是示上一页下一页，当render为true时有效</td>
+	</tr>
+	<tr>
+		<td>pageIndex</td>
+		<td>number</td>
+		<td></td>
+		<td>初始选中的页面，如果不指定则从页面结构推导</td>
+	</tr>
+	<tr>
+		<td>pageCount</td>
+		<td>number</td>
+		<td></td>
+		<td>总页数, -1表示未知分页</td>
+	</tr>
+	<tr>
+		<td>goTo</td>
+		<td>function(page)</td>
+		<td></td>
+		<td>分页动作, 返回false, 忽略本次跳转</td>
+	</tr>
+</table>
+
 ## DEMO
 
 ### 分页条由后端渲染
@@ -56,4 +109,59 @@ define(['jQuery', 'ui.Paging'], function($, Paging) {
 
 ### 分页条由前端渲染
 
+#### html
+
+~~~html
+&lt;div class="ui-paging paging-01"&gt;&lt;/div&gt;
+	
+&lt;br /&gt;&lt;br /&gt;
+
+&lt;div class="ui-paging paging-02"&gt;&lt;/div&gt;
+
+&lt;br /&gt;&lt;br /&gt;
+
+&lt;div class="ui-paging paging-03"&gt;&lt;/div&gt;
+~~~
+
+
+#### js
+
+~~~js
+define(['jQuery', 'ui.Paging'], function($, Paging) {
+	var elm = $('div.paging-01', document);
+
+	new Paging(elm, {
+		render: true,
+		renderForm: true,
+		pageCount: 47,
+		goTo: function(page) {
+			// do paging
+		}
+	});
+	
+	var elm = $('div.paging-02', document);
+	new Paging(elm, {
+		render: true,
+		pageCount: -1,
+		goTo: function(page) {
+			// do paging
+		}
+	});
+
+	var elm = $('div.paging-03', document);
+	new Paging(elm, {
+		render: true,
+		pageCount: 10,
+		showPrevNext: false,
+		goTo: function(page) {
+			// do paging
+		}
+	});
+
+});
+~~~
+
+#### 效果 
+
+<iframe src="page/ui/paging_2.htm" frameborder="0" scrolling="no" style="width: 100%; height: 150px;"></iframe>
 
