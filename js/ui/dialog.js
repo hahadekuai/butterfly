@@ -26,22 +26,21 @@ var Dialog = new Class({
 	 *  - forceHeight	{boolean}		默认情况下, height仅仅是对话框打开时的高度，后来内容载入后就会自定义的
 	 *			如果设置forceHeight, 则会设置d-content的高度
 	 *
-	 *  - loader(html)		{function} 内容载入器
-	 *  - beforeOpen(dialog) {function}	打开窗口前触发, 返回false阻上对话框打开
-	 *  - beforeClose(dialog) {function} 关闭窗口时前触发，可以做一些清理工作
-	 *  - contentSuccess(dialog) {function}	内容载入完成时触发（已更新到对话框节点中，可以操作DOM了）
+	 *  - loader	{function(html)} 内容载入器
+	 *  - beforeOpen {function(dialog)}	打开窗口前触发, 返回false阻上对话框打开
+	 *  - beforeClose {function(dialog)} 关闭窗口时前触发，可以做一些清理工作
+	 *  - contentSuccess {function(dialog)}	内容载入完成时触发（已更新到对话框节点中，可以操作DOM了）
 	 *
 	 *
 	 */
 	init: function(config) {
-		this.config = this.$prepare(config);
+		this.config = this.__prepare(config);
 		this.$renderTemplate($.proxy(this, '__openDialog'));
 	},
 
-	/**
-	 * $带头的方法 相当于"protected", 可由子类重写
-	 */
-	$prepare: function(config) {
+	__prepare: function(config) {
+		var config = this.$prepare(config);
+
 		config = $.extend({
 			center: true,
 			closable: true,
@@ -56,6 +55,13 @@ var Dialog = new Class({
 		config.showFooter === undefined &&
 			(config.showFooter = !!config.buttons.length);
 
+		return config;			
+	},
+
+	/**
+	 * $带头的方法 相当于"protected", 可由子类重写
+	 */
+	$prepare: function(config) {
 		return config;
 	},
 

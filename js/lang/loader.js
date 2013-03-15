@@ -115,6 +115,7 @@ var define = function(config, id, depends, factory) {
 		return;
 	} else {
 		mods[id] = args;
+		config.ondefine && config.ondefine(args);
 	}
 
 	// require anonymous module immediately

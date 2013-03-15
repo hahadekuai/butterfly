@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<meta name="description" value="" />
+	<meta name="keywords" value="" />
+</head>
+<body>
+
+<dl class="basic-info">
+	<dt>Name:</dt>
+	<dd>butterfly</dd>
+	<dt>Version:</dt>
+	<dd>1.1</dd>
+</dl>
+
+<script src="http://wpstatic.china.alibaba.com/??js/export/lib.js,js/plugin/start.js"></script>
+
+<script>
+define(['jQuery', 'ui.InplaceEditor'], function($, InplaceEditor) {
+
+var elms = $('dl.basic-info dd', document);
+new InplaceEditor(elms, {
+	event: 'click'	
+});
+
+
+});
+
+</script>
+
+</body>
+</html>
