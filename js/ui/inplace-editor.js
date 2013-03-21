@@ -16,6 +16,7 @@ var InplaceEditor = new Class({
 		this.options = options || {};
 
 		this._handle();	
+		this._delegate();
 	},
 
 	_handle: function() {
@@ -26,14 +27,14 @@ var InplaceEditor = new Class({
 		});
 	},
 
-	open: function(index) {
-		var elm = this.element.eq(index || 0);
-		InplaceEditor.open(elm, this.options);
-	},
-
-	isActive: function(index) {
-		var elm = this.element.eq(index || 0);
-		InplaceEditor.isActive(elm);
+	_delegate: function() {
+		var self = this;
+		$.each(['open', 'isActive', 'submit', 'cancel'], function(index, method) {
+			self[method] = function(index) {
+				var elm = self.element.eq(index || 0);
+				InplaceEditor[method](elm, self.options);
+			};
+		});
 	}
 
 });
@@ -76,6 +77,16 @@ $.extend(InplaceEditor, {
 		return !!data.active;
 	},
 
+	submit: function(elm) {
+		var editor = this._data($(elm));
+		return editor.submit && editor.submit();
+	},
+
+	cancel: function(elm) {
+		var editor = this._data($(elm));
+		return editor.cancel && editor.cancel();
+	},
+
 	_data: function(elm) {
 		var data = elm.data('inplaceEditor');
 		if (!data) {
@@ -110,7 +121,8 @@ $.extend(InplaceEditor, {
 			log.error('invalid editor');
 			return;
 		}
-		Editor({
+
+		this._data(elm).editor = new Editor({
 			element: elm,
 			label: label,
 			value: value,
@@ -118,6 +130,7 @@ $.extend(InplaceEditor, {
 			cancel: $.proxy(this, '_cancel', elm),
 			options: options
 		});
+
 	},
 
 	_submit: function(elm, value, callback) {
@@ -152,6 +165,7 @@ $.extend(InplaceEditor, {
 	_cancel: function(elm) {
 		var data = this._data(elm);
 		data.active = false;
+		data.editor = null;
 	},
 
 	_getLabel: function(elm) {
@@ -163,7 +177,7 @@ $.extend(InplaceEditor, {
 
 var Editors = {};
 
-var Text = new Class({
+Editors.text = new Class({
 	/**
 	 * options
 	 *	- editorClass
@@ -196,31 +210,41 @@ var Text = new Class({
 		this.editor = editor;
 	},
 
+	_reset: function() {
+		this.editor.remove();	
+		this.label.show();
+	},
+
+	submit: function() {
+		var self = this,
+			value = $.trim(this.editor.val());
+
+		this.config.submit(value, function(complete) {
+			complete && self._reset();
+		});
+	},
+
+	cancel: function() {
+		this._reset();
+		this.config.cancel();
+	},
+
 	_handle: function() {
 		var self = this;
 		this.editor.on('blur', function() {
 			var value = $.trim($(this).val());
 			if (!self.options.forceSubmit && self.value === value ||
 					self.options.cancelOnEmpty && !value) {
-				self.config.cancel();
+				self.cancel();
 				return;
 			}
 
-			self.config.submit(value, function(complete) {
-				if (complete) {
-					self.editor.remove();
-					self.label.show();
-				}
-			});
+			self.submit();
 		});
 	}
 
-
 });
-Editors.text = function(config) {
-	return new Text(config);
-};
-//~test
+//~text
 
 
 InplaceEditor.Editors = Editors;

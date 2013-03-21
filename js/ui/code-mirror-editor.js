@@ -30,6 +30,9 @@ var CodeMirrorEditor =  new Class({
         
 		require(urls, function() {
 			self.editor = CodeMirror.fromTextArea(input.get(0), options);
+			setTimeout(function() {
+				self.editor.refresh();
+			}, 200);
 			defer.resolve();
 		});
 
@@ -48,21 +51,21 @@ var CodeMirrorEditor =  new Class({
         this.editor && this.editor.setValue(value);
     },
     
-    refresh: function(){
-        this.editor && this.editor.refresh();
-    },
-    
-    getLastValue: function(){
+    _getLastValue: function(){
         return this.editor && this.editor.getTextArea().value;        
     },
 
 	isDirty: function() {
-		return this.getLastValue().replace(/\r\n/g,'\n').length !== this.getValue().replace(/\r\n/g,'\n').length;	
+		return this._getLastValue().replace(/\r\n/g,'\n').length !== this.getValue().replace(/\r\n/g,'\n').length;	
 	},
     
-    saveToTextArea: function(){
+    save: function() {
         return this.editor && this.editor.save();
-    }
+    },
+
+	getEditor: function() {
+		return this.editor;	
+	}
     
 });
 
