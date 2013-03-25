@@ -60,6 +60,24 @@ Types.hover = function(div, config) {
 };
 //~
 
+
+/**
+ * close
+ */
+Types.close = function(div, config) {
+	var duration = config.animate ? 500 : 0,
+		target = config.closeTarget ? $(config.closeTarget, div) : div,
+		btn = $(config.closeBtn || '.fx-close', div);
+
+	btn.on('click', function(e) {
+		e.preventDefault();
+		target.slideUp(duration, function(){
+			target.remove();
+		});
+	});
+};
+//~
+
 return Effect;
 
 });
