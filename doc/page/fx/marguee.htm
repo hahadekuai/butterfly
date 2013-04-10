@@ -1,0 +1,118 @@
+Marguee
+=======
+
+## 描述
+
+滚动效果，鼠标hover停止滚动
+
+## API
+
+~~~js
+new Marguee(element, config)
+~~~
+
+## config
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="300">类型</th>
+		<th width="100">默认值</th>
+		<th width="600">说明</th>	
+	</tr>
+	<tr>
+		<td>body</td>
+		<td>string</td>
+		<td>.fx-body</td>
+		<td>滚动元素的选择器</td>
+	</tr>
+	<tr>
+		<td>effect</td>
+		<td>string</td>
+		<td>left</td>
+		<td>滚动效果，可选值有 left, right, up, leftright</td>
+	</tr>
+	<tr>
+		<td>stopOnHover</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>鼠标hover时是否停止滚动</td>
+	</tr>
+	<tr>
+		<td>step</td>
+		<td>number</td>
+		<td>4</td>
+		<td>速度, 每次滚动偏移(px), 值越大，滚动越快</td>
+	</tr>
+	<tr>
+		<td>speed</td>
+		<td>number</td>
+		<td>80</td>
+		<td>每次滚动时间间隔(ms)。值越大，滚动越慢</td>
+	</tr>
+	<tr>
+		<td>delay</td>
+		<td>number</td>
+		<td>1000</td>
+		<td>每轮滚动结束后停止时间(ms)</td>
+	</tr>
+</table>
+
+## demo
+
+### effect: left
+<div class="demo-container">
+
+<div data-widget-type="fx.Marguee" style="border: 1px solid #ddd;">
+	<span class="fx-body">啦啦啦，我会移动耶！</span>
+</div>
+
+</div>
+
+### effect: right
+	
+<div class="demo-container">
+
+<div data-widget-type="fx.Marguee" data-widget-config='{"effect":"right"}' style="border: 1px solid #ddd;">
+	<span class="fx-body">啦啦啦，我会移动耶！</span>
+</div>
+
+</div>
+
+### effect: up
+	
+<div class="demo-container">
+
+<div data-widget-type="fx.Marguee" data-widget-config='{"effect":"up"}' style="border: 1px solid #ddd;">
+	<div class="fx-body">
+		啦啦啦，我会移动耶！<br />
+		啦啦啦，我会移动耶！<br />
+		啦啦啦，我会移动耶！<br />
+		啦啦啦，我会移动耶！<br />
+		啦啦啦，我会移动耶！<br />
+		啦啦啦，我会移动耶！<br />
+		啦啦啦，我会移动耶！
+	</div>
+</div>
+
+</div>
+
+### effect: leftright
+
+<div class="demo-container">
+
+<div data-widget-type="fx.Marguee" data-widget-config='{"effect":"leftright"}' style="border: 1px solid #ddd;">
+	<span class="fx-body">啦啦啦，我会移动耶！</span>
+</div>
+
+</div>
+
+### stopOnHover: false
+
+<div class="demo-container">
+
+<div data-widget-type="fx.Marguee" data-widget-config='{"stopOnHover":false}' style="border: 1px solid #ddd;">
+	<span class="fx-body">啦啦啦，我会移动耶！</span>
+</div>
+
+</div>

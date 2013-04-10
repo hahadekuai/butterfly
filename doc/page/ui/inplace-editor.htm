@@ -1,0 +1,116 @@
+InplaceEditor
+=============
+
+## 描述
+
+即时编辑
+
+## API
+
+### 初始化一个InplaceEditor
+
+~~~js
+new InplaceEditor(element, config)
+~~~
+
+### 在一个节点上激活editor
+
+~~~js
+InplaceEditor#open()
+~~~
+
+### 判断editor是否激活状态
+
+~~~js
+InplaceEditor#isActive()
+~~~
+
+### 提交editor内容
+
+~~~js
+InplaceEditor#submit()
+~~~
+
+### 取消editor
+
+~~~js
+InplaceEditor#cancel()
+~~~
+
+### 在一个节点上激活editor
+
+~~~js
+InplaceEditor.open(element, options)
+~~~
+
+### 判断editor是否激活状态
+
+~~~js
+InplaceEditor.isActive()
+~~~
+
+### config
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>event</td>
+		<td>string</td>
+		<td></td>
+		<td>触发事件</td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>string | new function(o)</td>
+		<td>text</td>
+		<td>编辑器类型</td>
+	</tr>
+	<tr>
+		<td>submit</td>
+		<td>function(value, fn)</td>
+		<td></td>
+		<td>定义如何提交数据, 函数可以返回一个结构或调用fn传递结果信息以告知结果
+<pre>
+{
+	success: true | false // 是否成功提交, 否则不会关闭编辑器
+	cancel: true | false	// 是否取消编辑
+}
+</pre>
+		<td>
+	</tr>
+	<tr>
+		<td>editorClass</td>
+		<td>string</td>
+		<td></td>
+		<td>输入框额外的className</td>
+	</tr>
+	<tr>
+		<td>editorAttr</td>
+		<td>object</td>
+		<td></td>
+		<td>输入框额外的属性</td>
+	</tr>
+	<tr>
+		<td>forceSubmit</td>
+		<td>boolean</td>
+		<td>false</td>
+		<td>字符串未作变化时是否提交</td>
+	</tr>
+	<tr>
+		<td>cancelOnEmpty</td>
+		<td>boolean</td>
+		<td>false</td>
+		<td>字符串为空时是否取消</td>
+	</tr>
+</table>
+
+
+## DEMO
+
+<iframe src="page/ui/inplace-editor_.htm" frameborder="0" scrolling="no" style="width: 100%; height: 450px;"></iframe>
+

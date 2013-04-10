@@ -1,0 +1,17 @@
+.effect-toggle-demo .fx-body {
+	display: none;
+}
+.effect-toggle-demo.fx-toggle .fx-body {
+	display: block;
+}
+
+.effect-toggle-demo-2 .body {
+	display: none;
+}
+.effect-toggle-demo-2 .fx-toggle .body {
+	display: block;
+}
+
+.effect-hover-demo li.hover {
+	background: #ddd;
+}

@@ -1,0 +1,191 @@
+Popup
+=======
+
+## 描述
+
+浮出效果, 可以用来实现菜单，浮层等效果
+
+## API
+
+new Popup(element, config)
+
+## config
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="300">类型</th>
+		<th width="100">默认值</th>
+		<th width="600">说明</th>	
+	</tr>
+	<tr>
+		<td>trigger</td>
+		<td>string</td>
+		<td>.fx-popup-trigger</td>
+		<td>触发节点</td>
+	</tr>
+	<tr>
+		<td>showTrigger</td>
+		<td>string</td>
+		<td></td>
+		<td>显示触发节点选择器，默认和trigger相同</td>
+	</tr>
+	<tr>
+		<td>hideTrigger</td>
+		<td>string</td>
+		<td></td>
+		<td>隐藏触发节点选择器，默认和trigger相同</td>
+	</tr>
+	<tr>
+		<td>showEvent</td>
+		<td>string</td>
+		<td>mouseenter</td>
+		<td>显示事件</td>
+	</tr>
+	<tr>
+		<td>hideEvent</td>
+		<td>string</td>
+		<td>mouseleave</td>
+		<td>关闭事件</td>
+	</tr>
+	<tr>
+		<td>body</td>
+		<td>string</td>
+		<td>.fx-popup-body</td>
+		<td>内容节点选择器</td>
+	</tr>
+	<tr>
+		<td>effect</td>
+		<td>
+<pre>	
+1. string
+2. { show: function(elm, callback), 
+hide: function(elm, callback)}
+</pre>
+</td>
+		<td>default</td>
+		<td>浮出效果</td>
+	</tr>
+	<tr>
+		<td>active</td>
+		<td>string</td>
+		<td>fx-popup-active</td>
+		<td>显示时具有的className</td>
+	</tr>
+	<tr>
+		<td>showDelay</td>
+		<td>number</td>
+		<td>0</td>
+		<td>延迟多少ms打开</td>
+	</tr>
+	<tr>
+		<td>hideDelay</td>
+		<td>number</td>
+		<td>0</td>
+		<td>延迟多少ms关闭</td>
+	</tr>
+</table>
+
+<link rel="stylesheet" href="page/fx/popup.css" />
+
+## demo1
+
+<div class="demo-container">
+
+<div class="design-popup-01">
+	<ul class="ui-clr">
+		<li data-widget-type="fx.Popup">
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/101.jpg" /></div>
+			<div class="fx-popup-body"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/101.jpg" /></div>
+		</li>
+		<li data-widget-type="fx.Popup">
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/102.jpg" /></div>
+			<div class="fx-popup-body"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/102.jpg" /></div>
+		</li>
+		<li data-widget-type="fx.Popup" class="design-left">
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/103.jpg" /></div>
+			<div class="fx-popup-body"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/103.jpg" /></div>
+		</li>
+		<li data-widget-type="fx.Popup" class="design-left">
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/104.jpg" /></div>
+			<div class="fx-popup-body"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/104.jpg" /></div>
+		</li>
+		<li data-widget-type="fx.Popup" class="design-top">
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/105.jpg" /></div>
+			<div class="fx-popup-body"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/105.jpg" /></div>
+		</li>
+		<li data-widget-type="fx.Popup" class="design-top">
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/106.jpg" /></div>
+			<div class="fx-popup-body"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/106.jpg" /></div>
+		</li>
+		<li data-widget-type="fx.Popup" class="design-top design-left">
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/107.jpg" /></div>
+			<div class="fx-popup-body"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/107.jpg" /></div>
+		</li>
+		<li data-widget-type="fx.Popup" class="design-top design-left">
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/108.jpg" /></div>
+			<div class="fx-popup-body"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/108.jpg" /></div>
+		</li>
+</div>
+
+</div>
+
+
+## demo2
+
+<div class="demo-container">
+
+<div class="design-popup-02">
+	<ul class="ui-clr">
+		<li data-widget-type="fx.Popup" data-widget-config='{"trigger":".fx-popup-trigger,.fx-popup-body"}'>
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/101.jpg" /></div>
+			<div class="fx-popup-body">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/101.jpg" /></a>
+			</div>
+		</li>
+		<li data-widget-type="fx.Popup" data-widget-config='{"trigger":".fx-popup-trigger,.fx-popup-body"}'>
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/102.jpg" /></div>
+			<div class="fx-popup-body">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/102.jpg" /></a>
+			</div>
+		</li>
+		<li data-widget-type="fx.Popup" data-widget-config='{"trigger":".fx-popup-trigger,.fx-popup-body"}'>
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/103.jpg" /></div>
+			<div class="fx-popup-body">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/103.jpg" /></a>
+			</div>
+		</li>
+		<li class="design-last" data-widget-type="fx.Popup" data-widget-config='{"trigger":".fx-popup-trigger,.fx-popup-body"}'>
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/104.jpg" /></div>
+			<div class="fx-popup-body">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/104.jpg" /></a>
+			</div>
+		</li>
+		<li data-widget-type="fx.Popup" data-widget-config='{"trigger":".fx-popup-trigger,.fx-popup-body"}'>
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/105.jpg" /></div>
+			<div class="fx-popup-body">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/105.jpg" /></a>
+			</div>
+		</li>
+		<li data-widget-type="fx.Popup" data-widget-config='{"trigger":".fx-popup-trigger,.fx-popup-body"}'>
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/106.jpg" /></div>
+			<div class="fx-popup-body">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/106.jpg" /></a>
+			</div>
+		</li>
+		<li data-widget-type="fx.Popup" data-widget-config='{"trigger":".fx-popup-trigger,.fx-popup-body"}'>
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/107.jpg" /></div>
+			<div class="fx-popup-body">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/107.jpg" /></a>
+			</div>
+		</li>
+		<li class="design-last" data-widget-type="fx.Popup" data-widget-config='{"trigger":".fx-popup-trigger,.fx-popup-body"}'>
+			<div class="fx-popup-trigger"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/108.jpg" /></div>
+			<div class="fx-popup-body">
+				<a href="#" target="_blank"><img src="http://img.china.alibaba.com/cms/upload/other/2012121105/108.jpg" /></a>
+			</div>
+		</li>
+	</ul>
+</div>
+
+</div>

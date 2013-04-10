@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<meta name="description" value="" />
+	<meta name="keywords" value="" />
+
+	<link rel="stylesheet" href="http://wpstatic.china.alibaba.com/css/export/lib.css" />
+</head>
+<body>
+	<div class="ui-paging paging-01"></div>
+	
+	<br /><br />
+
+	<div class="ui-paging paging-02"></div>
+
+	<br /><br />
+
+	<div class="ui-paging paging-03"></div>
+
+<script src="http://wpstatic.china.alibaba.com/??js/export/lib.js,js/plugin/start.js"></script>
+
+<script>
+define(['jQuery', 'ui.Paging'], function($, Paging) {
+	var elm = $('div.paging-01', document);
+
+	new Paging(elm, {
+		render: true,
+		renderForm: true,
+		pageCount: 47,
+		goTo: function(page) {
+			// do paging
+		}
+	});
+	
+	var elm = $('div.paging-02', document);
+	new Paging(elm, {
+		render: true,
+		pageCount: -1,
+		goTo: function(page) {
+			// do paging
+		}
+	});
+
+	var elm = $('div.paging-03', document);
+	new Paging(elm, {
+		render: true,
+		pageCount: 10,
+		showPrevNext: false,
+		goTo: function(page) {
+			// do paging
+		}
+	});
+
+});
+</script>
+</div>
+</body>
+</html>
+
+

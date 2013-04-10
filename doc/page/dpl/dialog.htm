@@ -1,0 +1,35 @@
+###浮出层###
+
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|.ui-site-dialog| 必选 | 浮出层的基础样式，容器内边距为24像素|
+|.d-header| 必选 | 浮出层标题框容器样式|
+|.d-close| 必选 | 标题框中关闭按钮样式|
+|.d-content| 必选 | 浮出层内容和底部容器的父容器|
+|.d-form| 必选 | 内容容器|
+|.d-footer| 必选 | 底部容器|
+|.ui-site-dialog-mini| 可选 | 配合.ui-site-dialog一起使用，可使容器内边距变为12像素|
+
+`html：`
+
+	<div class="ui-site-dialog">
+		<div class="d-body">
+		    <div class="d-header">
+			    <h3>弹出层标题</h3>
+			    <a href="#" class="d-close" title="关闭">关闭</a>
+			</div>
+			<div class="d-content">
+				<div class="d-form">
+				    内容显示区...
+				</div>
+			    <div class="d-footer">
+				    <a class="ui-btn-default" href="#" title="按钮名称"><span>按钮名称</span></a>
+                    <a class="ui-btn-default" href="#" title="按钮名称"><span>按钮名称</span></a>
+			    </div>
+		    </div>
+		</div>
+    </div>
+
+<iframe class="auto-height" src="page/dpl/content/dialog.htm" frameborder="0"></iframe>

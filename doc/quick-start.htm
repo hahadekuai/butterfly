@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="gbk" />
+	<title>Quick Start</title>
+	<meta name="description" value="" />
+	<meta name="keywords" value="" />
+
+	<link rel="stylesheet" href="http://wpstatic.china.alibaba.com/css/export/lib.css" />
+
+</head>
+<body>
+
+
+<div class="demo-mod" data-mod-config='{ "message": "hello" }'>
+	<a href="#" class="ui-btn ui-btn-default"><span>Go</span></a>
+</div>
+
+
+<div data-widget-type="app.AutowireDemo" data-widget-config='{ "url": "123.htm" }'>
+	<a href="#" class="ui-btn ui-btn-default"><span>Go</span></a>
+</div>
+
+<script src="http://wpstatic.china.alibaba.com/??js/export/lib.js,js/plugin/start.js"></script>
+
+<script>
+
+define(['jQuery', 'PageContext'], function($, PageContext) {
+
+var DemoMod = {
+	init: function(node, config) {
+		var btn = $('a.ui-btn', node);
+		btn.on('click', function(e) {
+			e.preventDefault();	
+			alert(config.message);
+		});
+	}
+};
+
+PageContext.register('.demo-mod', DemoMod);
+
+});
+
+
+define('app.AutowireDemo', ['jQuery', 'Class'], function($, Class) {
+
+return Class({
+	
+	init: function(node, config) {
+		var btn = $('a.ui-btn', node),
+			url = config.url;
+		btn.on('click', function() {
+			alert(url);
+		});
+	}
+
+});
+
+});	
+
+</script>
+</body>
+</html>

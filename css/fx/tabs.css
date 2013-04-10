@@ -1,0 +1,152 @@
+/**
+ * 预定义tabs样式
+ * @author qijun.weiqj
+ */
+
+.widgetx-tabs .tab-pane {
+	overflow: hidden;
+}
+
+/**
+ * 消除图片底部空白
+ */
+.widgetx-tabs .tab-pane img {
+	display: block;
+}
+
+/**
+ * 延迟加载loading
+ */
+.widgetx-tabs .lazy-load-loading {
+	height: 170px;
+	background: url(http://img.china.alibaba.com/cms/upload/winport/new5/loading.gif) no-repeat center center;
+}
+
+
+
+/**
+ * 样式a
+ */
+.widgetx-tabs-style-a {
+	overflow: hidden;
+	position: relative;
+	height: 170px;
+}
+
+	/**
+	 * 分页条
+	 */
+	.widgetx-tabs-style-a .tab-nav {
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
+
+		zoom: 1;
+		z-index: 9;
+	}
+		.widgetx-tabs-style-a .tab-nav:after {
+			display:block;clear:both;height:0;content:"\0020";
+		}
+
+		.widgetx-tabs-style-a .tab-nav li {
+			float: left;
+			overflow: hidden;
+
+			width: 18px;
+			height: 18px;
+
+			border: 1px solid #d8d8d8;
+			background: #fff;
+
+			color: #ff6600;
+			text-align: center;
+			line-height: 18px;
+
+			cursor: pointer;
+			opacity: 0.7;
+			filter: alpha(opacity=70);
+		}
+
+		.widgetx-tabs-style-a .tab-nav li.active {
+			background: #ff6600;
+			color: #fff;
+			font-weight: bold;
+			opacity: 1;
+			filter: alpha(opacity=100);
+		}
+
+/**
+ * 样式b
+ */
+.widgetx-tabs-style-b {
+	overflow: hidden;
+	position: relative;
+	height: 170px;
+}
+
+	/**
+	 * 分页条
+	 */
+	.widgetx-tabs-style-b .tab-nav {
+		position: absolute;
+		left: 50%;
+		bottom: 8px;
+		margin-left: -20px;
+		z-index: 9;
+		zoom: 1;
+	}
+	.widgetx-tabs-style-b .tab-nav:after {
+		display:block;clear:both;height:0;content:"\0020";
+	}
+
+		.widgetx-tabs-style-b .tab-nav li {
+			float: left;
+			overflow: hidden;
+
+			width: 18px;
+			height: 18px;
+			margin-right: 2px;
+
+			background: url(http://img.china.alibaba.com/cms/upload/winport/new2/tabs-2.png) no-repeat 4px 4px ;
+
+			cursor: pointer;
+			line-height: 5000px;
+		}
+
+		.widgetx-tabs-style-b .tab-nav li.active {
+			background-position: -17px 4px;
+		}
+
+
+
+/**
+ * 效果
+ */
+
+/**
+ * 上下移动
+ */
+.widgetx-tabs-effect-leftright .tab-content {
+	width: 10000px;
+	zoom: 1;
+}
+	.widgetx-tabs-effect-leftright  ta-content:after {
+		display:block;clear:both;height:0;content:"\0020";
+	}
+
+	.widgetx-tabs-effect-leftright .tab-pane {
+		float: left;
+	}
+
+	
+/**
+ * 渐变
+ */
+.widgetx-tabs-effect-fade .tab-content {
+	position: relative;	
+}
+	.widgetx-tabs-effect-fade .tab-pane {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}

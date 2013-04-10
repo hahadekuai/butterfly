@@ -1,0 +1,20 @@
+.design-roll-01 {
+	position: relative;
+	overflow: hidden;
+	width: 835px;
+}
+
+.design-roll-01 .fx-roll-body {
+	width: 8000px;
+}
+.design-roll-01 .fx-roll-body li {
+	float: left;
+	width: 200px;
+	height: 200px;
+	margin-right: 10px;
+}
+.design-roll-01 .fx-roll-body li img {
+	display: block;
+	width: 200px;
+	height: 200px;
+}

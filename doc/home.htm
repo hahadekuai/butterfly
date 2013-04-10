@@ -1,0 +1,137 @@
+# Welcome to Butterfly
+
+## 简介
+
+butterfly是建站平台前端应用框架，它可以搭配radiance使用，也可以独立使用。
+
+## 特点
+
+## QuickStart
+
+1\. 创建一个HTML页面
+
+~~~html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>Quick Start</title>
+	<meta name="description" value="" />
+	<meta name="keywords" value="" />
+
+	<link rel="stylesheet" href="http://wpstatic.china.alibaba.com/css/export/lib.css" />
+</head>
+<body>
+
+<script src="http://wpstatic.china.alibaba.com/??js/export/lib.js,js/plugin/start.js"></script>
+</body>
+</html>
+<html>
+~~~
+
+lib.css包含reset.css及建站平台的dpl <br />
+lib.js包含loader，用于实现类似AMD模块的功能 <br />
+start.js包含着快速使用butterfly的一些配置 <br />
+
+现在已经准备好了，下面开始写点javascript吧。
+
+2\. 创建一个模块
+
+~~~html
+<div class="demo-mod" data-mod-config='{ "message": "hello"} '>
+	<a href="#"	class="ui-btn ui-btn-default"><span>Go</span></a>
+</div>
+~~~
+
+data-mod-config中就是这个模块会用到的后端传递给前端的信息，以json格式渲染
+
+3\. 编写模块代码
+
+~~~js
+define(['jQuery', 'PageContext'], function($, PageContext) {
+
+var DemoMod = {
+	init: function(node, config) {
+		var btn = $('a.ui-btn', node);
+		btn.on('click', function(e) {
+			e.preventDefault();	
+			alert(config.name);
+		});
+	}
+};
+
+PageContext.register('.demo-mod', DemoMod);
+
+});
+~~~
+
+我们定义了一个匿名模块用于初始化demo-mod <br />
+定义了一个对象DemoMod用于完成模块的功能<br />
+最后注册到PageContext中，这样domready时会自动调用 DemoMod.init方法<br />
+node 和 config就是对应的节点(jQuery对象）和配置参数(object)
+
+4\. 使用Autowire来初始化模块
+
+利用Autowire可以使用html tag直接调用组件，而不需要编写Html代码。
+
+比如需要使用Tabs功能
+
+~~~html
+<div data-widget-type="fx.Tabs">
+	<ul class="fx-tab-content">
+		<li class="fx-tab-pane">
+			content1
+		</li>
+		<li class="fx-tab-pane">
+			content2
+		</li>
+		<li class="fx-tab-pane">
+			content3
+		</li>
+	</ul>
+	<ul class="fx-tab-nav ui-clr">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+</div>
+~~~
+
+上面就是利用Autowire来使用Tabs组件
+
+5\. 自定义模块的Autowire
+
+~~~html
+<div data-widget-type="app.AutowireDemo" data-widget-config='{ "url": "123.htm" }'>
+	<a href="#" class="ui-btn ui-btn-default"><span>Go</span></a>
+</div>
+~~~
+
+~~~js
+define('app.AutowireDemo', ['jQuery', 'Class'], function($, Class) {
+
+return Class({
+	
+	init: function(node, config) {
+		var btn = $('a.ui-btn', node),
+			url = config.url;
+		btn.on('click', function() {
+			alert(url);
+		});
+	}
+
+});
+
+});	
+~~~
+
+完整的例子见 [Quick Start](quick-start.htm)
+
+## 结构
+<img src="img/struct2.png" alt="包结构图" />
+
+## 包结构概要
+<img src="img/struct.png" alt="包结构图" />
+
+## 现有组件
+<img src="img/butterfly.png" />

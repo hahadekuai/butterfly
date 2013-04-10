@@ -1,0 +1,28 @@
+/**
+ * tabel dpl
+ * author yefei.niuyf
+ **/
+.ui-table{
+	width:100%;
+	border:1px solid #ccc;
+}
+.ui-table td,ui-table th{
+	border-bottom:1px solid #ccc;
+}
+.ui-table thead tr{
+	background:#e5e4e4;
+	height:46px;
+}
+.ui-table tbody tr{
+	height:26px;
+}
+.ui-table .even{
+	background:#f7f7f7;
+	text-align:center;
+}
+.ui-table .odd{
+	text-align:center;
+}
+.ui-table .text-left{
+	text-align:left
+}

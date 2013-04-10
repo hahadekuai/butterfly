@@ -1,0 +1,50 @@
+/**
+ * 通用
+ * @author qijun.weiqj
+ */
+.ui-font-beauty {
+  font-family: "Microsoft YaHei", SimHei, "WenQuanYi Micro Hei", STHeiti;
+  font-size: 16px;
+}
+.ui-overflow-hidden {
+  overflow: hidden;
+}
+.ui-clr {
+  zoom: 1;
+}
+.ui-clr:after {
+  display: block;
+  clear: both;
+  height: 0;
+  content: "\0020";
+}
+.ui-left {
+  float: left;
+}
+.ui-right {
+  float: right;
+}
+.ui-hide {
+  display: none !important;
+}
+/**
+ * 图片竖直居中
+ */
+.ui-vertical-img {
+  display: table;
+  text-align: center;
+  overflow: hidden;
+  font-size: 0;
+  *display: block;
+}
+.ui-vertical-img .img-box {
+  display: table-cell;
+  vertical-align: middle;
+  *display: inline;
+  *writing-mode: tb-rl;
+  *text-align: center;
+  *height: 100%;
+}
+.ui-vertical-img img {
+  vertical-align: middle;
+}
