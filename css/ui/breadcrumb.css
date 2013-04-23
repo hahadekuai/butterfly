@@ -1,0 +1,41 @@
+/*
+* breadcrumb
+* @author yefei.niuyf
+* @version 2012-12-24
+*/
+.ui-crumbs .ui-crumbs-arrow {
+background: url(http://img.china.alibaba.com/cms/upload/winport/dpl/20130109/dpl-bg.png) no-repeat;
+}
+.ui-crumbs a:link,
+.ui-crumbs a:visited{
+color: #05b;
+}
+.ui-crumbs a:hover{
+color: #ff7300;
+}
+.ui-crumbs {
+color:#666;
+zoom: 1;
+}
+.ui-crumbs:after {
+clear: both;
+content: " ";
+display: block;
+height: 0;
+}
+.ui-crumbs li {
+float:left;
+margin-right:10px;
+}
+.ui-crumbs li a {
+float:left;
+}
+.ui-crumbs .ui-crumbs-arrow {
+float:left;
+background-position:0 3px;
+width:7px;
+height:18px;
+margin-left:10px;
+line-height:400%;
+overflow:hidden;
+}

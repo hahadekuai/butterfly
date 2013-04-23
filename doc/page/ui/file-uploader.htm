@@ -1,0 +1,125 @@
+FileUploader
+============
+
+## 描述
+
+文件上传组件，简单包装fdev4的ui-flash-uploader2组件，以便以标准的模块化方式进行使用
+
+http://wd.alibaba-inc.com/fdevlib/#fdev4.jQuery.ui.flash.uploader
+
+## API
+
+	new FileUploader(element, config)
+
+## config
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>url</td>
+		<td>string</td>
+		<td>&nbsp;</td>
+		<td>上传接口地址，如图片银行可以是http://picman.china.alibaba.com/album/ajax/image_upload_non_operating_ajax.json
+		</td>
+	</tr>
+	<tr>
+		<td>config</td>
+		<td>object</td>
+		<td>&nbsp;</td>
+		<td>传递给上传组件的额外参数</td>
+	</tr>
+	<tr>
+		<td>data</td>
+		<td>object</td>
+		<td>&nbsp;</td>
+		<td>传递给接口的额外参数</td>
+	</tr>
+	<tr>
+		<td>filter</td>
+		<td>string | array</td>
+		<td>&nbsp;</td>
+		<td>
+		<p>配置选择文件窗口过滤器，可以是image, 也可以是一个数组，用于配置文件类型和描述，如</p>
+	
+<pre>
+[{
+	description: '图片文件（jpg,jpeg,gif,png）',
+	extensions: '*.jpg;*.jpeg;*.gif;*.png'
+}]
+</pre>
+		</td>
+	</tr>
+
+	<tr>
+		<td>before</td>
+		<td>function()</td>
+		<td>&nbsp;</td>
+		<td>上传文件前会调用此回调方法，如果返回false, 则不进行上传</td>
+	</tr>
+
+	<tr>
+		<td>success</td>
+		<td>function(url)</td>
+		<td>&nbsp;</td>
+		<td>上传文件成功后会调用此方法，可以从url中获取文件地址</td>
+	</tr>
+
+	<tr>
+		<td>error</td>
+		<td>function(message)</td>
+		<td>&nbsp;</td>
+		<td>上传文件失败后会调用此方法，可以从message获得出错提示信息</td>
+	</tr>
+
+</table>
+
+
+## DEMO
+
+<div id="upload"></div>
+
+## 用法
+
+下面示例代码演示了如何使用FileUploader组件将图片上传到图片银行
+
+~~~js
+define(['ui.FileUploader'], function(Uploader) {
+
+	new Uploader(upload, {
+		filter: 'image',
+		url: config.url + '/album/ajax/image_upload_non_operating_ajax.json',
+		data: {
+			memberId: config.uid,
+			source: 'vas_winport',
+			drawText: false,
+			_csrf_token: config.csrfToken,
+			noScale: config.noScale
+		},
+
+		before: function() {
+			loading.show();
+			self.showMessage(false);
+		},
+		
+		success: function(url) {
+			loading.hide();
+			self.uploadSuccess(url);
+		},
+
+		error: function(message) {
+			loading.hide();
+			self.showMessage('error', message);
+		}
+	});
+
+});
+~~~
+
+<script src="page/ui/file-uploader.js"></script>
+
+

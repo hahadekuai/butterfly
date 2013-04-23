@@ -1,0 +1,193 @@
+Dialog
+============
+
+## 描述
+
+浮出层组件
+
+## API
+
+	new Dialog(element, config);
+
+	Dialog.warn(msg, title, options);
+	Dialog.error(msg, title, options);
+	Dialog.info(msg, title, options);
+	Dialog.confirm((msg, title, options));
+
+## config
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="100">类型</th>
+		<th width="100">默认值</th>
+		<th width="800">说明</th>	
+	</tr>
+	<tr>
+		<td>center</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>是否居中</td>
+	</tr>
+	<tr>
+		<td>closable</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>有无关闭按扭</td>
+	</tr>
+	<tr>
+		<td>draggable</td>
+		<td>boolean,selector</td>
+		<td>true</td>
+		<td>是否可拖动, 以及拖动handler</td>
+	</tr>
+	<tr>
+		<td>content</td>
+		<td>string</td>
+		<td></td>
+		<td>对话框内容</td>
+	</tr>
+	<tr>
+		<td>buttons</td>
+		<td></td>
+		<td>true</td>
+		<td>按钮
+<pre>
+[{
+	'name': 'confirm',
+	'text': '确定'
+}]
+</pre></td>
+	</tr>
+	<tr>
+		<td>showHeader</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>是否显示头部, 默认情况下如果有title就会显示header</td>
+	</tr>
+	<tr>
+		<td>title</td>
+		<td>string</td>
+		<td></td>
+		<td>显示标题</td>
+	</tr>
+	<tr>
+		<td>showFooter</td>
+		<td>boolean</td>
+		<td></td>
+		<td>是否显示底部，默认情况下根据是否有buttons来决定是否显示footer</td>
+	</tr>
+	<tr>
+		<td>className</td>
+		<td>string</td>
+		<td></td>
+		<td>添加到dialog节点的class, 可以使用它定义dialog的样式</td>
+	</tr>
+	<tr>
+		<td>width</td>
+		<td>number</td>
+		<td></td>
+		<td>对话框宽度</td>
+	</tr>
+	<tr>
+		<td>height</td>
+		<td>number</td>
+		<td></td>
+		<td>异步加载时,对话框初始高度, 用于改善交互</td>
+	</tr>
+	<tr>
+		<td>forceHeight</td>
+		<td>boolean</td>
+		<td></td>
+		<td>默认情况下, height仅仅是对话框打开时的高度，后来内容载入后就会自定义的,如果设置forceHeight, 则会设置d-content的高度</td>
+	</tr>
+	<tr>
+		<td>loader</td>
+		<td>function</td>
+		<td></td>
+		<td>内容载入器</td>
+	</tr>
+	<tr>
+		<td>beforeOpen</td>
+		<td>function</td>
+		<td></td>
+		<td>打开窗口前触发, 返回false阻上对话框打开</td>
+	</tr>
+	<tr>
+		<td>beforeClose</td>
+		<td>function</td>
+		<td></td>
+		<td>关闭窗口时前触发，可以做一些清理工作</td>
+	</tr>
+	<tr>
+		<td>contentSuccess</td>
+		<td>function</td>
+		<td></td>
+		<td>内容载入完成时触发（已更新到对话框节点中，可以操作DOM了）</td>
+	</tr>
+</table>
+
+
+## DEMO
+代码
+~~~js
+$('a.dialogtest').on('click',function(e){
+	e.preventDefault();
+	new Dialog({
+		title:'tip',
+		content:'just a test',
+		buttons:[{
+			'name': 'confirm',
+		    'text': 'confirm'
+		},{
+			'name': 'cancel',
+		    'text': 'cancel'
+		}]
+	});
+});
+
+
+$('a.dialoginfo').on('click',function(e){
+	e.preventDefault();
+
+	Dialog.info('a info demo', 'title');
+});
+
+$('a.dialogwarn').on('click',function(e){
+	e.preventDefault();
+
+	Dialog.warn('a warn demo', 'title');
+});
+
+$('a.dialogerror').on('click',function(e){
+	e.preventDefault();
+
+	Dialog.error('a error demo', 'title');
+});
+	
+$('a.dialogconfirm').on('click',function(e){
+	e.preventDefault();
+
+	Dialog.confirm('a confirm demo', 'title',{
+		confirm:function(){
+			alert('confirm sending');
+		}
+	});
+});
+~~~
+<a href="#" class="democommon">demo common</a>
+
+<a href="#" class="dialoginfo">demo info</a>
+
+<a href="#" class="dialogwarn">demo warn</a>
+
+<a href="#" class="dialogerror">demo rror</a>
+
+<a href="#" class="dialogconfirm">demo confirm</a>
+
+<style>
+h3{
+	margin:0
+}
+</style>
+<script src="page/ui/dialog.js"></script>

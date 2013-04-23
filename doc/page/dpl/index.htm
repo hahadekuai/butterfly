@@ -1,0 +1,49 @@
+# 建站平台DPL规范使用文档 #
+
+##开发说明##
+![建站平台前端开发流程](http://img.china.alibaba.com/cms/upload/2012/083/994/499380_681975369.png)
+
+##使用说明##
+
+DPL:设计组件样式库
+
+`要求：`
+
+- 新开发或重构的建站平台相关页面使用此套DPL样式
+- 老页面可以先保持原有样式和风格
+
+`你可以：`
+
+- 样式上重写最外层容器的height、width和margin
+- 在最外层容器class属性中添加新值
+- 可以修改标签内target、href、readonly、disabled、title等这类不会影响dpl展示形状的属性
+- DPL对应的js都是fdev提供的组件配置，可按照组件规范修改
+- 直接修改HTML中相关文案
+- 复制完整的DPL代码片段应用到任何offer前台页面中
+- 提合理的DPL需求给对应支持DPL前端做
+- 对不合理的DPL结构提出优化需求到对应的DPL前端
+
+`你不可以：`
+
+- 在DPL子容器中重新定义样式
+- 通过样式改变DPL展示性状（背景色、内边距、边框宽度等）
+- 改变DPL中标签名
+- 修改或使用不完整DPL模板代码在页面中使用
+- 自己单独引用DPL样式文件
+- 自己写一套和DPL展示形状一致的模块
+
+`注意：`
+
+DPL样式中包含css3样式，这类样式在ie下不支持
+
+`有问题直接联系：`
+
+前端：钮也非 分机：30254
+
+前端：魏琪君 分机：30839
+
+
+##参考##
+[DPL组件编码规范](http://wd.alibaba-inc.com/doc/page/work/cbu-architecture/dpl)
+[网站统一后台 DPL 规范使用文档](http://wd.alibaba-inc.com/doc/page/work/cbu-business/workplatform/wkdpl)
+[Offer线前台DPL规范使用文档](http://wd.alibaba-inc.com/doc/page/work/cbu-market/offer/offer-dpl)

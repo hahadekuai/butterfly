@@ -1,0 +1,63 @@
+.design-accordion-01 .fx-accordion .fx-accordion-header{
+    border:1px solid #bebebe;
+    padding-left: 24px;
+    margin-bottom: 2px;
+    height: 25px;
+    line-height: 25px;
+    background: url(http://img.china.alibaba.com/cms/upload/2012/599/884/488995_681975369.png) no-repeat 12px 10px #e9e9e9;
+    cursor: pointer;
+}
+.design-accordion-01 .fx-accordion .fx-accordion-hactive{
+    border:1px solid #aaa;
+    background: url(http://img.china.alibaba.com/cms/upload/2012/599/884/488995_681975369.png) no-repeat 11px -28px #e9e9e9;
+    margin-bottom:0;
+    cursor: default;
+}
+.design-accordion-01 .fx-accordion .fx-accordion-content{
+    border-left:1px solid #aaa;
+    border-right:1px solid #aaa;
+    border-bottom:1px solid #aaa;
+    height:153px;
+    margin-bottom:2px;
+    overflow: hidden;
+}
+.design-accordion-01 .fx-accordion .fx-accordion-content ul{
+    padding:3px;
+}
+.design-accordion-01 .fx-accordion .fx-accordion-content li{
+    float:left;
+    border:1px solid #ccc;
+    height:143px;
+    width:107px;
+    margin-right:8px;
+}
+
+.design-accordion-02 .fx-accordion .fx-accordion-header{
+    border:1px solid #bebebe;
+    margin-right: 2px;
+    width: 13px;
+    padding:24px 6px 24px 7px;
+    height: 171px;
+    background: url(http://img.china.alibaba.com/cms/upload/2012/350/094/490053_681975369.png) no-repeat 10px 10px #e9e9e9;
+    cursor: pointer;
+    float:left;
+}
+.design-accordion-02 .fx-accordion .fx-accordion-hactive{
+    border:1px solid #aaa;
+    background: url(http://img.china.alibaba.com/cms/upload/2012/350/094/490053_681975369.png) no-repeat -20px 10px #e9e9e9;
+    margin-right:0;
+    cursor: default;
+}
+.design-accordion-02 .fx-accordion .fx-accordion-content{
+    border-top:1px solid #aaa;
+    border-right:1px solid #aaa;
+    border-bottom:1px solid #aaa;
+    height: 219px;
+    width: 472px;
+    margin-right:2px;
+    overflow: hidden;
+    float:left;
+}
+.design-accordion-02 .fx-accordion .fx-accordion-content img{
+    margin:1px;
+}

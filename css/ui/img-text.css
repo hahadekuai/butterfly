@@ -1,0 +1,32 @@
+/**
+ * 图文列表
+ * @author yefei.niuyf
+ * @version 2012-12-25
+ */
+.ui-img-text{
+	border:1px solid #eee;
+	float:left;
+	padding:7px;
+	margin-left:12px;
+}
+.ui-img-text .ui-vertical-img{
+	margin-bottom: 5px;
+}
+.ui-img-text .price{
+	color:#ff7300;
+	font-weight: 700;
+}
+.ui-img-150{
+	width:150px;
+}
+.ui-img-150 .ui-vertical-img{
+	width:150px;
+	height:150px;
+}
+.ui-img-100{
+	width:100px;
+}
+.ui-img-100 .ui-vertical-img{
+	width:100px;
+	height:100px;
+}

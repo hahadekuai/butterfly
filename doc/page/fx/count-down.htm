@@ -1,0 +1,122 @@
+CountDown
+=======
+
+## 描述
+
+用于实现倒计时计数
+
+## API
+
+new CountDown(element, config)
+
+## config
+
+<table class="table table-bordered table-striped">
+	<tr>
+		<th width="100">名称</th>
+		<th width="300">类型</th>
+		<th width="100">默认值</th>
+		<th width="600">说明</th>	
+	</tr>
+	<tr>
+		<td>beforeShow</td>
+		<td>string</td>
+		<td>.fx-countdown-unstart</td>
+		<td>倒计时没有开始时会展示在effectClass元素上的选择器</td>
+	</tr>
+	<tr>
+		<td>inProcessShow</td>
+		<td>string</td>
+		<td>.fx-countdown-inprocess</td>
+		<td>倒计时进行中会展示在effectClass元素上的选择器<</td>
+	</tr>
+	<tr>
+		<td>finishedShow</td>
+		<td>string</td>
+		<td>.fx-accordion-finish</td>
+		<td>倒计时结束后会展示在effectClass元素上的选择器<</td>
+	</tr>
+	<tr>
+		<td>startTime</td>
+		<td>string</td>
+		<td>无</td>
+		<td>开始时间,例如:'2012-12-12 09:01:00'</td>
+	</tr>
+	<tr>
+		<td>endTime</td>
+		<td>string</td>
+		<td>无</td>
+		<td>结束时间,例如:'2012-12-12 09:11:00'</td>
+	</tr>
+
+</table>
+
+## DEMO
+
+<link rel="stylesheet" href="page/fx/count-down.css" />
+
+### effect: updown
+<div class="demo-container">
+<div class="design-countdown-01 ui-clr">
+	<div class="design-title">
+		<span>今日推荐：</span>【感恩柒月 10:00开团】现价109包邮 原价199元 吸尘器
+	</div>
+	<div class="design-content fx-countdown" data-widget-type="fx.CountDown" data-widget-config='{"startTime":"2012-12-13 11:11:10","endTime":"2012-12-13 11:11:20","currentTime":"$dateUtil.getCurrentTime().getTime()"}'>
+		<div class="design-info">
+			<div class="design-unstartinfo">
+				<div class="fx-countdown-unstart">
+				</div>
+				<div class="fx-countdown-inprocess">
+					<a href="#" title="" class="design-join"></a>
+				</div>
+				<div class="fx-countdown-finish"></div>
+			</div>
+			<div class="design-priceinfo">
+				<ul>
+					<li>
+						<p>原价</p>
+						<p class="design-del">&yen;199.00</p>
+					</li>
+					<li>
+						<p>折扣</p>
+						<p>5.4</p>
+					</li>
+					<li>
+						<p>节省</p>
+						<p>&yen;99.00</p>
+					</li>
+				</ul>
+			</div>
+			<div class="design-countdown">
+				<div class="fx-countdown-unstart">剩余时间
+					<p class="fx-countdown-day"></p><span class="design-time-label">天</span>
+					<p class="fx-countdown-hour"></p><span class="design-time-label">小时</span>
+					<p class="fx-countdown-minute"></p><span class="design-time-label">分</span>
+					<p class="fx-countdown-second"></p><span class="design-time-label">秒</span>
+				</div>
+				<div class="fx-countdown-inprocess"><span class="design-time-label">剩余时间</span>
+					<p class="fx-countdown-day"></p><span class="design-time-label">天</span>
+					<p class="fx-countdown-hour"></p><span class="design-time-label">小时</span>
+					<p class="fx-countdown-minute"></p><span class="design-time-label">分</span>
+					<p class="fx-countdown-second"></p><span class="design-time-label">秒</span>
+				</div>
+				<div class="fx-countdown-finish">已结束</div>
+			</div>
+		</div>
+		<div class="design-detail">
+			<div class="fx-countdown-unstart">
+				<img src="http://img.china.alibaba.com/cms/upload/2012/570/294/492075_681975369.png" />
+			</div>
+			<div class="fx-countdown-inprocess">
+				<img src="http://img.china.alibaba.com/cms/upload/2012/570/294/492075_681975369.png" />
+			</div>
+			<div class="fx-countdown-finish">
+				<img src="http://img.china.alibaba.com/cms/upload/2012/570/294/492075_681975369.png" />
+			</div>
+		</div>
+
+	</div>
+	
+</div>
+</div>
+<!--/demo-container-->

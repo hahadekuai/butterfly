@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<meta name="description" value="" />
+	<meta name="keywords" value="" />
+
+	<link rel="stylesheet" href="http://wpstatic.china.alibaba.com/css/export/lib.css" />
+</head>
+<body>
+	<div class="ui-paging" data-url="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page={page}">
+		<div class="paging">
+			<ul class="paging-list fd-clr">
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=1" class="pre pre-disabled">上一页</a></li>
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=1" class="current">1</a></li>
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=2">2</a></li>
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=3">3</a></li>
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=4">4</a></li>
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=5">5</a></li>
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=6">6</a></li>
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=7">7</a></li>
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=8">8</a></li>
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=9">9</a></li>
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=4" class="omit">...</a></li>  
+				<li><a href="http://wpstatic.china.alibaba.com/doc/page/ui/paging_.htm?page=2" class="next">下一页</a></li>
+			</ul>
+			<div class="paging-form fd-clr">
+					<span>共<em class="pagenum">3</em>页</span>
+					<span>到<input type="text" class="ui-txt ui-txt-small pnum" autocomplete="off" maxlength="4">页</span>
+					<a title="确定" href="#" class="paging-btn">确 定</a>
+			</div>
+		</div>
+	</div>
+
+<script src="http://wpstatic.china.alibaba.com/??js/export/lib.js,js/plugin/start.js"></script>
+
+<script>
+define(['jQuery', 'ui.Paging'], function($, Paging) {
+	var context = document, 
+		elm = $('div.ui-paging', context);
+	new Paging(elm);
+});
+</script>
+</div>
+</body>
+</html>
+
+

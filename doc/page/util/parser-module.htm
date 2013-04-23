@@ -1,0 +1,19 @@
+Context
+=======
+
+## 描述
+
+用于支持Parser的编写, 实现类可以mixin这个模块
+
+## 使用
+
+~~~js
+var HtmlParser = new Class({
+	init: function(html) {
+		this.body = html;
+	},
+	...
+});
+
+ParserModule.mixin(HtmlParser);
+~~~

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<meta name="description" value="" />
+	<meta name="keywords" value="" />
+</head>
+<body>
+
+<h3>简单示例</h3>
+<dl class="basic-info">
+	<dt>Name:</dt>
+	<dd>butterfly</dd>
+	<dt>Version:</dt>
+	<dd>1.1</dd>
+</dl>
+
+
+<h3>表格示例</h3>
+<table class="table-demo ui-table" border="1">
+	<tr>
+		<th width="100">Name</th>
+		<th width="100">Age</th>
+		<th width="100">Favorite</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+</table>
+
+<script src="http://wpstatic.china.alibaba.com/??js/export/lib.js,js/plugin/start.js"></script>
+
+<script>
+define(['jQuery', 'ui.InplaceEditor'], function($, InplaceEditor) {
+
+var elms = $('dl.basic-info dd', document);
+new InplaceEditor(elms, {
+	event: 'click',
+	submit: function(value) {
+		// do submit
+		return { success: true };
+	}
+});
+
+
+});
+
+
+define(['jQuery', 'ui.InplaceEditor'], function($, InplaceEditor) {
+
+var elm = $('.table-demo');
+elm.on('dblclick', 'td', function() {
+	InplaceEditor.open(this, {
+		submit: function(value) {
+			return { success: true };
+		}
+	});
+});
+//~
+	
+});
+
+</script>
+
+</body>
+</html>

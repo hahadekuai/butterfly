@@ -1,0 +1,373 @@
+# 建站平台DPL规范使用文档 #
+
+##开发说明##
+![建站平台前端开发流程](http://img.china.alibaba.com/cms/upload/2012/083/994/499380_681975369.png)
+
+##使用说明##
+
+DPL:设计组件样式库
+
+`要求：`
+
+- 新开发或重构的建站平台相关页面使用此套DPL样式
+- 老页面可以先保持原有样式和风格
+
+`你可以：`
+
+- 样式上重写最外层容器的height、width和margin
+- 在最外层容器class属性中添加新值
+- 可以修改标签内target、href、readonly、disabled、title等这类不会影响dpl展示形状的属性
+- DPL对应的js都是fdev提供的组件配置，可按照组件规范修改
+- 直接修改HTML中相关文案
+- 复制完整的DPL代码片段应用到任何offer前台页面中
+- 提合理的DPL需求给对应支持DPL前端做
+- 对不合理的DPL结构提出优化需求到对应的DPL前端
+
+`你不可以：`
+
+- 在DPL子容器中重新定义样式
+- 通过样式改变DPL展示性状（背景色、内边距、边框宽度等）
+- 改变DPL中标签名
+- 修改或使用不完整DPL模板代码在页面中使用
+- 自己单独引用DPL样式文件
+- 自己写一套和DPL展示形状一致的模块
+
+`注意：`
+
+DPL样式中包含css3样式，这类样式在ie下不支持
+
+`有问题直接联系：`
+
+前端：钮也非 分机：30254
+前端：魏琪君 分机：30839
+
+##DPL示例##
+
+###布局###
+
+`说明：`
+
+- 布局目前支持30px中间空10px的布局
+
+`相关样式：`
+
+`html：`
+
+    <div class="ui-layout-p10m30">
+		<div class="grid-1">1</div> 
+		<div class="grid-1">1</div> 
+		<div class="grid-1">1</div> 
+		<div class="grid-1">1</div> 
+		<div class="grid-1">1</div>
+		<div class="grid-1">1</div> 
+		<div class="grid-1">1</div> 
+		<div class="grid-1">1</div> 
+		<div class="grid-1">1</div> 
+		<div class="grid-1">1</div>
+		<div class="grid-1">1</div> 
+	<div class="grid-1">1</div> 
+	</div>
+	<div class="ui-layout-p10m30">
+		<div class="grid-2">2</div> 
+		<div class="grid-2">2</div> 
+		<div class="grid-2">2</div> 
+		<div class="grid-2">2</div>
+		<div class="grid-2">2</div>
+		<div class="grid-2">2</div>
+	</div>
+	<div class="ui-layout-p10m30">
+		<div class="grid-3">3</div> 
+		<div class="grid-3">3</div> 
+		<div class="grid-3">3</div> 
+		<div class="grid-3">3</div>
+	</div>
+	<div class="ui-layout-p10m30">
+		<div class="grid-4">4</div> 
+		<div class="grid-4">4</div> 
+		<div class="grid-4">4</div> 
+	</div>
+
+`示例：`
+
+<iframe class="auto-height" src="page/dpl/content/layout.htm" frameborder="0"></iframe>
+
+###模块###
+
+`说明：`
+
+- 模块是页面中完整包括title和存放内容的容器组成的一个区块，视觉规范中定义了三种样式，布局边距有16像素和8像素两种。该DPL规定标题文案为加粗的14像素字体，在标题框中的其他字体应该是12像素，正文部分文案应该是12像素颜色为#444。
+- 你可以修改标题文案内容，可以在标题文案右侧加上“更多”之类的链接，可以设定该DPL最外层容器的width、height、margin样式属性，内容写在“.dpl-mod-bd”容器内
+
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|.ui-mod| 必选 | 模块的基础样式，每个模块必须含有此样式|
+|.ui-mod-hd| 必选 | 标题框容器的样式|
+|.ui-mod-bd| 必选 | 内容框容器的样式|
+|.ui-mod-main| 可选 | 在基础样式的基础上使用此样式可将框体中的内边距变从8像素变为16像素|
+
+`示例：`
+
+    <div class="dpl-mod">
+        <div class="dpl-mod-hd">
+            <h3>标题</h3>
+        </div>
+        <div class="dpl-mod-bd">
+            内容...
+        </div>
+    </div>
+
+<iframe class="auto-height" src="page/dpl/content/mod.htm" frameborder="0"></iframe>
+
+###按钮###
+
+`说明：`
+
+- 按钮样式支持button和a标签。
+
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|.dpl-btn-default| 必选 | 按钮的基础样式，显示为灰色高26px|
+|.dpl-btn-small| 必选 | 该样式按钮主色为黄色，对应一些功能确定状态|
+
+`html：`
+
+    <div class="ui-btn-default">
+        <span>默认按钮</span> 
+    </div>
+
+`示例：`
+
+<iframe class="auto-height" src="page/dpl/content/button.htm" frameborder="0"></iframe>
+
+###分页###
+
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|.ui-paging| 必选 | 分页的基础样式，子节点居左|
+|.ui-paging-center| 可选 | 配合.dpl-paging一起使用，可使分页子节点居中|
+|.ui-paging-right| 可选 | 配合.dpl-paging一起使用，可使分页子节点居右|
+
+`html：`
+
+    <div class="ui-paging">
+        <div class="paging">
+            <ul class="paging-list fd-clr">
+                <li><a href="#" class="pre-disabled">上一页</a></li>
+                <li><a href="#" class="current">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">6</a></li>
+                <li><a href="#">7</a></li>
+                <li><a href="#">8</a></li>
+                <li><a href="#">9</a></li>
+                <li><a href="#" class="omit">...</a></li>  
+                <li><a href="#" class="next">下一页</a></li>
+            </ul>
+            <div class="paging-form fd-clr">
+                <span>共<em class="pagenum">3</em>页</span>
+                <span>到<input type="text" class="ui-txt ui-txt-s pnum" autocomplete="off" maxlength="4">页</span>
+                <a title="确定" href="#" class="paging-btn">确 定</a>
+            </div>
+        </div>
+    </div>
+
+`示例：`
+
+<iframe class="auto-height" src="page/dpl/content/paging.htm" frameborder="0"></iframe>
+
+###面包屑###
+
+`说明：`
+
+- 面包屑就是当前网页路径
+    
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|.ui-crumbs| 必选 | 面包屑容器，基础样式|
+|.ui-crumbs-arrow| 必选 | 面包屑路径显示容器中的箭头|
+
+`html：`
+
+    <ul class="ui-crumbs">
+        <li><a href="#" title="1688首页" target="_blank">1688首页</a><span class="ui-crumbs-arrow">&gt;</span></li>
+        <li><a href="#" title="供应产品" target="_blank">供应产品</a><span class="ui-crumbs-arrow">&gt;</span></li>
+        <li><a href="#" title="能源" target="_blank">能源</a><span class="ui-crumbs-arrow">&gt;</span></li>
+        <li><a href="#" title="石油燃料" target="_blank">石油燃料</a><span class="ui-crumbs-arrow">&gt;</span></li>
+        <li>柴油</li>
+    </ul>
+
+`示例：`
+
+<iframe class="auto-height" src="page/dpl/content/breadcrumb.htm" frameborder="0"></iframe>
+
+###提示###
+
+`说明：`
+
+- 分为状态提示，单行提示，多行提示，气泡提示
+
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|.ui-tips| 必选 | 提示基础样式|
+|.ui-tips-close| 可选 | 提示内的关闭按钮|
+|.ui-tips-bd| 必选 | 提示内容容器|
+|.ui-bubbletip| 必选 | 气泡提示基础样式|
+|.ui-bubbletip-bd| 必选 | 气泡提示内容容器|
+|.ui-bubbletip-hasclose-bd| 必选 | 有关闭按钮气泡提示内容容器|
+|.bubble-pos| 必选 | 气泡提示箭头容器|
+|.pos-t-l| 可选 | 与.bubble-pos一起使用，呈现上左箭头|
+|.pos-t-r| 可选 | 与.bubble-pos一起使用，呈现上右箭头|
+|.pos-r-t| 可选 | 与.bubble-pos一起使用，呈现右上箭头|
+|.pos-r-b| 可选 | 与.bubble-pos一起使用，呈现右下箭头|
+|.pos-b-l| 可选 | 与.bubble-pos一起使用，呈现下左箭头|
+|.pos-b-r| 可选 | 与.bubble-pos一起使用，呈现下右箭头|
+|.pos-l-t| 可选 | 与.bubble-pos一起使用，呈现左上箭头|
+|.pos-l-b| 可选 | 与.bubble-pos一起使用，呈现左下箭头|
+
+`示例：`
+
+<iframe class="auto-height" src="page/dpl/content/tips.htm" frameborder="0"></iframe>
+
+###文本框###
+
+`说明：`
+
+- 输入框ui一共两种尺寸，分别22像素高和26像素高。
+- 你可以重写文本框的宽度样式
+
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|.ui-txt| 必选 | 文本框基础样式|
+|.ui-txt-error| 可选 | 与.ui-txt一起使用，使文本框变为出错状态|
+|.ui-txt-success| 可选 | 与.ui-txt一起使用，使文本框变为成功状态|
+|.disabled| 可选 | 与.ui-txt一起使用，配合disabled="disabled"属性一起使用|
+|.ui-txt-small| 可选 | 与.ui-txt一起使用，使文本框变为高度20像素|
+
+`示例：`
+
+<iframe class="auto-height" src="page/dpl/content/input.htm" frameborder="0"></iframe>
+
+###选项卡###
+
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|.ui-tabs| 必选 | 选项卡基础样式|
+|.ui-tabs-hd| 必选 | 选项卡容器|
+|.ui-tabs-bd| 必选 | 选项卡内容容器|
+|.ui-tabs-t| 必选 | 单个选项卡|
+|.ui-tabs-b| 必选 | 单个选项卡内容|
+|.active| 可选 | 表示当前被选中的选项，和.ui-tabs-t一起使用|
+
+`html：`
+
+    <div class="ui-tabs">
+	    <div class="ui-tabs-hd">
+		    <ul class="ui-tabs-ul">
+			    <li class="first ui-tabs-t active"><a href="#">选项卡1</a></li>
+			    <li class="ui-tabs-t"><a href="#">选项卡2</a></li>
+			    <li class="ui-tabs-t"><a href="#">选项卡3</a></li>
+		    </ul>
+	    </div>
+	    <div class="ui-tabs-bd">
+		    <div class="ui-tabs-b">tab1</div>
+		    <div class="ui-tabs-b">tab2</div>
+		    <div class="ui-tabs-b">tab3</div>
+	    </div>
+    </div>
+
+`示例：`
+
+<iframe class="auto-height" src="page/dpl/content/tabs.htm" frameborder="0"></iframe>
+
+###浮出层###
+
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|.ui-site-dialog| 必选 | 浮出层的基础样式，容器内边距为24像素|
+|.ui-site-dialog-hd| 必选 | 浮出层标题框容器样式|
+|.ui-site-dialog-close| 必选 | 标题框中关闭按钮样式|
+|.ui-site-dialog-bd| 必选 | 浮出层内容和底部容器的父容器|
+|.dialog-bd| 必选 | 内容容器|
+|.dialog-ft| 必选 | 底部容器|
+|.ui-site-dialog-mini| 可选 | 配合.ui-site-dialog一起使用，可使容器内边距变为12像素|
+
+`html：`
+
+	<div class="ui-site-dialog">
+	    <div class="ui-site-dialog-hd">
+		    <h3>弹出层标题</h3>
+		    <a href="#" class="ui-site-dialog-close" title="关闭">关闭</a>
+		</div>
+		    <div class="ui-site-dialog-bd">
+			    <div class="dialog-bd">
+			    内容显示区...
+			    </div>
+		    <div class="dialog-ft">
+			    <a class="ui-btn ui-btn-action" href="#" title="按钮名称">按钮名称</a>
+			    <a class="ui-btn" href="#" title="按钮名称">按钮名称</a>
+		    </div>
+	    </div>
+    </div>
+
+<iframe class="auto-height" src="page/dpl/content/dialog.htm" frameborder="0"></iframe>
+
+###图文列表###
+
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|.ui-img-text| 必选 | 图文列表的基础样式，容器内边距为7像素|
+|.ui-img-100| 可选 | 图片为100*100时使用|
+|.ui-img-150| 可选 | 图片为150*150时使用|
+
+`html：`
+
+	<li class="ui-img-text ui-img-100">
+		<div class="ui-vertical-img">
+		    <a class="img-box" href="#" title="">
+				<img src="http://wd.alibaba-inc.com/i/100x60.png" alt="" />
+			</a>
+		</div>
+		<div class="price">&yen;1.00</div>
+		<div class="title">
+			<a href="#" title="这是个标题">这是个标题这是个标题这是个标题这是个标题</a>
+		</div>
+	</li>
+
+<iframe class="auto-height" src="page/dpl/content/imgText.htm" frameborder="0"></iframe>
+
+###字体颜色###
+
+`说明：`
+
+- 目前只定义链接色,默认写在html节点上自动被所有节点继承，其他后续再加
+
+`相关样式：`
+
+|样式名称| 状态| 说明|
+|--------|-----|-----|
+|html| 必选 | 链接色:<a href="#" style="color:#06c">#0066cc</a> |
+
+##参考##
+[DPL组件编码规范](http://wd.alibaba-inc.com/doc/page/work/cbu-architecture/dpl)
+[网站统一后台 DPL 规范使用文档](http://wd.alibaba-inc.com/doc/page/work/cbu-business/workplatform/wkdpl)
+[Offer线前台DPL规范使用文档](http://wd.alibaba-inc.com/doc/page/work/cbu-market/offer/offer-dpl)
