@@ -5,11 +5,11 @@
  * 
  * @author qijun.weiqj
  */
-define('Executor', ['jQuery', 'Class', 'Log'],
+define('context.Executor', ['jQuery', 'Class', 'Log'],
 
 function($, Class, Log) {
 
-var log = new Log('may:Executor'),
+var log = new Log('context.Executor'),
 	proxy = function() {};
 	
 return new Class({

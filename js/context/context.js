@@ -2,7 +2,7 @@
  * 基于事件机制管理一组模块
  * @author qijun.weiqj
  */
-define('Context', ['jQuery', 'Class', 'Log'], 
+define('context.Context', ['jQuery', 'Class', 'Log'], 
 
 function($, Class, Log) {
 

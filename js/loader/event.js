@@ -38,15 +38,6 @@ Event.prototype = {
 		}
 	},
 
-	one: function(type, fn) {
-		var self = this;
-			wrap = function() {
-				fn.apply(this, arguments);
-				self.off(type, wrap);
-			};
-		this.on(type, wrap);
-	},
-
 	trigger: function(type, o) {
 		this._log.info('trigger', type);
 		var list = this._cache[type];
@@ -56,18 +47,6 @@ Event.prototype = {
 			}
 		}
 	}
-};
-
-Event.mixin = function(name, o) {
-	if (!o) {
-		o = name;
-		name = o.name || '';
-	}
-	var event = new Event(name);
-	event.target = o;
-	util.each(['on', 'off', 'trigger', 'one'], function(index, type) {
-		o[type] = o[type] || util.proxy(event, type);
-	});
 };
 
 return Event;

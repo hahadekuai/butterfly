@@ -4,7 +4,8 @@
 define('resolve', function() {
 
 var rAbs = /^(?:(?:\w+:\/\/)|(?:[.\/]))/,
-	rFile = /\.(js|css)(\?|$)/;
+	rFile = /\.(js|css)(\?|$)/,
+	rSlash = /\/$/;
 
 var resolve = function(config, id) {
 	if (rAbs.test(id)) {
@@ -27,8 +28,9 @@ resolve['default'] = function(config, id) {
 
 		if (path) {
 			for (var k in path) {
+				var v = path[k];
 				if (id.indexOf(k) === 0) {
-					id = id.replace(k, path[k]);
+					id = id.replace(k, v);
 					break;
 				}
 			}
@@ -42,6 +44,7 @@ resolve['default'] = function(config, id) {
 	if (root && !rAbs.test(id)) {
 		id = root.replace(/\/$/, '') + '/' + id;
 	}
+
 	return id;		
 };
 

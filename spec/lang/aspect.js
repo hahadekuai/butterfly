@@ -1,4 +1,4 @@
-define('spec.lang.Aspect', ['Class', 'lang.Aspect'], function(Class, Aspect) {
+define('spec.lang.Aspect', ['lang.Class', 'lang.Aspect'], function(Class, Aspect) {
 
 describe(this.id, function() {
 

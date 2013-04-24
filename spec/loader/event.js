@@ -28,28 +28,7 @@ it('event', function() {
 	event.off('click');
 	event.trigger('click', 100);
 	expect(list.length).toBe(3);
-
-	var times = 0;
-	event.one('user', function() {
-		times++;	
-	});
-	event.trigger('user');
-	event.trigger('user');
-	expect(times).toBe(1);
 });
 
-it('mixin', function() {
-	var o = { };
 
-	Event.mixin(o);
-	
-	var f = 0;
-	o.on('open', function(data) {
-		f = data;	
-	});
-	o.trigger('open', 123);
-	expect(f).toBe(123);
-});
-
-		
 });

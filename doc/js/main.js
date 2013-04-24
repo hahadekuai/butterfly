@@ -2,7 +2,7 @@ butterfly.config({
 	charset: 'gbk',
 	root: '../js',
 	path: {
-		doc: './js'
+		'doc/': './js/'
 	}
 });
 

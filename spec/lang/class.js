@@ -1,4 +1,4 @@
-define('spec.lang.Class', ['Class'], function(Class) {
+define('spec.lang.Class', ['lang.Class'], function(Class) {
 
 describe(this.id, function() {
 

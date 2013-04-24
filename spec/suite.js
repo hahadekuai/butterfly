@@ -1,7 +1,7 @@
 define('spec.Suite', [
-	'spec.lang.Loader',
 	'spec.lang.Class',
 	'spec.lang.Aspect',
+	'spec.lang.Event',
 
 	'spec.util.ParserModule',
 	'spec.util.HtmlParser',
