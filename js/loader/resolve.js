@@ -3,7 +3,7 @@
  */
 define('resolve', function() {
 
-var rAbs = /^(?:\/|(?:\w+:\/\/))/,
+var rAbs = /^(?:(?:\w+:\/\/)|(?:[.\/]))/,
 	rFile = /\.(js|css)(\?|$)/;
 
 var resolve = function(config, id) {
@@ -16,25 +16,25 @@ var resolve = function(config, id) {
 };
 
 resolve['default'] = function(config, id) {
+	var root = config.root,
+		path = config.path;
+
 	if (!rFile.test(id)) {
 		id = id.replace(/\./g, '/')
 			.replace(/([a-z])([A-Z])/g, function(s, m1, m2) {
 				return m1 + '-'	+ m2;
 			}).toLowerCase();
-	}
-	
-	var root = config.root,
-		path = config.path;
 
-	if (path) {
-		for (var k in path) {
-			if (id.indexOf(k) === 0) {
-				id = id.replace(k, path[k]);
-				break;
+		if (path) {
+			for (var k in path) {
+				if (id.indexOf(k) === 0) {
+					id = id.replace(k, path[k]);
+					break;
+				}
 			}
 		}
 	}
-
+	
 	if (!rFile.test(id)) {
 		id = id + '.js';
 	}

@@ -3,7 +3,7 @@
  *
  * @author qijun.weiqj
  */
-define('Class', ['jQuery'], function($) {
+define('lang.Class', ['jQuery'], function($) {
 
 /**
  * Из:
@@ -47,3 +47,9 @@ var proxy = function() {};
 return Class;
 
 });
+
+
+define('Class', ['lang.Class'], function(Class) {
+	return Class;
+});
+

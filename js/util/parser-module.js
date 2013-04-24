@@ -107,7 +107,7 @@ var Mixin = {
 
 return {
 	mixin: function(klass) {
-		$.extendIf(klass.prototype, Mixin);
+		$.extend(klass.prototype, Mixin);
 		klass.parse = klass.parse ||
 				$.proxy(this, '_parse', klass);
 		return klass;

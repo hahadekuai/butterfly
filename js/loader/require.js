@@ -146,6 +146,7 @@ var loadModuleFromScript = function(config, id, options) {
 	request.module(path, {
 		namespace: config.id,
 		id: id,
+		charset: config.charset,
 
 		success: function() {
 			delete loadList[id];

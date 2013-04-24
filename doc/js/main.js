@@ -1,19 +1,20 @@
 butterfly.config({
 	charset: 'gbk',
+	root: '../js',
 	path: {
-		doc: '/doc/js'
+		doc: './js'
 	}
 });
 
 
-define('!doc.Main', ['require', 'jQuery', 'Log', 'PageContext',
+define('!doc.Main', ['require', 'jQuery', 'Log',
 		'/vendor/marked.js', '/vendor/mustache.js'], 
 		
-function(require, $, Log, PageContext) {
+function(require, $, Log) {
 
 var log = new Log('NavBar');
 
-var NavBar = {
+var Main = {
 
 	init: function() {
 		this.config();
@@ -104,7 +105,6 @@ var NavBar = {
 
 };
 
+$($.proxy(Main, 'init'));
 
-PageContext.add('navbar', NavBar);
-	
 });

@@ -1,43 +1,13 @@
 /**
  * 简单日志模块
  *
- * 后续要实现在IE下可以更加方便友好地显示日志，并且方便调试
- * 提供方便快捷的方式来过滤日志
- *
- * 当然最好能和后台结合，把出错信息记录到后台，以方便前端异常的监控
- *
  * @author qijun.weiqj
  */
-define('Log', ['jQuery', 'Class'], 
+define('lang.Log', ['loader', 'jQuery', 'lang.Class'], 
 
-function($, Class) {
+function(Loader, $, Class) {
 
-var Log = new Class({
-	
-	init: function(name) {
-		this.name = name;
-	},
-
-	error: function(message) {
-		this.log(message, 'error');
-	},
-
-	warn: function(message) {
-		this.log(message, 'warn');
-	},
-
-	info: function(message) {
-		this.log(message, 'info');
-	},
-
-	log: function(message, level) {
-		simpleLog(message, level, this.name);
-	},
-
-	isEnabled: may.log.isEnabled
-  
-});
-//~ Log
+var Log = Loader.require('log');
 
 var body = null,
 	list = [],
@@ -45,8 +15,9 @@ var body = null,
 	logConsole = /\bdebug-console=true\b/.test(search),
 	filter = (/\bdebug-log-filter=([^&]+)/.exec(search) || {})[1];
 
-
-var prepare = function() {
+// prepare for debug-console
+logConsole && 
+(function() {
 	var container = $('<div class="debug-container"></div>').appendTo('body'),
 		clear = $('<button class="clear">clear</button>').appendTo(container),
 		wrap = $('<p><textarea class="editor"></textarea><button class="go">Go</button></p>').appendTo(container),
@@ -68,19 +39,15 @@ var prepare = function() {
 
 	$.each(list, function(index, message) {
 		body.append(message);
-	});
-};
-
-logConsole && $(function() {
-	prepare();	
-});
+	});	
+})();
 
 
-var oriLog = may.log.handler;
-var simpleLog = function(message, level, name) {
+var oriHandler = Log.handler;
+var handler = function(message, level, name) {
 	level = level || 'info'
 
-	if (!may.log.isEnabled(level)) {
+	if (!Log.isEnabled(level)) {
 		return;
 	}
 	
@@ -91,15 +58,13 @@ var simpleLog = function(message, level, name) {
 	if (logConsole) {
 		var node = $('<p class="debug debug-' + level + '"></p>');
 		node.text((name ? '[' + name + '] ' : '') + message);
-		
 		if (body) {
 			body.append(node);
 		} else {
 			list.push(node);
 		}
-
 	} else {
-		oriLog(message, level, name);
+		oriHandler(message, level, name);
 	}
 
 };
@@ -114,12 +79,14 @@ var checkFilter = function(message, level, name) {
 };
 
 
-may.log.handler = simpleLog;
+Log.handler = handler;
 
 
 return Log;
 
-
 });
 
 
+define('Log', ['lang.Log'], function(Log) {
+	return Log;	
+});

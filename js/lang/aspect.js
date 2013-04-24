@@ -4,7 +4,6 @@
  */
 define('lang.Aspect', function() {
 
-
 var Aspect = function() {
 	this._list = [];
 	this.isAttached = true;
