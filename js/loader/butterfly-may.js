@@ -20,6 +20,9 @@ var may = {
 may.log = log;
 window.may = may;
 
+butterfly.config({ id: 'may' });
+butterfly.config.push('may');
+
 define('CssLoader', {
 	load: util.proxy(request, 'css')
 });
