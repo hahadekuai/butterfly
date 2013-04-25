@@ -37,14 +37,28 @@ it('trigger with mutiple param', function() {
 	event.on('click', function(a, b, c, d) {
 		called = true;
 		expect(a).toBe(1);	
-		expect(b).toBe([1]);	
-		expect(c).toBe({ a: 1 });	
+		expect(b).toEqual([1]);	
+		expect(c).toEqual({ a: 1 });	
 		expect(d).toBe('d');	
 	});
 
 	event.trigger('click', 1, [1], { a: 1 }, 'd');
 	expect(called).toBeTruthy();
 
+});
+
+it('with break', function() {
+	var event = new Event('test3');
+	var count = 0;
+	event.on('click', function() {
+		count++;	
+		return false;
+	});
+	event.on('click', function() {
+		count++;	
+	});
+	event.trigger('click');
+	expect(count).toBe(1);
 });
 
 });

@@ -43,7 +43,7 @@ Event.prototype = {
 		var list = this._cache[type],
 			ret;
 		if (list) {
-			var args = [].slice.call(arguments, 1),
+			var args = [].slice.call(arguments, 1);
 			for (var i = 0, c = list.length; i < c; i++) {
 				ret = list[i].apply(this.target, args);
 				if (ret === false) {
