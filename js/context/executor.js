@@ -1,6 +1,5 @@
 /**
  * 用于执行一个模块/类/普通对象方法
- * 统一异常管理,转交给errorHandler
  * 统一的执行时间记录, 由log模块输出
  * 
  * @author qijun.weiqj
@@ -16,7 +15,6 @@ return new Class({
 
 	init: function(options) {
 		options = options || {};
-		this._error = options.error || may.error;
 		this._userload = options.load;
 	},
 
@@ -56,10 +54,10 @@ return new Class({
 			if (typeof context === 'function') {
 				this._call(method, context, args);
 			} else {
-				this._error('parameters error');
+				throw 'parameters error';
 			}
 		} else {
-			this._error('parameters error');
+			throw 'parameters error';
 		}
 	},
 
@@ -84,7 +82,7 @@ return new Class({
 				log.info('[' + guid + '] cost ' + time + ' ms' + ext);
 			}
 		} catch (e) {
-			this._error(e);
+			log.error(e);
 		}
 	},
 
@@ -97,7 +95,7 @@ return new Class({
 		} else if (this._userload) {
 			// 如果有load方法，则使用load来载入模块
 			this._userload(module, success, function() {
-				self._error('load module [' + module + '] fail');
+				log.error('load module [' + module + '] fail');
 			});
 		} else {
 			log.error('can not resolve module [' + module + ']');
