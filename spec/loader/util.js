@@ -23,6 +23,14 @@ it('util.error', function() {
 	}).toThrow();
 });
 
+it('util.proxy', function() {
+	var add = function(a, b) {
+		return a + b;
+	};
+	var add100 = util.proxy(add, 100);
+	expect(add100(200)).toBe(300);
+});
+
 it('util.assert', function() {
 	expect(function() {
 		util.assert(true, 'must not be here');

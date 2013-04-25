@@ -36,6 +36,28 @@ var util = {
 		}
 	},
 
+	proxy: function(o, name) {
+		var fn, params, n;
+		if (typeof o === 'function') {
+			fn = o;
+			o = null;
+			n = 1;
+		} else {
+			fn = o[name];
+			n = 2;
+		}
+		params = [].slice.call(arguments, n);
+
+		return function() {
+			var args = arguments;
+			if (params.length > 0) {
+				args = params.slice(0);
+				args.push.apply(args, arguments);
+			}
+			return fn.apply(o, args);
+		};
+	},
+
 	error: function(e) {
 		e = typeof e === 'string' ? new Error(e) : e;
 		throw e;
