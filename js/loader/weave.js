@@ -11,7 +11,7 @@ var log = new Log('weave');
 
 // require anonymous module immediately
 event.on('define', function(mod) {
-	if (mod.id.indexOf('!') === 0) {
+	if (mod.anonymous || mod.id.indexOf('!') === 0) {
 		log.info('require anonymous module immediately: ' + mod.namespace, ':', mod.id)
 		var config = module.cache[mod.namespace];
 		config.require([mod.id]);

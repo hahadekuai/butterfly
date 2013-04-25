@@ -38,14 +38,20 @@ Event.prototype = {
 		}
 	},
 
-	trigger: function(type, o) {
+	trigger: function(type) {
 		this._log.info('trigger', type);
-		var list = this._cache[type];
+		var list = this._cache[type],
+			ret;
 		if (list) {
+			var args = [].slice.call(arguments, 1),
 			for (var i = 0, c = list.length; i < c; i++) {
-				list[i].call(this.target, o);
+				ret = list[i].apply(this.target, args);
+				if (ret === false) {
+					break;
+				}
 			}
 		}
+		return ret;
 	}
 };
 

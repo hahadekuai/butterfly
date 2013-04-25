@@ -30,5 +30,21 @@ it('event', function() {
 	expect(list.length).toBe(3);
 });
 
+it('trigger with mutiple param', function() {
+	var event = new Event('test2'),
+		called = false;
+
+	event.on('click', function(a, b, c, d) {
+		called = true;
+		expect(a).toBe(1);	
+		expect(b).toBe([1]);	
+		expect(c).toBe({ a: 1 });	
+		expect(d).toBe('d');	
+	});
+
+	event.trigger('click', 1, [1], { a: 1 }, 'd');
+	expect(called).toBeTruthy();
+
+});
 
 });
