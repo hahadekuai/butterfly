@@ -1,9 +1,9 @@
 /**
  * require
  */
-define('require', ['util', 'log', 'event/loader', 'module', 'define', 'loader'], 
+define('require', ['util', 'log', 'module', 'define', 'loader'], 
 
-function(util, Log, event, module, moduleDefine, loader) {
+function(util, Log, module, moduleDefine, loader) {
 
 var isArray = util.isArray,
 	assert = util.assert,
