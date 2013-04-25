@@ -1,3 +1,6 @@
+/**
+ * for migrate module
+ */
 define(['loader'], function(loader) {
 
 var alias = loader.require('alias');
