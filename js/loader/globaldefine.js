@@ -44,7 +44,7 @@ var globaldefine = function(id) {
 	});
 };
 
-var rAbs = /^(?:\/|(?:\w+:\/\/))/,
+var rAbs = /^(?:(?:\w+:\/\/)|(?:[.\/]))/,
 	rFile = /\.(js|css)(\?|$)/;
 
 var postLoadScript = function(config, mod, options) {

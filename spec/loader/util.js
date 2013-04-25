@@ -33,12 +33,4 @@ it('util.assert', function() {
 	}).toThrow();
 });
 
-it('util.proxy', function() {
-	var add = function(a, b) {
-		return a + b;
-	};
-	var add100 = util.proxy(add, 100);
-	expect(add100(200)).toBe(300);
-});
-
 });
