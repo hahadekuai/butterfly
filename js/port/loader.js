@@ -12,6 +12,7 @@ ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/loader/log.js');
 ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/loader/event.js');
 ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/loader/module.js');
 ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/loader/define.js');
+ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/loader/alias.js');
 ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/loader/require.js');
 ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/loader/config.js');
 ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/loader/resolve.js');

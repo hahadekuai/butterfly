@@ -1,9 +1,9 @@
 /**
  * require
  */
-define('require', ['util', 'log', 'module', 'define', 'loader'], 
+define('require', ['util', 'log', 'module', 'define', 'alias', 'loader'], 
 
-function(util, Log, module, moduleDefine, loader) {
+function(util, Log, module, moduleDefine, alias, loader) {
 
 var isArray = util.isArray,
 	assert = util.assert,
@@ -54,15 +54,11 @@ var loadModule = function(config, id, options) {
 		return;
 	}
 
-	var alias = null,
-		pos = null,
+	var pos = null,
 		o = null,
 		otherConfig = null;
 
-	if (config.alias && 
-			(alias = config.alias[id])) {
-		id = alias;
-	}
+	id = alias.get(config, id);
 	
 	// require other namespace module
 	pos = id.indexOf(':');
