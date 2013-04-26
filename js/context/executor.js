@@ -1,5 +1,6 @@
 /**
  * 用于执行一个模块/类/普通对象方法
+ * 统一的异常处理
  * 统一的执行时间记录, 由log模块输出
  * 
  * @author qijun.weiqj
@@ -15,7 +16,8 @@ return new Class({
 
 	init: function(options) {
 		options = options || {};
-		this._userload = options.load;
+		this.loader = options.loader || options.load;
+		this.error = options.error || $.proxy(log, 'error');
 	},
 
 	/**
@@ -54,35 +56,34 @@ return new Class({
 			if (typeof context === 'function') {
 				this._call(method, context, args);
 			} else {
-				throw 'parameters error';
+				this.error('parameters error: context should be function');
 			}
 		} else {
-			throw 'parameters error';
+			this.error('parameters error: invalid method');
 		}
 	},
 
 	_call: function(o, method, args) {
 		var time = null,
-			guid = this._guid++,
+			guid = this.guid++,
 			ext = null;
 		try {
-			if (log.isEnabled('info')) {
-				time = (new Date()).getTime();
-				log.info('[' + guid + '] start');
-			}
+			time = (new Date()).getTime();
+			log.info('[' + guid + '] start');
+
 			if (o === true) {
 				proxy.prototype = method.prototype;
 				o = new proxy();
 			}
+
 			args = args || [];
 			method.apply(o, args);
-			if (log.isEnabled('info')) {
-				time = (new Date()).getTime() - time;
-				ext = time > 100 ? '!!!!!' : '';
-				log.info('[' + guid + '] cost ' + time + ' ms' + ext);
-			}
+
+			time = (new Date()).getTime() - time;
+			ext = time > 100 ? '!!!!!' : '';
+			log.info('[' + guid + '] cost ' + time + ' ms' + ext);
 		} catch (e) {
-			log.error(e);
+			this.error(e);
 		}
 	},
 
@@ -92,13 +93,13 @@ return new Class({
 			o = this._get(module);
 		if (o) {
 			success(o);
-		} else if (this._userload) {
-			// 如果有load方法，则使用load来载入模块
-			this._userload(module, success, function() {
+		} else if (this._loader) {
+			// 如果有loader，则使用loader来载入模块
+			this.loader(module, success, function() {
 				log.error('load module [' + module + '] fail');
 			});
 		} else {
-			log.error('can not resolve module [' + module + ']');
+			this.error('can not resolve module [' + module + ']');
 		}
 	},
 
@@ -114,8 +115,9 @@ return new Class({
 		return o;
 	},
 
-	_guid: 1
+	guid: 1
 	
 });
-		
+
+
 });
