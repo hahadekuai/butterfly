@@ -6,13 +6,14 @@ define('context.Context', ['loader', 'jQuery', 'Class', 'Log'],
 
 function(loader, $, Class, Log) {
 
-var loaderEvent = loader.require('loaderEvent');
+var config = loader.require('config');
 
 var Context = new Class({
 
 	/**
 	 * @param {string} name  context name
 	 * @param {object} attachment
+	 *  - loader {string}
 	 *  - moduleFilter {package|regexp|function}
 	 *	- before(context) -> {boolean}
 	 *	- query(name, event) -> node
@@ -212,9 +213,14 @@ var Context = new Class({
 
 	_handle: function() {
 		var self = this,
-			attach = this._attachment,
-			filter = attach.moduleFilter;
-		filter && 
+			attach = this._attachment;
+
+		if (!attach.moduleFilter) {
+			return;
+		}
+
+		config.
+
 		loaderEvent.on('define', function(module) {
 			if (self._match(filter, module)) {
 				loaderConfig(module.namespace).require(module.id, function(o) {

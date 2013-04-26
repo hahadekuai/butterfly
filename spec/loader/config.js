@@ -1,12 +1,15 @@
 describe('config', function() {
 
 	var cache = loader.require('module').cache,
-		config = loader.require('config');
+		Config = loader.require('config');
 
-	it('config a new loader', function() {
+	it('config', function() {
 		expect(cache.newloader).toBeUndefined();
-		config({ id: 'newloader' });
+		Config.config({ id: 'newloader' });
 		expect(cache.newloader).toBeDefined();
+
+		expect(Config.get('newloader')).toBe(cache.newloader.facade);
 	});
+
 	
 });

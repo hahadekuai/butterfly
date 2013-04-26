@@ -13,22 +13,25 @@ var log = new Log('weave');
 loaderEvent.on('define', function(mod) {
 	if (mod.anonymous || mod.id.indexOf('!') === 0) {
 		log.info('require anonymous module immediately: ' + mod.namespace, ':', mod.id)
-		config(mod.namespace).require([mod.id]);
+		config.get(mod.namespace).require([mod.id]);
 	}
 });
 
 window.define = globaldefine;
-config({ id: 'butterfly' });
+
+// default config
+config.config({ id: 'butterfly' });
 config.push('butterfly');
 
-// butterfly(o) -> config(o)
-// butterfly.config(o) -> config(o)
+// butterfly(o) -> config.config(o)
+// butterfly.config(o) -> config.config(o)
+// butterfly.config.push()
 butterfly.handler = butterfly.config = config;
 
 // butterfly.define
 // butterfly.require
 // butterfly.isDefine
-util.extend(butterfly, config('butterfly'));
+util.extend(butterfly, config.get('butterfly'));
 
 var _butterfly = butterfly;
 butterfly.noConflict = function(deep) {
