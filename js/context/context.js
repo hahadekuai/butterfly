@@ -6,15 +6,16 @@ define('context.Context', ['loader', 'jQuery', 'Class', 'Log'],
 
 function(loader, $, Class, Log) {
 
-var config = loader.require('config');
+var Config = loader.require('config');
 
 var Context = new Class({
 
 	/**
 	 * @param {string} name  context name
 	 * @param {object} attachment
-	 *  - loader {string}
-	 *  - moduleFilter {package|regexp|function}
+	 *  - loader {string} for auto register to require module
+	 *  - moduleFilter {package|regexp|function} for auto register to filter module
+	 *
 	 *	- before(context) -> {boolean}
 	 *	- query(name, event) -> node
 	 *	- bind(node, event, module, [options])
@@ -211,27 +212,36 @@ var Context = new Class({
 		return o ? o.module : null;
 	},
 
+	/**
+	 * auto register module to context
+	 */
 	_handle: function() {
 		var self = this,
-			attach = this._attachment;
+			attach = this._attachment,
+			filter = attach.moduleFilter;
 
-		if (!attach.moduleFilter) {
+		if (!filter) {
 			return;
 		}
 
-		config.
+		var loader = Config.get(attach.loader);
+		if (!loader) {
+			log.error('invalid loader: ', attach.loader);
+			return;
+		}
 
-		loaderEvent.on('define', function(module) {
-			if (self._match(filter, module)) {
-				loaderConfig(module.namespace).require(module.id, function(o) {
-					self.add()
+		config.on('define', function(module) {
+			if (self._match(filter, module.id)) {
+				loader.require([module.id], function(o) {
+					self.add(module.id, o);
 				});
 			}
 		});
 	},
 
-	_match: function(filter, module) {
-			
+	_match: function(filter, id) {
+		return typeof filter === 'function' ? filter(id) :
+				filter.test ? filter.test(id) : false;
 	}
 
 });

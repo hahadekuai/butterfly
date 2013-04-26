@@ -24,9 +24,10 @@ var config = function(cfg) {
 
 util.extend(config, {
 
-	get: function(name) {
-		assert(cache[name], 'config for ' + name + ' is not exist');
-		return cache[name].facade;
+	get: function(id) {
+		id = id || 'butterfly';
+		assert(cache[id], 'config for ' + id + ' is not exist');
+		return cache[id].facade;
 	},
 
 	config: function(cfg) {
