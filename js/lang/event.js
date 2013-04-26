@@ -1,14 +1,11 @@
 /**
  * event
  */
-define('lang.Event', ['loader'], function(Loader) {
+define('lang.Event', ['loader/util', 'loader/event'], 
 
-var util = Loader.require('util'),
-	Event = Loader.require('event');
-
+function(util, Event) {
 
 util.extend(Event.prototype, {
-
 	one: function(type, fn) {
 		var self = this;
 			wrap = function() {
@@ -17,12 +14,10 @@ util.extend(Event.prototype, {
 			};
 		this.on(type, wrap);
 	}
-
 });
 
 
 util.extend(Event, {
-
 	mixin: function(name, o) {
 		if (!o) {
 			o = name;
@@ -34,7 +29,6 @@ util.extend(Event, {
 			o[type] = o[type] || util.proxy(event, type);
 		});
 	}
-	
 });
 
 

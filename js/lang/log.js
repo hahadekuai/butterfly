@@ -3,11 +3,9 @@
  *
  * @author qijun.weiqj
  */
-define('lang.Log', ['loader', 'jQuery', 'lang.Class'], 
+define('lang.Log', ['loader/log', 'jQuery', 'lang.Class'], 
 
-function(Loader, $, Class) {
-
-var Log = Loader.require('log');
+function(Log, $, Class) {
 
 var body = null,
 	list = [],

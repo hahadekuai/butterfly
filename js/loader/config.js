@@ -9,9 +9,9 @@
  *
  * config(name) get a loader config
  */
-define('config', ['util', 'log', 'module', 'require', 'define'], 
+define('config', ['util', 'log', 'event', 'module', 'require', 'define'], 
 
-function(util, Log, module, require, define) {
+function(util, Log, Event, module, require, define) {
 
 var assert = util.assert,
 	cache = module.cache,
@@ -29,8 +29,6 @@ var config = function(cfg) {
 	var id = cfg.id || 'butterfly',
 		o = cache[id];
 
-	log.info('config loader', id);
-	
 	if (o) {
 		log.info('config loader', id);
 	} else {
@@ -68,6 +66,11 @@ var create = function(id) {
 			return !!o.modules[id];
 		}
 	};
+	
+	var event = new Event('config/' + id);
+	o.on = util.proxy(event, 'on');
+	o.off = util.proxy(event, 'off');
+	o.trigger = util.proxy(event, 'trigger');
 
 	o.facade = { 
 		id: o.id,

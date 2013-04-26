@@ -1,7 +1,7 @@
 describe('define', function() {
 		
 	var define = loader.require('define'),
-		event = loader.require('event/loader'),
+		loaderEvent = loader.require('loaderEvent'),
 		config = {
 			id: 'test',
 			modules: {}
@@ -37,11 +37,11 @@ describe('define', function() {
 	});
 
 	it('define(depends, factory)', function() {
-		spyOn(event, 'trigger');
+		spyOn(loaderEvent, 'trigger');
 		var mod = define(config, ['a', 'b'], function() {});	
 		expect(mod.depends).toEqual(['a', 'b']);
 		expect(mod.anonymous).toBeTruthy();
-		expect(event.trigger).wasCalledWith('define', mod);
+		expect(loaderEvent.trigger).wasCalledWith('define', mod);
 	});
 
 });

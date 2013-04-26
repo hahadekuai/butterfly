@@ -25,6 +25,7 @@ describe('globaldefine', function() {
 		define('mod1', 'mod1');
 		define('mod2', 'mod2');
 		define('mod3', 'mod3');
+
 		config.pop();
 
 		define('mod3', 'mod3');
@@ -36,24 +37,26 @@ describe('globaldefine', function() {
 		expect(cache.offer.modules.mod1).toBeDefined();
 		expect(cache.offer.modules.mod2).toBeDefined();
 		expect(cache.offer.modules.mod3).toBeDefined();
+
+		config.pop();
 	});
 
 	it('async define', function() {
 		var site = config({
 			id: 'site',
 			path: {
-				mod9: '/spec/fixture/loader/site-mod9.js?delay=0.2',
-				mod10: '/spec/fixture/loader/site-mod10.js?delay=0.5',
-				mod11: '/spec/fixture/loader/site-mod11.js?delay=0.8'
+				mod9: './fixture/loader/site-mod9.js?delay=0.2',
+				mod10: './fixture/loader/site-mod10.js?delay=0.5',
+				mod11: './fixture/loader/site-mod11.js?delay=0.8'
 			}
 		});
 
 		var offer = config({
 			id: 'offer',
 			path: {
-				mod9: '/spec/fixture/loader/offer-mod9.js?delay=0.3',
-				mod10: '/spec/fixture/loader/offer-mod10.js?delay=0.6',
-				mod11: '/spec/fixture/loader/offer-mod11.js?delay=0.9'
+				mod9: './fixture/loader/offer-mod9.js?delay=0.3',
+				mod10: './fixture/loader/offer-mod10.js?delay=0.6',
+				mod11: './fixture/loader/offer-mod11.js?delay=0.9'
 			}
 		});
 

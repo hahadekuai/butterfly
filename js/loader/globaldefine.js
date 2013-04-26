@@ -3,14 +3,14 @@
  */
 define('globaldefine', 
 		['util', 'log', 'module', 'config', 'request'], 
-		function(util, Log, module, config, request) {
+		function(util, Log, module, Config, request) {
 
 var assert = util.assert,
 	log = new Log('globaldefine');
 
 var stack = [];
 
-util.extend(config, {
+util.extend(Config, {
 	push: function(name) {
 		log.info('push loader to stack:', name);
 		var config = module.cache[name];
@@ -20,6 +20,7 @@ util.extend(config, {
 	},
 
 	pop: function() {
+		log.info('pop');
 		assert(stack.length > 0, 'empty config stack');
 		var o = stack.pop();
 		return o.facade;

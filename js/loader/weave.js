@@ -2,19 +2,18 @@
  * weave
  */
 define('weave', 
-		['util', 'log', 'event/loader', 'module', 'config', 'globaldefine', 
+		['util', 'log', 'loaderEvent', 'config', 'globaldefine', 
 		'oldbutterfly', 'olddefine', 'loader'], 
-function(util, Log, event, module, config, 
-		globaldefine, oldbutterfly, olddefine, loader) {
+function(util, Log, loaderEvent, config, globaldefine, 
+		oldbutterfly, olddefine, loader) {
 
 var log = new Log('weave');
 
 // require anonymous module immediately
-event.on('define', function(mod) {
+loaderEvent.on('define', function(mod) {
 	if (mod.anonymous || mod.id.indexOf('!') === 0) {
 		log.info('require anonymous module immediately: ' + mod.namespace, ':', mod.id)
-		var config = module.cache[mod.namespace];
-		config.require([mod.id]);
+		config(mod.namespace).require([mod.id]);
 	}
 });
 
@@ -22,7 +21,13 @@ window.define = globaldefine;
 config({ id: 'butterfly' });
 config.push('butterfly');
 
+// butterfly(o) -> config(o)
+// butterfly.config(o) -> config(o)
 butterfly.handler = butterfly.config = config;
+
+// butterfly.define
+// butterfly.require
+// butterfly.isDefine
 util.extend(butterfly, config('butterfly'));
 
 var _butterfly = butterfly;
@@ -34,6 +39,15 @@ butterfly.noConflict = function(deep) {
 	return _butterfly;
 };
 
-define('loader', loader);
+
+// export loader module
+butterfly.define('loader', loader);
+util.each(['util', 'log', 'event', 'loaderEvent', 'config'], 
+function(index, name) {
+	butterfly.define('loader/' + name, function() {
+		return loader.require(name);
+	});
+});
+
 
 });

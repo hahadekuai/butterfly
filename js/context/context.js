@@ -2,12 +2,21 @@
  * 基于事件机制管理一组模块
  * @author qijun.weiqj
  */
-define('context.Context', ['jQuery', 'Class', 'Log'], 
+define('context.Context', ['loader', 'jQuery', 'Class', 'Log'], 
 
-function($, Class, Log) {
+function(Loader, $, Class, Log) {
 
 var Context = new Class({
 
+	/**
+	 * @param {string} name  context name
+	 * @param {object} attachment
+	 *  - moduleFilter {package|regexp|function}
+	 *	- before(context) -> {boolean}
+	 *	- query(name, event) -> node
+	 *	- bind(node, event, module, [options])
+	 *	- resolve(node) -> name
+	 */
 	init: function(name, attachment) {
 		this.name = name;
 		
@@ -28,6 +37,8 @@ var Context = new Class({
 		 */
 		this._modules = [];
 		this._indices = {};
+
+		this._handle();
 	},
 
 	/**
@@ -195,6 +206,20 @@ var Context = new Class({
 	get: function(name, event) {
 		var o = this._get(name, event || 'default');
 		return o ? o.module : null;
+	},
+
+	_handle: function() {
+		var self = this,
+			attach = this._attachment,
+			filter = attach.moduleFilter;
+		filter && 
+		loaderEvent.on('define', function(module) {
+			if (self._match(filter, module)) {
+				loaderConfig(module.namespace).require(module.id, function(o) {
+					self.add()	
+				});
+			}
+		});
 	}
 
 });

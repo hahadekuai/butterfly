@@ -63,10 +63,10 @@ var onLoadScript = function(url, node, options) {
 		event = event || window.event;
 		if (event.type === 'load' || rReadyStates.test(node.readyState)) {
 			postLoadScript && postLoadScript(options);
-			log.info('request success:', url);
+			log.info('request script success:', url);
 			options.success();
 		} else {
-			log.warn('request error:', url);
+			log.warn('request script error:', url);
 			options.error();
 		}
 		node.onload = node.onreadystatechange = node.onerror = null;
@@ -132,10 +132,10 @@ request.css = function(url, options) {
 	}
 
 	if (isOldWebKit || !('onload' in node)) {
-		log.info('request css use iamge delegate');
+		log.info('request css use image proxy');
 		var img = doc.createElement('img');
 		img.onerror = function() {
-			log.info('request success:', url);
+			log.info('request css success with image proxy:', url);
 			options.success();
 			img.onerror = null;
 			img = undefined;
@@ -144,10 +144,10 @@ request.css = function(url, options) {
 	} else {
 		node.onload = node.onreadystatechange = node.onerror = function() {
 			if (rReadyStates.test(node.readyState)) {
-				log.info('request success:', url);
+				log.info('request css success:', url);
 				options.success();
 			} else {
-				log.warn('request error:', url);
+				log.warn('request css error:', url);
 				options.error();
 			}
 

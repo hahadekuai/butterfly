@@ -4,11 +4,9 @@
  *
  * @author qijun.weiqj
 */
-define('jQuery', ['loader'], function(Loader) {
+define('jQuery', ['loader/log'], function(Log) {
 
-var Log = Loader.require('log');
-
-if (Log.isEnabled('info')) {
+if (Log.isEnabled('debug')) {
 
 	jQuery.fn.toString = function() {
 		var html = [];

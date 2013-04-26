@@ -1,11 +1,14 @@
 /**
  * alias support
  */
-define('alias', ['util'], function(util) {
+define('alias', ['util', 'log'], function(util, Log) {
+
+var log = new Log('alias');
 	
-var Alias = {
+return {
 	get: function(config, id) {
 		var alias = this._cache[id] || (config.alias && config.alias[id]);
+		alias && log.debug(id, ' -> ', alias);
 		return alias || id;
 	},
 
@@ -15,7 +18,5 @@ var Alias = {
 
 	_cache: {}
 };
-
-return Alias;
 
 });

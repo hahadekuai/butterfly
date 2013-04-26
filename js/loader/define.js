@@ -1,9 +1,9 @@
 /**
  * define
  */
-define('define', ['util', 'log', 'event/loader', 'module'], 
+define('define', ['util', 'log', 'loaderEvent', 'module'], 
 
-function(util, Log, event, module) {
+function(util, Log, loaderEvent, module) {
 
 var isArray = util.isArray,
 	assert = util.assert,
@@ -27,7 +27,8 @@ var define = function(config, id, depends, factory) {
 		mods[id] = args;
 	}
 
-	event.trigger('define', args);
+	config.trigger && config.trigger('define', args);
+	loaderEvent.trigger('define', args);
 	
 	return args;
 };

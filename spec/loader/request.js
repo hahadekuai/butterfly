@@ -4,7 +4,7 @@ describe('request', function() {
 	
 	it('script', function() {
 		var flag = false,
-			url = '/spec/fixture/loader/request.js';
+			url = 'fixture/loader/request.js';
 		request.script(url, {
 			success: function() {
 				flag = true;
@@ -29,7 +29,7 @@ describe('request', function() {
 
 	var testRequestCss = function() {
 		var flag = false,
-			url = '/spec/fixture/loader/request.css',
+			url = 'fixture/loader/request.css',
 			p = jQuery('<p>some text</p>').appendTo('body');
 
 		expect(p.css('height')).not.toBe('100px');

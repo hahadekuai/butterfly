@@ -58,14 +58,14 @@ var loadModule = function(config, id, options) {
 		o = null,
 		otherConfig = null;
 
-	id = alias.get(config, id);
-	
 	// require other namespace module
 	pos = id.indexOf(':');
 	if (pos !== -1 && 
 			(otherConfig = module.cache[id.substr(0, pos)])) {
 		return loadModule(otherConfig, id.substr(pos + 1), options);
 	}
+
+	id = alias.get(config, id);
 
 	o = config.modules[id];
 	if (o) {

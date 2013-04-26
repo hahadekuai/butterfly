@@ -3,7 +3,7 @@
  *
  * @author qijun.weiqj
  */
-define('lang.Class', ['jQuery'], function($) {
+define('lang.Class', ['loader/util'], function(util) {
 
 /**
  * Из:
@@ -38,7 +38,7 @@ var Class = function(parent, o) {
 		proto = {};
 	}
 
-	klass.prototype = $.extend(proto, o);
+	klass.prototype = util.extend(proto, o);
 	return klass;
 };
 
