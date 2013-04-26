@@ -42,12 +42,5 @@ butterfly.noConflict = function(deep) {
 
 // export loader module
 butterfly.define('loader', loader);
-util.each(['util', 'log', 'event', 'loaderEvent', 'config'], 
-function(index, name) {
-	butterfly.define('loader/' + name, function() {
-		return loader.require(name);
-	});
-});
-
 
 });

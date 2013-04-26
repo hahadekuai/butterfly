@@ -32,17 +32,4 @@ describe('weave', function() {
 		expect(butterfly.isDefine).toBe(config.isDefine);
 	});
 
-	it('export loader module', function() {
-		var util = loader.require('util'),
-			names = ['loader', 'loader/util', 'loader/log', 'loader/event', 'loader/loaderEvent', 'loader/config'],
-			config = butterfly.config('butterfly');
-
-		config.require(names, function() {
-			var modules = arguments;
-			util.each(names, function(index, name) {
-				expect(modules[index]).toBeDefined();
-			});
-		});
-	});
-
 });

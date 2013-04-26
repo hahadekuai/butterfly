@@ -1,9 +1,10 @@
 /**
  * event
  */
-define('lang.Event', ['loader/util', 'loader/event'], 
+define('lang.Event', ['loader'], function(loader) {
 
-function(util, Event) {
+var util = loader.require('util'),
+	Event = loader.require('event');
 
 util.extend(Event.prototype, {
 	one: function(type, fn) {

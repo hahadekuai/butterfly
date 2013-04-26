@@ -4,7 +4,9 @@
  */
 define('context.Context', ['loader', 'jQuery', 'Class', 'Log'], 
 
-function(Loader, $, Class, Log) {
+function(loader, $, Class, Log) {
+
+var loaderEvent = loader.require('loaderEvent');
 
 var Context = new Class({
 
@@ -216,10 +218,14 @@ var Context = new Class({
 		loaderEvent.on('define', function(module) {
 			if (self._match(filter, module)) {
 				loaderConfig(module.namespace).require(module.id, function(o) {
-					self.add()	
+					self.add()
 				});
 			}
 		});
+	},
+
+	_match: function(filter, module) {
+			
 	}
 
 });

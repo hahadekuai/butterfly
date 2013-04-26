@@ -3,7 +3,9 @@
  *
  * @author qijun.weiqj
  */
-define('lang.Class', ['loader/util'], function(util) {
+define('lang.Class', ['loader'], function(loader) {
+
+var util = loader.require('util');
 
 /**
  * Из:
