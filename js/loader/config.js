@@ -81,7 +81,10 @@ util.extend(config, {
 			id: o.id,
 			define: o.define, 
 			require: o.require, 
-			isDefine: o.isDefine 
+			isDefine: o.isDefine,
+			on: o.on,
+			off: o.off,
+			trigger: o.trigger
 		};
 
 		return o;	

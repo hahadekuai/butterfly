@@ -1,5 +1,6 @@
 /**
  * 基于事件机制管理一组模块
+ *
  * @author qijun.weiqj
  */
 define('context.Context', ['loader', 'jQuery', 'Class', 'Log'], 
@@ -24,7 +25,7 @@ var Context = new Class({
 	init: function(name, attachment) {
 		this.name = name;
 		
-		this._log = new Log(name);
+		this._log = new Log('context: ' + name);
 		this._attachment = attachment;
 
 		/*
@@ -230,7 +231,7 @@ var Context = new Class({
 			return;
 		}
 
-		config.on('define', function(module) {
+		loader.on('define', function(module) {
 			if (self._match(filter, module.id)) {
 				loader.require([module.id], function(o) {
 					self.add(module.id, o);

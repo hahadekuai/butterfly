@@ -1,5 +1,6 @@
 /**
- * event
+ * event 扩展
+ * @author qijun.weiqj
  */
 define('lang.Event', ['loader'], function(loader) {
 

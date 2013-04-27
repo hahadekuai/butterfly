@@ -5,7 +5,7 @@ define('event', ['util', 'log'], function(util, Log) {
 
 var Event = function(name) {
 	this.name = name || '';
-	this._log = new Log('event' + (name ? ' ' + name : ''));
+	this._log = new Log('event:' + (name ? ' ' + name : ''));
 	this.target = this;
 	this._cache = {};
 };
