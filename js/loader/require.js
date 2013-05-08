@@ -1,9 +1,12 @@
 /**
  * require
  */
-define('require', ['util', 'log', 'module', 'define', 'alias', 'loader'], 
+define('require', 
+		['util', 'log', 'loaderEvent', 'module', 'define', 
+		'alias', 'loader'], 
 
-function(util, Log, module, moduleDefine, alias, loader) {
+function(util, Log, loaderEvent, module, moduleDefine, 
+		alias, loader) {
 
 var isArray = util.isArray,
 	assert = util.assert,
@@ -18,15 +21,13 @@ var require = function(config, depends, callback) {
 	var list = [],
 		count = 0,
 		n = depends.length,
-		
 		check = function() {
-			count >= n && callback &&
-				callback.apply(null, list);
+			count >= n && callback && callback.apply(null, list);
 		},
 		
 		load = function(index) {
-			var depend = depends[index];
-			loadModule(config, depend, {
+			var id = depends[index];
+			loadModule(config, id, {
 				success: function(o) {
 					list[index] = o;
 					count++;
@@ -49,25 +50,27 @@ var require = function(config, depends, callback) {
 
 
 var loadModule = function(config, id, options) {
-	if (id === 'require') {
-		options.success(config.require);
-		return;
-	}
-
-	var pos = null,
-		o = null,
-		otherConfig = null;
-
-	// require other namespace module
-	pos = id.indexOf(':');
-	if (pos !== -1 && 
-			(otherConfig = module.cache[id.substr(0, pos)])) {
-		return loadModule(otherConfig, id.substr(pos + 1), options);
+	var pos = id.indexOf(':');
+	if (pos !== -1) {
+		// require other namespace module
+		var other = module.cache[id.substr(0, pos)];
+		if (other && other !== config) {
+			return loadModule(other, id.substr(pos + 1), options);
+		}
 	}
 
 	id = alias.get(config, id);
 
-	o = config.modules[id];
+	if (id === 'require') {
+		options.success(config.require);
+		return;
+	}
+	if (id === 'exports' || id === 'module') {
+		options.success();
+		return;
+	}
+
+	var o = config.modules[id];
 	if (o) {
 		loadModuleFromDef(config, o, options);
 	} else {
@@ -84,7 +87,7 @@ var loadModuleFromDef = function(config, o, options) {
 	if (o.load) {
 		o.load++;
 		log.info(longId, 'is loaded [', o.load , ']');
-		options.success(o.data);
+		options.success(o.exports);
 		return;
 	}
 	
@@ -94,20 +97,16 @@ var loadModuleFromDef = function(config, o, options) {
 		return;
 	}
 
+	loaderEvent.trigger('beforecompile', config, o);
+
 	var depends = o.depends || [];
 	require(config, depends, function() {
-		var factory = o.factory,
-			loadList = o.loadList; 
-
-		if (typeof factory === 'function') {
-			factory = factory.apply(o, arguments);
-			log.info('initialize', longId, 'complete!');
-		}
-		o.data = factory;
+		compile(config, o, arguments);
 		log.info(longId, 'is loaded');
 
+		var loadList = o.loadList;
 		for (var i = 0, c = loadList.length; i < c; i++) {
-			loadList[i](factory);
+			loadList[i](o.exports);
 		}
 		
 		o.load = loadList.length;
@@ -115,6 +114,32 @@ var loadModuleFromDef = function(config, o, options) {
 	});	
 };
 //~
+
+var compile = function(config, o, args) {
+	o.exports = {};
+	var factory = o.factory;
+	if (typeof factory === 'function') {
+		for (var i = 0, c = o.depends; i < c; i++) {
+			var depend = o.depends[i];
+			if (depend === 'exports') {
+				args[i] = o.exports;
+			} else if (depend === 'module') {
+				args[i] = o;
+			}
+		}
+		try {
+			log.info('compile', module.getId(config, o.id));
+			factory = factory.apply(o, args);
+		} catch (e) {
+			log.error(e);
+			loaderEvent.trigger('compilefail', e, o);
+		}
+	}
+
+	if (factory !== undefined && factory !== null) {
+		o.exports = factory;
+	}
+};
 
 
 // load async module

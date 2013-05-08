@@ -1,6 +1,7 @@
 describe('require', function() {
 
-	var define = loader.require('define'),
+	var loaderEvent = loader.require('loaderEvent'),
+		define = loader.require('define'),
 		require = loader.require('require'),
 		config = {
 			id: 'testrequire',
@@ -25,12 +26,4 @@ describe('require', function() {
 		expect(o).toBe('test.a,test.b');
 	});
 
-	it('require "require"', function() {
-		var config = {
-			require: function() {}
-		};
-
-		expect(require(config, 'require')).toBe(config.require);
-	});
-	
 });

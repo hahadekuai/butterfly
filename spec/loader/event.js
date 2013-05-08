@@ -61,4 +61,19 @@ it('with break', function() {
 	expect(count).toBe(1);
 });
 
+it('with return', function() {
+	var event = new Event('test4');
+	event.on('click', function() {
+		return 1;	
+	});
+	event.on('click', function() {
+		return 3;	
+	})
+	event.on('click', function() {
+	});
+
+	var ret = event.trigger('click');
+	expect(ret).toBe(3);
+});
+
 });

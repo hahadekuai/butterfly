@@ -28,7 +28,7 @@ var define = function(config, id, depends, factory) {
 	}
 
 	config.trigger && config.trigger('define', args);
-	loaderEvent.trigger('define', args);
+	loaderEvent.trigger('define', config, args);
 	
 	return args;
 };

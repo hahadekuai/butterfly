@@ -41,7 +41,7 @@ describe('define', function() {
 		var mod = define(config, ['a', 'b'], function() {});	
 		expect(mod.depends).toEqual(['a', 'b']);
 		expect(mod.anonymous).toBeTruthy();
-		expect(loaderEvent.trigger).wasCalledWith('define', mod);
+		expect(loaderEvent.trigger).wasCalledWith('define', config, mod);
 	});
 
 });

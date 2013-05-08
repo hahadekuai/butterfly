@@ -45,8 +45,11 @@ Event.prototype = {
 		if (list) {
 			var args = [].slice.call(arguments, 1);
 			for (var i = 0, c = list.length; i < c; i++) {
-				ret = list[i].apply(this.target, args);
-				if (ret === false) {
+				var o = list[i].apply(this.target, args);
+				if (o !== undefined && o !== null) {
+					ret = o;
+				}
+				if (o === false) {
 					break;
 				}
 			}
