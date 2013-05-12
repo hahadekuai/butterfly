@@ -46,7 +46,7 @@ var util = {
 			fn = o[name];
 			n = 2;
 		}
-		params = [].slice.call(arguments, n);
+		params = arguments.length > n ? [].slice.call(arguments, n) : [];
 
 		return function() {
 			var args = arguments;

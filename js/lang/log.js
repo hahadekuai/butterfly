@@ -3,9 +3,9 @@
  *
  * @author qijun.weiqj
  */
-define('lang.Log', ['loader', 'jQuery', 'lang.Class'], 
+define('lang.Log', ['loader', 'jQuery'], 
 
-function(loader, $, Class) {
+function(loader, $) {
 
 var Log = loader.require('log');
 

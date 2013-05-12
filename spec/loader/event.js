@@ -76,4 +76,39 @@ it('with return', function() {
 	expect(ret).toBe(3);
 });
 
+it('can use namespace', function() {
+	var event = new Event('namespace');
+	var count = 0;
+	event.on('click.a', function() {
+		count++;
+	});
+
+	event.on('click.b', function() {
+		count += 2;	
+	});
+
+	expect(count).toBe(0);
+	event.trigger('click');
+	expect(count).toBe(3);
+
+	event.trigger('click.a')
+	expect(count).toBe(4);
+
+	event.trigger('click.b')
+	expect(count).toBe(6);
+
+	event.trigger('click')
+	expect(count).toBe(9);
+
+	event.off('click.b');
+	event.trigger('click');
+	expect(count).toBe(10);
+	event.trigger('click.b');
+	expect(count).toBe(10);
+
+	event.off('click');
+	event.trigger('click');
+	expect(count).toBe(10);
+});
+
 });
