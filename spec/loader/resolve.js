@@ -8,7 +8,7 @@ describe('resolve', function() {
 			path: {
 				'vendor': 'vendor/js',
 				'test': '/test/js',
-				'abc': './abc'
+				'abc': '/abc'
 			}
 		};
 
@@ -16,14 +16,12 @@ describe('resolve', function() {
 		expect(resolve(config, 'vendor.Jasmine')).toBe('http://www.demo.com/js/vendor/js/jasmine.js');
 
 		expect(resolve(config, 'test.ui.Tabs')).toBe('/test/js/ui/tabs.js');
-		expect(resolve(config, 'abc.ui.Tabs')).toBe('./abc/ui/tabs.js');
+		expect(resolve(config, 'abc.ui.Tabs')).toBe('/abc/ui/tabs.js');
 
 		expect(resolve(config, 'a/b/c')).toBe('http://www.demo.com/js/a/b/c.js');
 		expect(resolve(config, 'a/b/c.js')).toBe('http://www.demo.com/js/a/b/c.js');
 
 		expect(resolve(config, '/abc.js')).toBe('/abc.js');
-		expect(resolve(config, './abc.js')).toBe('./abc.js');
-		expect(resolve(config, '../abc.js')).toBe('../abc.js');
 		expect(resolve(config, 'abc.js')).toBe('http://www.demo.com/js/abc.js');
 		expect(resolve(config, 'http://demo.js')).toBe('http://demo.js');
 	});

@@ -8,7 +8,7 @@ butterfly.config({
 
 
 define('!doc.Main', ['require', 'jQuery', 'Log',
-		'/vendor/marked.js', '/vendor/mustache.js'], 
+		'../vendor/marked.js', '../vendor/mustache.js'], 
 		
 function(require, $, Log) {
 

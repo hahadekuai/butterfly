@@ -1,5 +1,5 @@
 define('doc.page.Doc', 
-		['jQuery', 'ui.Autowire', 'doc.page.NavData'], 
+		['jQuery', 'context.Autowire', 'doc.page.NavData'], 
 		function($, Autowire, NavData) {
 
 return {

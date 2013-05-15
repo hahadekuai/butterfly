@@ -45,11 +45,12 @@ var globaldefine = function(id) {
 	});
 };
 
-var rAbs = /^(?:(?:\w+:\/\/)|(?:[.\/]))/,
-	rFile = /\.(js|css)(\?|$)/;
+
+// absolute path | relative path | js/css file
+var rPath = /(^\w*:\/\/)|(^[.\/])|(\.(js|css)(\?|$))/;
 
 var postLoadScript = function(config, mod, options) {
-	if (rAbs.test(options.id) || rFile.test(options.id)) {
+	if (rPath.test(options.id)) {
 		return;
 	}
 

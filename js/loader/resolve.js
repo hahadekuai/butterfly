@@ -3,9 +3,8 @@
  */
 define('resolve', function() {
 
-var rAbs = /^(?:(?:\w+:\/\/)|(?:[.\/]))/,
-	rFile = /\.(js|css)(\?|$)/,
-	rSlash = /\/$/;
+var rAbs = /(^\w*:\/\/)|(^[.\/])/,
+	rFile = /\.(js|css)(\?|$)/;
 
 var resolve = function(config, id) {
 	if (rAbs.test(id)) {
