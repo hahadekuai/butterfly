@@ -12,7 +12,7 @@ var stack = [];
 
 util.extend(Config, {
 	push: function(name) {
-		log.info('push loader to stack:', name);
+		log.debug('push loader to stack:', name);
 		var config = module.cache[name];
 		assert(config, 'config for ' + name + ' is not exist');
 		stack.push(config);
@@ -20,7 +20,7 @@ util.extend(Config, {
 	},
 
 	pop: function() {
-		log.info('pop');
+		log.debug('pop');
 		assert(stack.length > 0, 'empty config stack');
 		var o = stack.pop();
 		return o.facade;
@@ -58,7 +58,7 @@ var postLoadScript = function(config, mod, options) {
 
 	// fix async anonymous module
 	if (mod.anonymous) {
-		log.info('fix anonymous module id for ', namespace, ':', options.id);
+		log.debug('fix anonymous module id for ', namespace, ':', options.id);
 		delete config.modules[mod.id];
 		mod.id = options.id;
 		config.modules[mod.id] = mod;
@@ -68,7 +68,7 @@ var postLoadScript = function(config, mod, options) {
 		return;
 	}
 
-	log.info('fix module namespace for ', namespace, ':', mod.id);
+	log.debug('fix module namespace for ', namespace, ':', mod.id);
 	mod.namespace = namespace;
 	module.cache[namespace].modules[mod.id] = mod;
 	delete config.modules[mod.id];

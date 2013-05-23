@@ -36,9 +36,9 @@ util.extend(config, {
 			o = cache[id];
 
 		if (o) {
-			log.info('config loader', id);
+			log.debug('config loader', id);
 		} else {
-			log.info('config new loader', id);
+			log.debug('config new loader', id);
 			o = cache[id] = this._create(id);
 		}
 

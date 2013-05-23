@@ -12,7 +12,7 @@ var Event = function(name, target) {
 
 Event.prototype = {
 	on: function(type, fn) {
-		this._log.info('on', type);
+		this._log.debug('on', type);
 
 		var o = this._param(type),
 			list = this._cache[o.type];
@@ -29,7 +29,7 @@ Event.prototype = {
 	},
 
 	off: function(type, fn) {
-		this._log.info('off', type);
+		this._log.debug('off', type);
 
 		var o = this._param(type),
 			list = this._cache[o.type];
@@ -53,7 +53,7 @@ Event.prototype = {
 	},
 
 	trigger: function(type) {
-		this._log.info('trigger', type);
+		this._log.debug('trigger', type);
 
 		var o = this._param(type),
 			list = this._cache[o.type];

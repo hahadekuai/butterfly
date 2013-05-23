@@ -38,7 +38,7 @@ var postLoadScript = null,
 	interactiveScript = null;
 
 request.script = function(url, options) {
-	log.info('request script:', url);
+	log.debug('request script:', url);
 
 	var node = doc.createElement('script');
 
@@ -63,7 +63,7 @@ var onLoadScript = function(url, node, options) {
 		event = event || window.event;
 		if (event.type === 'load' || rReadyStates.test(node.readyState)) {
 			postLoadScript && postLoadScript(options);
-			log.info('request script success:', url);
+			log.debug('request script success:', url);
 			options.success();
 		} else {
 			log.warn('request script error:', url);
@@ -121,7 +121,7 @@ var getCurrentScript = function() {
 
 // request css
 request.css = function(url, options) {
-	log.info('request css:', url);
+	log.debug('request css:', url);
 
 	var node = doc.createElement('link');
 
@@ -132,10 +132,10 @@ request.css = function(url, options) {
 	}
 
 	if (isOldWebKit || !('onload' in node)) {
-		log.info('request css use image proxy');
+		log.debug('request css use image proxy');
 		var img = doc.createElement('img');
 		img.onerror = function() {
-			log.info('request css success with image proxy:', url);
+			log.debug('request css success with image proxy:', url);
 			options.success();
 			img.onerror = null;
 			img = undefined;
@@ -144,7 +144,7 @@ request.css = function(url, options) {
 	} else {
 		node.onload = node.onreadystatechange = node.onerror = function() {
 			if (rReadyStates.test(node.readyState)) {
-				log.info('request css success:', url);
+				log.debug('request css success:', url);
 				options.success();
 			} else {
 				log.warn('request css error:', url);

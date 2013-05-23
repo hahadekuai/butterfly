@@ -86,7 +86,7 @@ var loadModuleFromDef = function(config, o, options) {
 
 	if (o.load) {
 		o.load++;
-		log.info(longId, 'is loaded [', o.load , ']');
+		log.debug(longId, 'is loaded [', o.load , ']');
 		options.success(o.exports);
 		return;
 	}
@@ -102,7 +102,7 @@ var loadModuleFromDef = function(config, o, options) {
 	var depends = o.depends || [];
 	require(config, depends, function() {
 		compile(config, o, arguments);
-		log.info(longId, 'is loaded');
+		log.debug(longId, 'is loaded');
 
 		var loadList = o.loadList;
 		for (var i = 0, c = loadList.length; i < c; i++) {
@@ -128,7 +128,7 @@ var compile = function(config, o, args) {
 			}
 		}
 		try {
-			log.info('compile', module.getId(config, o.id));
+			log.debug('compile', module.getId(config, o.id));
 			factory = factory.apply(o, args);
 		} catch (e) {
 			log.error(e);
@@ -163,7 +163,7 @@ var loadModuleFromScript = function(config, id, options) {
 		return;
 	}
 
-	log.info('load module', longId, ' from:', path);
+	log.debug('load module', longId, ' from:', path);
 	request.module(path, {
 		namespace: config.id,
 		id: id,

@@ -23,7 +23,7 @@ var define = function(config, id, depends, factory) {
 		log.warn(module.getId(config, id), ' already defined, ignore it');
 		return;
 	} else {
-		log.info('define module:', module.getId(config, id));
+		log.debug('define module:', module.getId(config, id));
 		mods[id] = args;
 	}
 
