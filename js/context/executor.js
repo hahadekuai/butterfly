@@ -57,19 +57,16 @@ return new Class({
 		};
 
 		var left = function(text, width) {
-			text = '' + (text || '');
 			return text + times(' ', width - text.length);
 		};
 
 		var center = function(text, width) {
-			text = '' + (text || '') ;
 			width = width - text.length;
 			var w = Math.round(width / 2);
 			return times(' ', w) + text + times(' ', width - w);
 		};
 
 		var right = function(text, width) {
-			text = '' + (text || '') ;
 			return times(' ', width - text.length) + text;
 		};
 		
@@ -85,7 +82,8 @@ return new Class({
 		line(times('=', 104));
 
 		$.each(stamps, function(index, stamp) {
-			line(times(' ', 1), left(stamp.name, 60), '|', center(stamp.time, 20), '|', right(stamp.cost, 20), times(' ', 1));
+			var cost = stamp.cost !== undefined ? '' + stamp.cost : '';
+			line(times(' ', 1), left(stamp.name, 60), '|', center('' + stamp.time, 20), '|', right(cost, 20), times(' ', 1));
 			line(times('-', 104));
 		});
 

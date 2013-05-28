@@ -53,7 +53,10 @@ var App = Class({
 				self.modContext && self.modContext.start();
 				self._startAutowire();
 			});
-			self.timestamp('ready');
+
+			self.event.setLazy(false);
+			self.timestamp('start');
+
 			self._report();
 		});
 	},
@@ -92,6 +95,7 @@ var App = Class({
 	_initEvent: function() {
 		var event = this.event = new Event(this);
 		event.mixto(this);
+		event.setLazy(true);
 
 		this.loader.define(this.namespace + '.core.Event', function() {
 			return event;

@@ -10,18 +10,39 @@ var util = loader.require('util'),
 
 var Event = function(target) {
 	this.event = new cEvent(target);
-	this._delegate();
+	this.lazyList = [];
+
+	this.off = util.proxy(this.event, 'off');
 };
+
 Event.prototype = {
-	_delegate: function() {
-		var self = this,
-			event = this.event;
-		util.each(['on', 'off', 'trigger'], function(index, name) {
-			self[name] = function(type) {
-				log.info(name, type);
-				return event[name].apply(event, arguments);
-			};
+
+	on: function(type, fn) {
+		log.info('on', type);
+
+		var self = this;
+		this.event.on.apply(this.event, arguments);
+		this.lazy && util.each(this.lazyList, function(index, item) {
+			if (item.type === type) {
+				log.info('lazy trigger: ', type);
+				fn.apply(self.event.target, item.args);
+			}
 		});
+	},
+
+	trigger: function(type) {
+		log.info('trigger', type);
+		this.lazy && this.lazyList.push({
+			type: type,
+			args: arguments
+		});
+
+		return this.event.trigger.apply(this.event, arguments);
+	},
+
+	off: function(type) {
+		log.info('off', type);
+		return this.event.off.apply(this.event, arguments);
 	},
 
 	one: function(type, fn) {
@@ -46,9 +67,11 @@ Event.prototype = {
 		this.event.target = target;
 	},
 
-	setDelay: function(delay) {
-		
+	setLazy: function(lazy) {
+		this.lazyList.length = 0;
+		this.lazy = lazy;
 	}
+
 };
 
 return Event;

@@ -17,7 +17,7 @@ it('event', function() {
 it('mixto', function() {
 	var o = { };
 
-	new Event('test').mixto(o);
+	new Event().mixto(o);
 	
 	var f = 0;
 	o.on('open', function(data) {
@@ -27,6 +27,27 @@ it('mixto', function() {
 	expect(f).toBe(123);
 });
 
+it('lazy event', function() {
+	var event = new Event();	
+	event.setLazy(true);
+
+	var count = 0;
+	event.on('click', function() {
+		count++;	
+	});
+
+	event.trigger('click');
+	event.trigger('click');
+	expect(count).toBe(2);
+
+	event.on('click', function() {
+		count++;	
+	});
+
+	expect(count).toBe(4);
+
+	event.setLazy(false);
+});
 
 });
 

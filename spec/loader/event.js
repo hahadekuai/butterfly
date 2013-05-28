@@ -3,7 +3,7 @@ describe('event', function() {
 var Event = loader.require('event');
 
 it('event', function() {
-	var event = new Event('test');
+	var event = new Event();
 
 	var list = [];
 	event.on('click', function(data) {
@@ -31,7 +31,7 @@ it('event', function() {
 });
 
 it('trigger with mutiple param', function() {
-	var event = new Event('test2'),
+	var event = new Event(),
 		called = false;
 
 	event.on('click', function(a, b, c, d) {
@@ -48,7 +48,7 @@ it('trigger with mutiple param', function() {
 });
 
 it('with break', function() {
-	var event = new Event('test3');
+	var event = new Event();
 	var count = 0;
 	event.on('click', function() {
 		count++;	
@@ -62,7 +62,7 @@ it('with break', function() {
 });
 
 it('with return', function() {
-	var event = new Event('test4');
+	var event = new Event();
 	event.on('click', function() {
 		return 1;	
 	});
@@ -76,8 +76,16 @@ it('with return', function() {
 	expect(ret).toBe(3);
 });
 
+it('different target', function() {
+	var event = new Event({ name: 'hello' });	
+	event.on('click', function() {
+		expect(this.name).toBe('hello');
+	});
+	event.trigger('click');
+});
+
 it('can use namespace', function() {
-	var event = new Event('namespace');
+	var event = new Event();
 	var count = 0;
 	event.on('click.a', function() {
 		count++;

@@ -30,7 +30,7 @@ var ModContext = function(id, config) {
 	event.mixto(context);
 
 	context.callModMethod = function(mod, method, args) {
-		var o = mod.data('modContext');
+		var o = $(mod).data('modContext');
 		if (o) {
 			log.info('call mod method: ' + o.name + '.' + method);
 			return o.context[method].apply(o.context, args || []);
@@ -68,7 +68,7 @@ var Attach = new Class({
 		});
 
 		queryMods().each(function() {
-			event.trigger('mod-ready', $(this));
+			context.attach($(this), 'default');
 		});
 
 		event.trigger('mod-all-ready');

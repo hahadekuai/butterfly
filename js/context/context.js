@@ -155,7 +155,7 @@ var Context = Class({
 		var self = this,
 			attach = this._attachment;
 
-		this._log.info('bind module for ' + name + '[' + o.type + ']');
+		this._log.info('bind ' + name + '[' + o.type + ']');
 		attach.bind(node, name, o.type, o.module, options);
 		o.times++;
 	},
