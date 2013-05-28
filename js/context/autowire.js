@@ -7,27 +7,30 @@ define('context.Autowire', ['loader', 'jQuery', 'Class', 'Log'],
 
 function(loader, $, Class, Log) {
 
-var Config = loader.require('config'),
-	log = new Log('context.Autowire');
-
+var log = new Log('context.Autowire');
 
 var Autowire = new Class({
 	
+	/**
+	 * @param options
+	 *	- loader
+	 *	- executor
+	 */
 	init: function(div, options) {
 		div = $(div);
 		options = options || {};
 
 		if (!div.length) {
-			log.warn('please specify parent element for autowire');
+			log.error('please specify parent element for autowire');
 			return;
 		}
-
-		this.loader = Config.get(options.loader);
-		if (!this.loader) {
-			log.error('invalid loader: ' + options.loader);
+		
+		if (!options.loader) {
+			log.error('please specify loader for autowire');
 			return;
 		}
-
+		
+		this.loader = options.loader;
 		this.executor = options.executor;
 
 		var self = this,
@@ -69,11 +72,11 @@ var Autowire = new Class({
 				} else if (config.method && o[method]) {
 					o[method](elm, config);
 				} else {
-					log.warn('invalid module for autowire: ' + type);
+					log.error('invalid module for autowire: ' + type);
 				}
 			};
 
-			self.executor ? self.executor.execute(fn) : fn();
+			self.executor ? self.executor.execute(type, fn) : fn();
 		});
 	}
 	

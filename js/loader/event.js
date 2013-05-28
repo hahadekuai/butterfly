@@ -3,16 +3,16 @@
  */
 define('event', ['util', 'log'], function(util, Log) {
 
-var Event = function(name, target) {
-	this.name = name || '';
+var log = new Log('event');
+
+var Event = function(target) {
 	this.target = target;
-	this._log = new Log('event:' + (name ? ' ' + name : ''));
 	this._cache = {};
 };
 
 Event.prototype = {
 	on: function(type, fn) {
-		this._log.debug('on', type);
+		log.debug('on', type);
 
 		var o = this._param(type),
 			list = this._cache[o.type];
@@ -29,7 +29,7 @@ Event.prototype = {
 	},
 
 	off: function(type, fn) {
-		this._log.debug('off', type);
+		log.debug('off', type);
 
 		var o = this._param(type),
 			list = this._cache[o.type];
@@ -53,7 +53,7 @@ Event.prototype = {
 	},
 
 	trigger: function(type) {
-		this._log.debug('trigger', type);
+		log.debug('trigger', type);
 
 		var o = this._param(type),
 			list = this._cache[o.type];
@@ -100,6 +100,6 @@ return Event;
 //~event
 
 define('loaderEvent', ['event'], function(Event) {
-	return new Event('loader');
+	return new Event();
 });
 

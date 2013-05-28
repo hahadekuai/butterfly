@@ -1,38 +1,37 @@
 /**
- * 基于事件机制管理一组模块
- *
+ * 管理一组与节点相关的模块
  * @author qijun.weiqj
  */
-define('context.Context', ['loader', 'jQuery', 'Class', 'Log'], 
+define('context.Context', ['jQuery', 'Class', 'Log'], 
 
-function(loader, $, Class, Log) {
+function($, Class, Log) {
 
-var Config = loader.require('config');
-
-var Context = new Class({
+var Context = Class({
 
 	/**
-	 * @param {string} name  context name
+	 * @param {string} id context id
 	 * @param {object} attachment
-	 *  - loader {string} for auto register to require module
+	 *  - loader for auto register
 	 *  - moduleFilter {package|regexp|function} for auto register to filter module
 	 *
 	 *	- before(context) -> {boolean}
-	 *	- query(name, event) -> node
-	 *	- bind(node, event, module, [options])
+	 *	- query(name, type) -> node
+	 *	- bind(node, type, module, [options])
 	 *	- resolve(node) -> name
 	 */
-	init: function(name, attachment) {
-		this.name = name;
+	init: function(id, attachment) {
+		this.id = id;
 		
-		this._log = new Log('context: ' + name);
+		this._log = new Log(id);
+		this._log.info('init');
+
 		this._attachment = attachment;
 
 		/*
 		 * [
 		 *		{
 		 *			name: name,
-		 *			events: {
+		 *			types: {
 		 *				'default': module,
 		 *				'exposure': module
 		 *			}
@@ -43,7 +42,7 @@ var Context = new Class({
 		this._modules = [];
 		this._indices = {};
 
-		this._handle();
+		this._autoRegister();
 	},
 
 	/**
@@ -57,39 +56,40 @@ var Context = new Class({
 	 * 添加模块到容器
 	 *
 	 * @param {string} name 名称
-     * @param {string} event 事件
+     * @param {string} type 类型
 	 * @param {function|object} 模块
 	 */
-	add: function(name, event, module) {
+	add: function(name, type, module) {
 		// add(name, module)
 		if (!module) {
-			module = event;
-			event = 'default';
+			module = type;
+			type = 'default';
 		}
 
 		var item = this._get(name);
 		if (!item) {
 			this._indices[name] = this._modules.length;
-			item = { name: name, events: {} };
+			item = { name: name, types: {} };
 			this._modules.push(item);
 		}
 		
-		if (item.events[event]) {
-			this._log.warn(name + '['+ event + '] is already added');
+		if (item.types[type]) {
+			this._log.warn(name + '['+ type + '] is already added');
 			return;
 		} 
 
-		item.events[event] = {
-			event: event,
+		item.types[type] = {
+			name: name,
+			type: type,
 			module: module,
 			times: 0
 		};
 
-		this._log.info(name + '['+ event + '] is added');
+		this._log.info(name + '['+ type + '] is added');
 		
 		// 如果context已start, 则直接进行start该模块
 		// 比如domready之后注册模块的情况
-		this._started && this._start(name, item.events[event]);
+		this._started && this._start(name, item.types[type]);
 	},
 
 	/**
@@ -98,9 +98,9 @@ var Context = new Class({
 	 *	attachment.before -> not false
 	 *
 	 *		foreach module in context
-	 *			foreach event in item
-	 *				node = attachment.query(name, event)
-	 *				attachment.bind(node, event, module)
+	 *			foreach type in item
+	 *				node = attachment.query(name, type)
+	 *				attachment.bind(node, type, module)
 	 *
 	 *	attachment.after
 	 */
@@ -111,13 +111,12 @@ var Context = new Class({
 		this._log.info('starting...');
 			
 		if (attach.before && attach.before(this) === false) {
-			this._log.info('before return false, break start');
 			this._started = true;
 			return;
 		}
 
 		$.each(this._modules, function(i, item) {
-			$.each(item.events, function(event, o) {
+			$.each(item.types, function(type, o) {
 				self._start(item.name, o);
 			});
 		});
@@ -128,21 +127,21 @@ var Context = new Class({
 
 	/**
 	 * 绑定节点和模块
-	 * 根据名称查询节点，再进行事件绑定
+	 * 根据名称查询节点，再进行绑定
 	 *
 	 * @param {string} name 名称
 	 * @o {object}
-	 *	- event
+	 *	- type
 	 *	- module
 	 *	- times
 	 */
 	_start: function(name, o) {
 		var self = this,
 			attach = this._attachment,
-			node = attach.query ? attach.query(name, o.event) : name;
+			node = attach.query ? attach.query(name, o.type) : name;
 
 		if (!node) {
-			this._log.info('no node query for context ' + name + '[' + o.event + ']');
+			this._log.info('no node query for context ' + name + '[' + o.type + ']');
 			return;
 		}
 
@@ -156,27 +155,27 @@ var Context = new Class({
 		var self = this,
 			attach = this._attachment;
 
-		this._log.info('bind event for ' + name + '[' + o.event + ']');
-		attach.bind(node, o.event, o.module, options);
+		this._log.info('bind module for ' + name + '[' + o.type + ']');
+		attach.bind(node, name, o.type, o.module, options);
 		o.times++;
 	},
 
 	/**
-	 * 将node与模块关联, 即绑定事件到node
+	 * 将node与模块关联
 	 * @param node 节点, 可以是抽像的节点, 一般为dom节点或jquery对象
-	 * @param type 事件, 默认为default
+	 * @param type 类型, 默认为default
 	 * @param options 可选的额外数据, 可以由attachment在bind方法实现中使用
 	 */
-	attach: function(node, event, options) {
-		if (arguments.length === 2 && typeof event !== 'string') {
-			options = event;
-			event = null;
+	attach: function(node, type, options) {
+		if (arguments.length === 2 && typeof type !== 'string') {
+			options = type;
+			type = null;
 		}
-		event = event || 'default';
+		type = type || 'default';
 
 		var attach = this._attachment,
 			name = attach.resolve ? attach.resolve(node) : node,
-			o = name ? this._get(name, event) : null;
+			o = name ? this._get(name, type) : null;
 
 		if (o) {
 			this._bind(name, node, o, options);
@@ -190,9 +189,9 @@ var Context = new Class({
 	/**
 	 * 取得指定名称和事件的模块
 	 * @param {string} name  模块名称
-	 * @param {string} event 事件名称, 默认为default
+	 * @param {string} type 类型名称, 默认为default
 	 */
-	_get: function(name, event) {
+	_get: function(name, type) {
 		var index = this._indices[name],
 			item = null;
 
@@ -201,36 +200,32 @@ var Context = new Class({
 		}
 
 		item = this._modules[index];
-		return event ? item.events[event] : item;
+		return type ? item.types[type] : item;
 	},
 
 	/**
 	 * 取得指定名称和事件的模块
 	 * @see _get
 	 */
-	get: function(name, event) {
-		var o = this._get(name, event || 'default');
+	get: function(name, type) {
+		var o = this._get(name, type || 'default');
 		return o ? o.module : null;
 	},
 
 	/**
 	 * auto register module to context
 	 */
-	_handle: function() {
+	_autoRegister: function() {
 		var self = this,
 			attach = this._attachment,
+			loader = attach.loader,
 			filter = attach.moduleFilter;
 
-		if (!filter) {
+		if (!loader || !filter) {
 			return;
 		}
 
-		var loader = Config.get(attach.loader);
-		if (!loader) {
-			log.error('invalid loader: ', attach.loader);
-			return;
-		}
-
+		this._log.info('init auto register');
 		loader.on('define', function(module) {
 			if (self._match(filter, module.id)) {
 				loader.require([module.id], function(o) {

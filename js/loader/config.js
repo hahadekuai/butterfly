@@ -72,7 +72,7 @@ util.extend(config, {
 			}
 		};
 		
-		var event = new Event('config/' + id);
+		var event = new Event();
 		o.on = util.proxy(event, 'on');
 		o.off = util.proxy(event, 'off');
 		o.trigger = util.proxy(event, 'trigger');

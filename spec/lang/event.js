@@ -3,7 +3,7 @@ define('spec.lang.Event', ['lang.Event'], function(Event) {
 describe(this.id, function() {
 
 it('event', function() {
-	var event = new Event('test');
+	var event = new Event();
 
 	var times = 0;
 	event.one('user', function() {
@@ -14,10 +14,10 @@ it('event', function() {
 	expect(times).toBe(1);
 });
 
-it('mixin', function() {
+it('mixto', function() {
 	var o = { };
 
-	Event.mixin(o);
+	new Event('test').mixto(o);
 	
 	var f = 0;
 	o.on('open', function(data) {
