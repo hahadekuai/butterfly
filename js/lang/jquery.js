@@ -8,8 +8,7 @@ define('jQuery', ['loader'], function(loader) {
 
 var log = loader.require('log');
 
-if (log.isEnabled('debug')) {
-
+if (log.isEnabled('info')) {
 	jQuery.fn.toString = function() {
 		var html = [];
 		this.each(function() {
@@ -29,9 +28,12 @@ if (log.isEnabled('debug')) {
 			html.push(s.join(''));
 		});
 
-		return '[' + html.join(', ') + ']';
+		return html.join(', ');
 	};
+}
+//~
 
+if (log.isEnabled('debug')) {
 	var orijQuery = jQuery,
 		warn = console && console.warn ? 
 				orijQuery.proxy(console, 'warn') : orijQuery.noop;
@@ -57,12 +59,12 @@ if (log.isEnabled('debug')) {
 	};
 	orijQuery.extend(jQuery, orijQuery);
 	jQuery.prototype = orijQuery.prototype;
-
 }
 
 return jQuery;
 
 });
+//~
 
 
 define('jquery', function() {

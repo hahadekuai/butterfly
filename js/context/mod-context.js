@@ -85,14 +85,16 @@ var Attach = new Class({
 		if (!ids) {
 			return null;
 		}
-		
-		var node = $();
-		$.each(ids, function(index, id) {
-			node.add($('#' + id));
-		});
 
 		delete this._cache[name];
-		return node;
+		
+		var nodes = [];
+		$.each(ids, function(index, id) {
+			var node = $('#' + id);
+			node.length && nodes.push(node[0]);
+		});
+
+		return nodes.length ? $(nodes) : null;
 	},
 
 	resolve: function(node) {
@@ -124,16 +126,11 @@ var Attach = new Class({
 	},
 
 	_bind: function(node, name, type, module, params) {
-		var config = this.config;
-		if (config.bind) {
-			return config.bind(node, name, type, module, params);
-		}
-
-		var event = this.context;
+		var config = this.config,
+			event = this.context;
 
 		var fn = function() {
-			var config = node.data('modConfig'),
-				context = null,
+			var context = null,
 				entry = null;
 			
 			if (typeof module === 'function') {
@@ -151,13 +148,13 @@ var Attach = new Class({
 				module: module,
 
 				context: context,
-				config: config,
-				params: params
+				params: params,
+				args: [node, node.data('modConfig'), params]
 			};
 
 			node.data('modContext', o);
 			if (event.trigger('mod-before-init', o) !== false) {
-				o.result = entry.apply(context, [node, config, params]);
+				o.result = entry.apply(context, o.args);
 				event.trigger('mod-inited', o);
 			}
 		};

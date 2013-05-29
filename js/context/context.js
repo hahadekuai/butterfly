@@ -85,7 +85,7 @@ var Context = Class({
 			times: 0
 		};
 
-		this._log.info(name + '['+ type + '] is added');
+		this._log.info(name + ' is added');
 		
 		// 如果context已start, 则直接进行start该模块
 		// 比如domready之后注册模块的情况
@@ -141,7 +141,7 @@ var Context = Class({
 			node = attach.query ? attach.query(name, o.type) : name;
 
 		if (!node) {
-			this._log.info('no node query for context ' + name + '[' + o.type + ']');
+			this._log.info('no node query for context ' + name);
 			return;
 		}
 
@@ -155,7 +155,7 @@ var Context = Class({
 		var self = this,
 			attach = this._attachment;
 
-		this._log.info('bind ' + name + '[' + o.type + ']');
+		this._log.info('bind ' + name);
 		attach.bind(node, name, o.type, o.module, options);
 		o.times++;
 	},
