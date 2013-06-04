@@ -88,10 +88,15 @@ return new Class({
 		});
 
 		var first = stamps[0],
-			last = stamps[stamps.length - 1],
-			total = first && last ? last.time - first.time : 0;
+			last = stamps[stamps.length - 1];
 
-		total && line(right('Total: ' + total + ' ms', 104));
+		if (first && last) {
+			var total = last.time - first.time;
+			if (last.cost) {
+				total += last.cost
+			}
+			line(right('Total: ' + total + ' ms', 104));
+		}
 
 		return lines.join('\n');
 	},
