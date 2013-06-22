@@ -5,7 +5,7 @@
  */
 define('ui.ColorChooser', 
 
-['jQuery', 'Class', 'Log', 'http://wpstatic.china.alibaba.com/css/ui/color-chooser.css'], 
+['jQuery', 'Class', 'Log', 'http://assets.1688.com/css/ui/color-chooser.css'], 
 
 function($, Class, Log) {
 

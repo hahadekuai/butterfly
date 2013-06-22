@@ -44,7 +44,7 @@ request.script = function(url, options) {
 
 	onLoadScript(url, node, options);
 
-	node.async = true;
+	node.async = 'async';
 	node.src = url;
 	if (options.charset) {
 		node.charset = options.charset;
@@ -58,20 +58,23 @@ request.script = function(url, options) {
 };
 
 var onLoadScript = function(url, node, options) {
-	node.onload = node.onerror = 
-	node.onreadystatechange = function(event) {
+	node.onload = node.onreadystatechange = function(event) {
 		event = event || window.event;
 		if (event.type === 'load' || rReadyStates.test(node.readyState)) {
+			node.onload = node.onreadystatechange = node.onerror = null;
+			isDebug || head.removeChild(node);
+			node = undefined;
+
 			postLoadScript && postLoadScript(options);
 			log.debug('request script success:', url);
 			options.success();
-		} else {
-			log.warn('request script error:', url);
-			options.error();
 		}
+	};
+
+	node.onerror = function() {
 		node.onload = node.onreadystatechange = node.onerror = null;
-		isDebug || head.removeChild(node);
 		node = undefined;
+		options.error();
 	};
 };
 

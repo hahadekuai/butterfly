@@ -1,3 +1,4 @@
+/*merge start*/
 (function(){
     ImportJavscript = {
         url:function(url){
@@ -5,6 +6,10 @@
         }
     };
 })();
+/*merge end*/
+/*!!cmd:compress=true*/
+/*!!cmd:conv2unicode=true*/
+/*!!cmd:jsCompressOpt=["--disable-optimizations"]*/
 
 ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/loader/butterfly.js');
 ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/loader/util.js');

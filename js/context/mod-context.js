@@ -149,12 +149,12 @@ var Attach = new Class({
 
 				context: context,
 				params: params,
-				args: [node, node.data('modConfig'), params]
+				config: node.data('modConfig')
 			};
 
 			node.data('modContext', o);
 			if (event.trigger('mod-before-init', o) !== false) {
-				o.result = entry.apply(context, o.args);
+				o.result = entry.apply(context, [o.node, o.config, o.params]);
 				event.trigger('mod-inited', o);
 			}
 		};

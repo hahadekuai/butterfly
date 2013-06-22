@@ -34,7 +34,7 @@ var require = function(config, depends, callback) {
 					check();
 				},
 				error: function() {
-					log.error('load', depend, 'error');
+					log.error('load', id, 'error');
 				}
 			});
 		};
@@ -50,12 +50,14 @@ var require = function(config, depends, callback) {
 
 
 var loadModule = function(config, id, options) {
-	var pos = id.indexOf(':');
-	if (pos !== -1) {
-		// require other namespace module
-		var other = module.cache[id.substr(0, pos)];
-		if (other && other !== config) {
-			return loadModule(other, id.substr(pos + 1), options);
+	if (/\w:\w/.test(id)) {
+		var pos = id.indexOf(':');
+		if (pos !== -1) {
+			// require other namespace module
+			var other = module.cache[id.substr(0, pos)];
+			if (other && other !== config) {
+				return loadModule(other, id.substr(pos + 1), options);
+			}
 		}
 	}
 

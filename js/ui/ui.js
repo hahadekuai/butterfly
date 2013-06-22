@@ -344,8 +344,8 @@ function getDateTime(date) {
  * Í¼Æ¬ÒøĞĞ
  */
 $.add('site-sys-ibank', {
-	css: ['http://style.china.alibaba.com/sys/css/ibank/ibank-min.css'],
-	js: ['http://style.china.alibaba.com/sys/js/ibank/ibank-min.js'],
+	css: ['http://style.c.aliimg.com/sys/css/ibank/ibank-min.css'],
+	js: ['http://style.c.aliimg.com/sys/js/ibank/ibank-min.js'],
 	ver: '1.0'
 });
 

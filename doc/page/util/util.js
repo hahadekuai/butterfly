@@ -3,7 +3,7 @@ define(['jQuery', 'util.Util'], function($, Util) {
 	$('a.formatUrl').on('click',function(e){
 		e.preventDefault();
 
-		var result = Util.formatUrl('http://wpstatic.china.alibaba.com/doc/index.htm',{"a":"b"});
+		var result = Util.formatUrl('http://assets.1688.com/doc/index.htm',{"a":"b"});
 		$('div.formatUrl-result').html(result);
 	});
 

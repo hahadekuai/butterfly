@@ -1,5 +1,5 @@
 /**
- * å»¶è¿Ÿæ¨¡å—åŒ…è£…å™¨
+ * ÑÓ³ÙÄ£¿é°ü×°Æ÷
  */
 define('context.LazyMod', 
 		['require', 'jQuery', 'Log'], 
@@ -8,8 +8,8 @@ define('context.LazyMod',
 var log = new Log('context.LazyMod');
 
 
-// å…ˆå®žçŽ°ä¸€ä¸ªå»¶æ—¶åŠ è½½å™¨, å› ä¸ºè¿™æ˜¯ä¸€ä¸ªéžå¸¸åŸºç¡€çš„æ¨¡å—
-// æ‰€ä»¥ä¸ä¾èµ–äºŽui.LazyInitializer
+// ÏÈÊµÏÖÒ»¸öÑÓÊ±¼ÓÔØÆ÷, ÒòÎªÕâÊÇÒ»¸ö·Ç³£»ù´¡µÄÄ£¿é
+// ËùÒÔ²»ÒÀÀµÓÚui.LazyInitializer
 var win = $(window),
 	lazyList = [],
 	timer = null,
@@ -26,6 +26,8 @@ var lazy = function(div, options) {
 		win.on('scroll resize', function() {
 			timer && clearTimeout(timer);	
 			timer = setTimeout(handle, 100);
+		}).on('initAllLazyMode',function(){
+			initAllLazyMode();
 		});
 		isReady = true;
 		guard();
@@ -56,8 +58,8 @@ var handle = function() {
 	}
 };
 
-// æœ‰æ—¶å€™é¡µé¢æ¯”è¾ƒå¤æ‚
-// æ‰€ä»¥ä½¿ç”¨è¿™ä¸ªä¿è¯èŠ‚ç‚¹å¯ä»¥æ­£å¸¸åˆå§‹åŒ–
+// ÓÐÊ±ºòÒ³Ãæ±È½Ï¸´ÔÓ
+// ËùÒÔÊ¹ÓÃÕâ¸ö±£Ö¤½Úµã¿ÉÒÔÕý³£³õÊ¼»¯
 var guard = function() {
 	var i = 0,
 		fn = function() {
@@ -69,7 +71,26 @@ var guard = function() {
 };
 //~
 
-// è¿”å›žä¸€ä¸ªè¢«åŒ…è£…è¿‡çš„æ¨¡å—
+//È«²¿Ä£¿é¼ÓÔØÊÂ¼þ
+//ÓÃÓÚÐèÒªÌáÇ°³õÊ¼»¯ËùÓÐÀÁ¼ÓÔØÄ£¿éµÄÇé¿ö
+var initAllLazyMode = function(){
+	var	remove = [];
+
+	$.each(lazyList, function(index, item) {
+		var elm = item.element;
+		
+		log.info('lazy init mod for ', elm);
+		item.handler();
+		remove.push(index);
+	});
+
+	for (var i = remove.length - 1; i >=0; i--) {
+		lazyList.splice(remove[i], 1);
+	}
+	win.trigger('initAllLazyModeDone');
+};
+
+// ·µ»ØÒ»¸ö±»°ü×°¹ýµÄÄ£¿é
 return function(target) {
 	var isFunc = typeof target === 'function',
 		entry = isFunc ? target : target.init;

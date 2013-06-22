@@ -24,8 +24,8 @@ var CodeMirrorEditor =  new Class({
 		defer.promise(this);
 
 		var urls = [
-			'http://wpstatic.china.alibaba.com??vendor/codemirror/lib/codemirror.css,vendor/codemirror/lib/codemirror.css,vendor/codemirror/theme/eclipse.css',
-			'http://wpstatic.china.alibaba.com??vendor/codemirror/lib/codemirror.js,vendor/codemirror/mode/css/css.js,vendor/codemirror/mode/javascript/javascript.js,vendor/codemirror/mode/xml/xml.js'
+			'http://assets.1688.com??vendor/codemirror/lib/codemirror.css,vendor/codemirror/lib/codemirror.css,vendor/codemirror/theme/eclipse.css',
+			'http://assets.1688.com??vendor/codemirror/lib/codemirror.js,vendor/codemirror/mode/css/css.js,vendor/codemirror/mode/javascript/javascript.js,vendor/codemirror/mode/xml/xml.js'
 		];
         
 		require(urls, function() {

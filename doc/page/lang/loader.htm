@@ -146,15 +146,15 @@ var site = may.config({
 				.replace(/([a-z])([A-Z])/g, function(s, m1, m2) {
 					return m1 + '-'	+ m2;
 				}).toLowerCase();
-		return 'http://wpstatic.china.alibaba.com/js/module/' + id + '.js';
+		return 'http://assets.1688.com/js/module/' + id + '.js';
 	}
 });
 ~~~
 
 所以
-widget.Tabs将会从 http://wpstatic.china.alibaba.com/js/module/widget/tabs.js载入js模块
+widget.Tabs将会从 http://assets.1688.com/js/module/widget/tabs.js载入js模块
 
-form.editor.ImageList 将会从http://wpstatic.china.alibaba.com/js/module/form/editor/image-list.js载入模块
+form.editor.ImageList 将会从http://assets.1688.com/js/module/form/editor/image-list.js载入模块
 
 
 ## app style资源的异步加载
@@ -179,7 +179,7 @@ define([‘app.topNav.Helper’], function(Helper) {
 ~~~js
 define('widget.ColorChooser', 
 
-    ['jQUery', 'http://wpstatic.china.alibaba.com/css/module/widget/offer-chooser.css'], 
+    ['jQUery', 'http://assets.1688.com/css/module/widget/offer-chooser.css'], 
 
     function($) {
 
@@ -191,7 +191,7 @@ define('widget.ColorChooser',
 以上widget.ColorChooser组件依赖于一个css文件，当使用这个组件时将会自动加载offer-chooser.css
 
 ~~~js
-define(‘widget.HtmlEditor’, [‘http://style.china.alibaba.com/js/....some.js’], function() {
+define(‘widget.HtmlEditor’, [‘http://style.c.aliimg.com/js/....some.js’], function() {
 
 });
 ~~~
