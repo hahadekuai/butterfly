@@ -7,7 +7,7 @@ butterfly专注于前端最佳解决方案，致力于成为前端的spring
 
 它不仅仅是一些js模块，而是希望从多方面最佳地去解决前端开发上的问题，让我们可以快乐高效地开发产品。
 
-它包括四个组成部分
+它从四个方向去解决前端开发上的问题：
 
 1. Framework
 2. DPL
@@ -34,13 +34,13 @@ Framework由许多js模块有机地组合在一起，主要是解决原生js太�
 
 #### 后续计划
 
-1. 后续我们需要引入一种机制，解放和统一具体模块的开发，它是基于事件驱动和视图模型管理(mvvm)。
+1\. 后续我们需要引入一种机制，解放和统一具体模块的开发，它是基于事件驱动和视图模型管理(mvvm)。
 
 具体方案会参考一些优秀的开源框架 AngularJs, batman 及knockout
 
-2. 统一数据模型，规范化接口调用(ajax/event/ascepter)
+2\. 统一数据模型，规范化接口调用(ajax/event/ascepter)
 
-*参考*
+[参考]
 
 [AngularJs](http://angularjs.org/)
 
@@ -61,8 +61,6 @@ DPL致力于提高页面的开发效率和质量，并期望统一页面元素�
 
 目前完成的有: 布局，按扭，分页，对话框，tabs, 表格等
 
-*参考* 
-
 [buuterfly dpl](http://assets.1688.com/doc/index.htm#doc/dpl/index)
 
 
@@ -71,8 +69,6 @@ DPL致力于提高页面的开发效率和质量，并期望统一页面元素�
 目前 butterfly dpl 建设已同全站 dpl建设(fui) 整合，即 fui 会以同样的规范应用于全站
 
 后续会去除butterfly dpl，而直接使用fui来创建页面
-
-*参考* 
 
 [fui](http://wd.alibaba-inc.com/fdevlib/#fdui.com.tab)
 
@@ -91,7 +87,7 @@ DPL致力于提高页面的开发效率和质量，并期望统一页面元素�
 
 不需要关心css书写的一些细节了，因为复杂烦碎的工作只写一次便能重用
 
-*参考*
+[参考]
 
 [less](http://www.lesscss.net/)
 
@@ -197,7 +193,8 @@ radiance和butterfly经过一年的发展，也有一些文档沉淀，但比较
 
 后续我们会先在技术上做好开放javascript的准备。
 
-*参考*
+
+[参考]
 
 [coffeescript.org](http://coffeescript.org/)
 
