@@ -206,5 +206,5 @@ radiance和butterfly经过一年的发展，也有一些文档沉淀，但比较
 
 ![butterfly roadmap](https://raw.github.com/bencode/butterfly/master/doc/img/roadmap20130623.png)
 
-注：点击打开大图
+点击图片可以放大展示
 
