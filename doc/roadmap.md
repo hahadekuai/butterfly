@@ -203,5 +203,5 @@ radiance和butterfly经过一年的发展，也有一些文档沉淀，但比较
 
 ## Roadmap
 
-![butterfly roadmap](img/roadmap20130623.png)
+![butterfly roadmap](https://raw.github.com/bencode/butterfly/master/doc/img/roadmap20130623.png)
 
