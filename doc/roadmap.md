@@ -26,13 +26,13 @@ Framework由许多js模块有机地组合在一起，主要是解决原生js太�
 4. 丰富的UI组件和效果库组件
 5. radiance app开发扩展
 
-### 目前现状
+#### 目前现状
 
 1. 模块规范化，效果库组件 等方面都已成型。
 2. 页面组件化随着offer发布页改造的发布，也已完成。
 3. radiance app开发的扩展也已在基于radiance的多个站点使用。
 
-## 后续计划
+#### 后续计划
 
 1. 后续我们需要引入一种机制，解放和统一具体模块的开发，它是基于事件驱动和视图模型管理(mvvm)。
 
@@ -53,7 +53,7 @@ Framework由许多js模块有机地组合在一起，主要是解决原生js太�
 
 DPL致力于提高页面的开发效率和质量，并期望统一页面元素的视觉和交互，最终达到快速搭建页面的目的。
 
-### 目前现状
+#### 目前现状
 
 目前我们主要完成了两个方面
 
@@ -77,7 +77,7 @@ DPL致力于提高页面的开发效率和质量，并期望统一页面元素�
 [fui](http://wd.alibaba-inc.com/fdevlib/#fdui.com.tab)
 
 
-### 后续计划
+#### 后续计划
 
 引入less，以支持可参数化的动态DPL，创建高复用的ui组件
 
@@ -144,7 +144,7 @@ fdserver是基于nodejs connect模块以中间件的方式开发的，所以很�
 
 ## 文档 (butterfly-doc)
 
-目的是：打造butterfly的官网站点
+#### 目前状况
 
 radiance和butterfly经过一年的发展，也有一些文档沉淀，但比较分散
 
@@ -153,23 +153,25 @@ radiance和butterfly经过一年的发展，也有一些文档沉淀，但比较
 1. [radiance &amp; app开发文档](http://doc.site.alibaba-inc.com)
 2. [butterfly api](http://assets.1688.com)
 
-另外：
+#### 后续计划
+
+建立buttefly的官方站点 butterfly-doc
+
+原因：
 
 1. butterfly目前没在线宣传站点
 2. 计划添加“开发字典”，以沉淀非组件形式的“软经验“。如规范，一类问题的最佳解决方案等。
 3. 希望整合所有文档，并且让文档也成为一种产品，以解决文档和代码脱离的问题。
 
-这就是发起butterfly-doc项目的原因。
-
 *项目地址:*
 
 [https://github.com/bencode/butterfly-doc](https://github.com/bencode/butterfly-doc)
 
-### 技术基础
+#### 技术基础
 1. 基于nodejs，以express为基础框架，搭建web应用
 2. 以git作为持久化存储，天然具有多版本功能
 
-### 功能
+#### 功能
 1. butterfly api浏览及更改
 2. demo和在线示例的创建
 3. radiance &amp; app开发文档的浏览和更改
