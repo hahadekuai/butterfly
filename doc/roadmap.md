@@ -106,14 +106,14 @@ DPL致力于提高页面的开发效率和质量，并期望统一页面元素�
 
 fdserver是基于nodejs connect模块以中间件的方式开发的，所以很容易扩展。
 
-### 目前状况
+#### 目前状况
 
 可以看在线项目介绍
 
 [https://github.com/fangdeng/fdserver](https://github.com/fangdeng/fdserver)
 
 
-### 后续计划
+#### 后续计划
 
 1. fdlint的扫描。用于在开发时实时检测代码是否符合规划，找出潜在问题。
 2. app创建等快捷支持
