@@ -34,7 +34,7 @@ Framework由许多js模块有机地组合在一起，主要是解决原生js太�
 
 #### 后续计划
 
-1\. 后续我们需要引入一种机制，解放和统一具体模块的开发，它是基于事件驱动和视图模型管理(mvvm)。
+1\. 后续我们需要引入一种机制，解放和统一具体模块的开发，它是基于事件驱动和视图模型管理[mvvm](http://en.wikipedia.org/wiki/Model_View_ViewModel)。
 
 具体方案会参考一些优秀的开源框架 AngularJs, batman 及knockout
 
@@ -48,6 +48,7 @@ Framework由许多js模块有机地组合在一起，主要是解决原生js太�
 
 [knockout](http://knockoutjs.com/)
 
+[mvvm](http://en.wikipedia.org/wiki/Model_View_ViewModel)
 
 ## DPL
 
