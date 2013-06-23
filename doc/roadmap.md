@@ -174,14 +174,15 @@ radiance和butterfly经过一年的发展，也有一些文档沉淀，但比较
 
 在具体版本演化过程中，以下新技术也会被考虑
 
-### Coffeescript及开放javascript
+### Coffeescript
 
-1\. 团队开发更需要使用javascript的good part，而避开一些陷阱
+团队开发更需要使用javascript的good part，而避开一些陷阱
 
 因此会在发布系统完善后，引入coffeescript来支持更爽的javascript开发
 
+### 开放javascript
 
-2\. 由于业务和技术上还不够成熟的原因，目前尚未对设计师开放javascript，
+由于业务和技术上还不够成熟的原因，目前尚未对设计师开放javascript，
 
 我们的autowire功能让设计师也可以很好地使用动态组件，这从一定程度上缓解了这种需求。
 
