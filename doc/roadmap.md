@@ -7,12 +7,15 @@ butterfly专注于前端最佳解决方案，致力于成为前端的spring
 
 它不仅仅是一些js模块，而是希望从多方面最佳地去解决前端开发上的问题，让我们可以快乐高效地开发产品。
 
-它从四个方向去解决前端开发上的问题：
+![butterfly结构图](https://raw.github.com/bencode/butterfly/master/doc/img/struct20130623.png)
+
+如上图所示，它主要从四个方向去解决前端开发上的问题：
 
 1. Framework
 2. DPL
-2. 工具和环境
-3. 文档库
+3. 工具和环境
+4. 文档库
+
 
 ## Framework
 
