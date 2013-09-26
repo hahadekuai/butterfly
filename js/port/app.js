@@ -20,3 +20,5 @@ ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/context/mod-cont
 ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/context/lazy-mod.js');
 ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/context/autowire.js');
 ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/context/application.js');
+
+ImportJavscript.url('http://style.c.aliimg.com/app/butterfly/js/part/fdsafe.js');

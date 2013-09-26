@@ -1,12 +1,4 @@
-Butterfly
-=========
-
-## 简介
-
-butterfly专注于前端最佳解决方案
-
-
-## butterfly-1.1.0
+## butterfly-1.1.0 [开发中]
 
 ### 框架优化
 1. 去除核心逻辑的fdev4依赖
@@ -14,7 +6,6 @@ butterfly专注于前端最佳解决方案
 3. 提供国际化支持, 框架级文案可以自定义
 
 ### 新增模块
-
 #### ui组件
 1. AlphaPng      解决png24在ie6下透明
 2. InlineEditor  即时编辑

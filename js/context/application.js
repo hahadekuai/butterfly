@@ -25,6 +25,7 @@ var App = Class({
 	 * - modContext
 	 *		- @see context.ModContext
 	 * - exportModule µ¼³öÄ£¿é
+	 * - error
 	 */
 	init: function(options) {
 		options = options || {};
@@ -115,9 +116,14 @@ var App = Class({
 	_error: function(e) {
 		if (log.isEnabled('debug')) {
 			throw e;
+		}
+
+		if (this.options.error) {
+			this.options.error(e);
 		} else {
 			log.error(e);
 		}
+
 		this.event.trigger('error', e);
 	},
 
