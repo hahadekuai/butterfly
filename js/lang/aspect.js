@@ -2,7 +2,7 @@
  * Aspect
  * @author qijun.weiqj
  */
-define('lang.Aspect', function() {
+define('lang.Aspect', ['lang.Lang'], function(_) {
 
 var Aspect = function() {
 	this._list = [];
@@ -13,7 +13,7 @@ Aspect.prototype = {
 	before: function(target, pointcut, advice) {
 		intercept(this, target, pointcut, function(o) {
 			var ret = advice(o),
-				args = isArray(ret) ? ret : args;
+				args = _.isArray(ret) ? ret : args;
 
 			return o.method.apply(o.target, args);
 		});
@@ -71,7 +71,7 @@ var intercept = function(self, target, pointcut, callback) {
 		pointcut = [pointcut];
 	}
 
-	if (isArray(pointcut)) {
+	if (_.isArray(pointcut)) {
 		for (var i = 0, c = pointcut.length; i < c; i++) {
 			interceptItem(self, target, pointcut[i], callback);
 		}
@@ -112,13 +112,6 @@ var interceptItem = function(self, target, name, callback) {
 		target[name] = method;
 	}
 };
-
-
-// utility
-var toString = Object.prototype.toString,
-	isArray = function(o) {
-		return toString.apply(o) === '[object Array]'; 
-	};
 
 
 // static

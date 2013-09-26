@@ -4,69 +4,75 @@
  *
  * @author qijun.weiqj
 */
-define('jQuery', ['loader'], function(loader) {
+define('jQuery', function(loader) {
 
-var log = loader.require('log');
 
-if (log.isEnabled('info')) {
-	jQuery.fn.toString = function() {
-		var html = [];
-		this.each(function() {
-			if (!this.tagName) {
-				return;
-			}
+var debug = /\bdebug-jquery\b/.test(window.location.search);
 
-			var s = [],
-				tag = this.tagName.toLowerCase(),
-				id = this.id,
-				className = this.className;
-
-			s.push('<' + tag);
-			id && s.push(' id="' + id + '"');
-			className && s.push(' class="' + className + '"');
-			s.push('>');
-			html.push(s.join(''));
-		});
-
-		return html.join(', ');
-	};
+if (!debug) {
+	return jQuery;
 }
-//~
 
-if (log.isEnabled('debug')) {
-	var orijQuery = jQuery,
-		warn = console && console.warn ? 
-				orijQuery.proxy(console, 'warn') : orijQuery.noop;
 
-	jQuery = function(selector, context) {
-		if (typeof selector === 'string' && 
-				selector !== 'body' &&
-				!/^\s*</.test(selector) && 
-				!/^#/.test(selector)) {
-
-			if (context === undefined) {
-				warn('please specify context for '+ selector + ' in ', 
-						arguments.callee.caller);
-			}
-
-			if (/^\.\[-\w]+/.test(selector)) {
-				warn('please specify tag for selector ' + selector + ' in ', 
-						arguments.callee.caller);
-			}
+jQuery.fn.toString = function() {
+	var html = [];
+	this.each(function() {
+		if (!this.tagName) {
+			return;
 		}
 
-		return orijQuery.apply(this, arguments);
-	};
-	orijQuery.extend(jQuery, orijQuery);
-	jQuery.prototype = orijQuery.prototype;
-}
+		var s = [],
+			tag = this.tagName.toLowerCase(),
+			id = this.id,
+			className = this.className;
+
+		s.push('<' + tag);
+		id && s.push(' id="' + id + '"');
+		className && s.push(' class="' + className + '"');
+		s.push('>');
+		html.push(s.join(''));
+	});
+
+	return html.join(', ');
+};
+//~
+
+
+var orijQuery = jQuery,
+	warn = console && console.warn ? 
+			orijQuery.proxy(console, 'warn') : orijQuery.noop;
+
+jQuery = function(selector, context) {
+	if (typeof selector === 'string' && 
+			selector !== 'body' &&
+			!/^\s*</.test(selector) && 
+			!/^#/.test(selector)) {
+
+		if (context === undefined) {
+			warn('please specify context for '+ selector + ' in ', 
+				arguments.callee.caller);
+		}
+
+		if (/^\.\[-\w]+/.test(selector)) {
+			warn('please specify tag for selector ' + selector + ' in ', 
+				arguments.callee.caller);
+		}
+	}
+
+	return orijQuery.apply(this, arguments);
+};
+
+orijQuery.extend(jQuery, orijQuery);
+jQuery.prototype = orijQuery.prototype;
+
 
 return jQuery;
+
 
 });
 //~
 
 
-define('jquery', function() {
-	return jQuery;	
+define('jquery', ['jQuery'], function($) {
+	return $;	
 });

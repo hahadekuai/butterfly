@@ -12,10 +12,8 @@
 
 <script src="../js/port/loader.js"></script>
 
-<script src="../vendor/jquery-1.9.1.min.js"></script>
-
+<script src="../vendor/jquery.js"></script>
 <script src="../js/lang/jquery.js"></script>
-<script src="../js/lang/class.js"></script>
 <script src="../js/lang/log.js"></script>
 
 <script src="helper.js"></script>
@@ -23,14 +21,22 @@
 <script>
 butterfly.config({
 	root: '../js',
+	alias: {
+		Log: 'lang.Log',
+		Lang: 'lang.Lang',
+		Class: 'lang.Class'
+	},
 	path: {
 		'spec/': './'
 	}
 });
 
+
 define(['spec.Suite'], function() {
 	runJasmineTest();
 });
+
+
 </script>
 
 </body>

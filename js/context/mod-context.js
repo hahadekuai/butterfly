@@ -4,7 +4,7 @@
  */
 define('context.ModContext', 
 
-['jQuery', 'Class', 'Log', 'lang.Event', 'context.Context'], 
+['jQuery', 'lang.Class', 'lang.Log', 'lang.Event', 'context.Context'], 
 function($, Class, Log, Event, Context) {
 
 var log = new Log('context.ModContext');

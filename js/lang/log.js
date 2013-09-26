@@ -1,32 +1,163 @@
 /**
- * 简单日志模块
+ * Simple log support
  *
- * @author qijun.weiqj
+ * create new log instance
+ *
+ * var log = new Log(type)
+ * 
+ * log.log(msg, level)
+ * log.error(msg)
+ * log.warn(msg)
+ * log.info(msg)
+ * log.debug(msg)
+ * 
+ * log.LEVEL
+ * log.level
+ * log.isEnabled
+ *
+ * use global log direct
+ *
+ * log(msg, level)
+ * log.error(msg)
+ * log.warn(msg)
+ * log.info(msg)
+ * log.debug(msg)
  */
-define('lang.Log', ['loader', 'jQuery'], 
+define('lang.Log', ['jQuery'], function($) {
 
-function(loader, $) {
+'use strict'
 
-var Log = loader.require('log');
+
+var LEVEL = { none: 0, error: 1, warn: 2, info: 3, debug: 4 };
+var level = (function() {
+	var search = window.location.search,
+		level = (/\bdebug-log-level=(\w+)\b/.exec(search) || {})[1] || 'error';
+	return LEVEL[level];
+})();
+
+
+var exports = function(type) {
+	if (window === this) {
+		exports.log.apply(exports, arguments);
+		return exports;
+	} else {
+		return new Log(type);
+	}
+};
+
+
+/**
+ * can be overrided by other module
+ */
+exports.handler = window.console ? function(msg, level, type) {
+	var fn = console[level] ? console[level] : console.log,
+		args = $.isArray(msg) ? msg.slice(0) : [msg];
+	type && args.unshift('[' + type  + ']');
+
+	try {
+		fn.apply(window.console, args);
+	} catch (e) {}
+
+} : function() {};
+
+
+/**
+ * `Class` Log
+ */
+var Log = function(type) {
+	this.type = type || 'Anonymous';
+};
+
+
+var proto = Log.prototype = {
+	LEVEL: LEVEL,
+	level: level,
+
+	isEnabled: function(level) {
+		level = typeof level === 'string' ? LEVEL[level] : level;
+		return level <= this.level;	
+	},
+
+	log: function(msg, level) {
+		level = level || 'info';
+		if (this.isEnabled(level)) {
+			exports.handler(msg, level, this.type);
+		}
+		return this;
+	}
+};
+
+
+var slice = [].slice;
+$.each(LEVEL, function(level) {
+	proto[level] = function() {
+		return this.log(slice.call(arguments, 0), level);
+	};
+});
+//~Log
+
+
+$.extend(exports, proto);
+
+
+
+/**
+ * filter support
+ */
+(function() {
+
+var search = window.location.search,
+	filter = (/\bdebug-log-filter=([^&]+)/.exec(search) || {})[1];
+
+if (!filter) {
+	return;
+}
+
+
+var handler = exports.handler;
+exports.handler = function(message, level, name) {
+	if (name && name.indexOf(filter) !== -1 ||
+			message && message.toString().indexOf(filter) !== -1) {
+		handler(message, level, name)
+	}
+};
+
+		
+})();
+//~
+
+
+/**
+ * console support
+ */
+(function() {
 
 var body = null,
 	list = [],
 	search = window.location.search,
-	logConsole = /\bdebug-console=true\b/.test(search),
-	filter = (/\bdebug-log-filter=([^&]+)/.exec(search) || {})[1];
-
-// prepare for debug-console
-logConsole && 
-(function() {
-	var container = $('<div class="debug-container"></div>').appendTo('body'),
-		clear = $('<button class="clear">clear</button>').appendTo(container),
-		wrap = $('<p><textarea class="editor"></textarea><button class="go">Go</button></p>').appendTo(container),
-		
-		editor = $('textarea.editor', wrap),
-		go = $('button.go', wrap);
+	logConsole = /\bdebug-log-console\b/.test(search);
 
 
-	body = $('<div class="body"></div>').appendTo(container);
+if (!logConsole) {
+	return;
+}
+
+
+var prepare = function() {
+	var html = [
+		'<div class="debug-container">',
+			'<button class="clear"></button>',
+			'<p><textarea class="editor"></textarea><button class="go">Go</button></p>',
+			'<div class="body"></div>',
+		'</div>'
+		].join('');
+
+
+	var panel = $(html).appendTo('body'),
+		clear = $('button.clear', panel),
+		editor = $('textarea.editor', panel),
+		go = $('button.go', panel),
+		body = $('div.body', panel);
 
 	clear.on('click', function(e) {
 		body.empty();	
@@ -40,53 +171,33 @@ logConsole &&
 	$.each(list, function(index, message) {
 		body.append(message);
 	});	
-})();
+};
+
+prepare();
 
 
-var oriHandler = Log.handler;
-var handler = function(message, level, name) {
-	level = level || 'info'
-
-	if (!Log.isEnabled(level)) {
-		return;
-	}
-	
-	if (filter && !checkFilter(message, level, name)) {
-		return;
-	}
-
-	if (logConsole) {
-		var node = $('<p class="debug debug-' + level + '"></p>');
-		node.text((name ? '[' + name + '] ' : '') + message);
-		if (body) {
-			body.append(node);
-		} else {
-			list.push(node);
-		}
+var handler = exports.handler;
+exports.handler = function(message, level, name) {
+	var node = $('<p class="debug debug-' + level + '"></p>');
+	node.text((name ? '[' + name + '] ' : '') + message);
+	if (body) {
+		body.append(node);
 	} else {
-		oriHandler(message, level, name);
+		list.push(node);
 	}
-
-};
-
-var checkFilter = function(message, level, name) {
-	if (name && name.indexOf(filter) !== -1 ||
-			level === filter ||
-			message && message.indexOf(filter) !== -1) {
-		return true;
-	}
-	return false;
 };
 
 
-Log.handler = handler;
+})();
+//~
 
 
-return Log;
+return exports;
+
 
 });
 
 
 define('Log', ['lang.Log'], function(Log) {
-	return Log;	
+	return Log;
 });

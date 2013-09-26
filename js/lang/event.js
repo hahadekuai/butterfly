@@ -2,48 +2,93 @@
  * event 扩展
  * @author qijun.weiqj
  */
-define('lang.Event', ['loader', 'lang.Log'], function(loader, Log) {
+define('lang.Event', ['lang.Lang', 'lang.Log'], function(_, Log) {
 
-var util = loader.require('util'),
-	cEvent = loader.require('event'),
-	log = new Log('lang.Event');
+
+var log = new Log('lang.Event');
+
 
 var Event = function(target) {
-	this.event = new cEvent(target);
-	this.lazyList = [];
-
-	this.off = util.proxy(this.event, 'off');
+	this.target = target;
+	this.isLazy = false;
+	this._cache = {};
+	this._lazyList = [];
 };
 
+
 Event.prototype = {
-
 	on: function(type, fn) {
-		log.info('on', type);
+		log.debug('on', type);
 
-		var self = this;
-		this.event.on.apply(this.event, arguments);
-		this.lazy && util.each(this.lazyList, function(index, item) {
-			if (item.type === type) {
-				log.info('lazy trigger: ', type);
-				fn.apply(self.event.target, item.args);
-			}
-		});
+		var o = param(type),
+			list = this._cache[o.type];
+		if (!list) {
+			list = this._cache[o.type] = [];
+		}
+
+		list.push({ namespace: o.namespace, fn: fn });
+		this.isLazy && triggerLazy(this, type, fn);
+
+		return this;
 	},
+
+
+	off: function(type, fn) {
+		log.debug('off', type);
+
+		var o = param(type),
+			list = this._cache[o.type];
+		if (!list) {
+			return;
+		}
+		
+		for (var i = list.length - 1; i >= 0; i--) {
+			var item = list[i];
+			if (match(item.namespace, o.namespace) &&
+					(fn ? item.fn === fn : true)) {
+				list.splice(i, 1);
+			}
+		}
+		
+		if (list.length === 0) {
+			delete this._cache[o.type];
+		}
+
+		return this;
+	},
+
 
 	trigger: function(type) {
-		log.info('trigger', type);
-		this.lazy && this.lazyList.push({
-			type: type,
-			args: arguments
-		});
+		log.debug('trigger', type);
 
-		return this.event.trigger.apply(this.event, arguments);
+		this.isLazy && this._lazyList.push({ type: type, args: arguments });
+
+		var o = param(type),
+			list = this._cache[o.type];
+
+		if (!list || list.length === 0) {
+			return;
+		}
+
+		var ret,
+			args = [].slice.call(arguments, 1);
+
+		for (var i = 0, c = list.length; i < c; i++) {
+			var item = list[i];
+			if (match(item.namespace, o.namespace)) {
+				var tmp = item.fn.apply(this.target, args);
+				if (tmp !== undefined && tmp !== null) {
+					ret = tmp;
+				}
+				if (ret === false) {
+					break;
+				}
+			}
+		}
+
+		return ret;
 	},
 
-	off: function(type) {
-		log.info('off', type);
-		return this.event.off.apply(this.event, arguments);
-	},
 
 	one: function(type, fn) {
 		var self = this,
@@ -55,25 +100,53 @@ Event.prototype = {
 		this.on(type, wrap);
 	},
 
+
 	mixto: function(o) {
 		var self = this;
-		util.each(['on', 'off', 'trigger', 'one'], function(index, type) {
-			o[type] = o[type] || util.proxy(self, type);
+		_.each(['on', 'off', 'trigger', 'one'], function(index, type) {
+			o[type] = o[type] || _.proxy(self, type);
 		});
 		return this;
 	},
 
+
 	setTarget: function(target) {
-		this.event.target = target;
+		this.target = target;
 	},
 
-	setLazy: function(lazy) {
-		this.lazyList.length = 0;
-		this.lazy = lazy;
-	}
 
+	setLazy: function(lazy) {
+		this.isLazy = lazy;
+		this._lazyList.length = 0;
+	}
 };
 
+
+var param = function(type) {
+	var parts = type.split('.');
+	return {
+		type: parts[0],
+		namespace: parts.slice(1).join('.')
+	}	
+};
+
+
+var match = function(namespace, now) {
+	return now ? namespace.indexOf(now) === 0 : true;	
+};
+
+
+var triggerLazy = function(self, type, fn) {
+	_.each(self._lazyList, function(index, item) {
+		if (item.type === type) {
+			log.info('lazy trigger: ', type);
+			fn.apply(self.target, item.args);
+		}
+	});
+};
+
+
 return Event;
+
 
 });

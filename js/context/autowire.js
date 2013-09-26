@@ -3,7 +3,7 @@
  *
  * @author qijun.weiqj
  */
-define('context.Autowire', ['loader', 'jQuery', 'Class', 'Log'], 
+define('context.Autowire', ['loader', 'jQuery', 'lang.Class', 'lang.Log'], 
 
 function(loader, $, Class, Log) {
 

@@ -3,9 +3,8 @@
  *
  * @author qijun.weiqj
  */
-define('lang.Class', ['loader'], function(loader) {
+define('lang.Class', ['lang.Lang'], function(_) {
 
-var util = loader.require('util');
 
 /**
  * Из:
@@ -40,7 +39,7 @@ var Class = function(parent, o) {
 		proto = {};
 	}
 
-	klass.prototype = util.extend(proto, o);
+	klass.prototype = _.extend(proto, o);
 	return klass;
 };
 

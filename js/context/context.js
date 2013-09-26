@@ -2,7 +2,7 @@
  * 管理一组与节点相关的模块
  * @author qijun.weiqj
  */
-define('context.Context', ['jQuery', 'Class', 'Log'], 
+define('context.Context', ['jQuery', 'lang.Class', 'lang.Log'], 
 
 function($, Class, Log) {
 

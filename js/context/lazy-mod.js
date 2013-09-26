@@ -2,8 +2,8 @@
  * ÑÓ³ÙÄ£¿é°ü×°Æ÷
  */
 define('context.LazyMod', 
-		['require', 'jQuery', 'Log'], 
-		function(require, $, Log) {
+		['require', 'jQuery', 'lang.Log'], 
+		function(require, $, lang.Log) {
 
 var log = new Log('context.LazyMod');
 

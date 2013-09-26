@@ -4,7 +4,7 @@
  *
  * @author qijun.weiqj
  */
-define('context.Executor', ['jQuery', 'Class', 'Log'],
+define('context.Executor', ['jQuery', 'lang.Class', 'lang.Log'],
 
 function($, Class, Log) {
 

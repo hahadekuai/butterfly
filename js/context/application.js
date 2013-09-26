@@ -4,7 +4,7 @@
  */
 define('context.Application', 
 
-	['jQuery', 'Class', 'Log', 'lang.Event', 'context.Executor', 
+	['jQuery', 'lang.Class', 'lang.Log', 'lang.Event', 'context.Executor', 
 	'context.Context', 'context.ModContext', 'context.Autowire'], 
 
 function($, Class, Log, Event, Executor,
