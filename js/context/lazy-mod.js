@@ -2,14 +2,13 @@
  * 延迟模块包装器
  */
 define('context.LazyMod', 
-		['require', 'jQuery', 'lang.Log'], 
-		function(require, $, lang.Log) {
+		['jQuery', 'lang.Log'], 
+		function($, Log) {
 
 var log = new Log('context.LazyMod');
 
 
-// 先实现一个延时加载器, 因为这是一个非常基础的模块
-// 所以不依赖于ui.LazyInitializer
+// 实现一个延时加载器
 var win = $(window),
 	lazyList = [],
 	timer = null,
@@ -37,6 +36,7 @@ var lazy = function(div, options) {
 };
 //~
 
+
 var handle = function() {
 	timer = null;
 	var sTop = win.scrollTop(),
@@ -58,6 +58,7 @@ var handle = function() {
 	}
 };
 
+
 // 有时候页面比较复杂
 // 所以使用这个保证节点可以正常初始化
 var guard = function() {
@@ -70,6 +71,7 @@ var guard = function() {
 	setTimeout(fn, 500);
 };
 //~
+
 
 //全部模块加载事件
 //用于需要提前初始化所有懒加载模块的情况
@@ -90,6 +92,7 @@ var initAllLazyMode = function(){
 	win.trigger('initAllLazyModeDone');
 };
 
+
 // 返回一个被包装过的模块
 return function(target) {
 	var isFunc = typeof target === 'function',
@@ -104,15 +107,21 @@ return function(target) {
 			css = lazyOptions.css;
 
 		js && res.push.apply(res, $.makeArray(js));
-		css && res.push.apply(res, $.makeArray(css));
+		// TODO
+		// 需要兼容fdev5 loader，所以这里暂时不使用require加载资源，而使用jquery加载js
+		//css && res.push.apply(res, $.makeArray(css));
 
 		var loadRes = function() {
-			var defer = $.Deferred();
+			var defer = null;
 			if (res.length) {
-				require(res, function() {
-					defer.resolve();
+				defer = $.when();
+				$.each(res, function(index, url) {
+					defer = defer.pipe(function() {
+						return $.ajax(url, { dataType: 'script' });
+					});
 				});
 			} else {
+				defer = $.Deferred();
 				defer.resolve();
 			}
 			return defer;
