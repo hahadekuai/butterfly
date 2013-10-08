@@ -2,7 +2,7 @@ define('spec.Suite', [
 	'spec.lang.Class',
 	'spec.lang.Aspect',
 	'spec.lang.Event',
-	
+
 	'spec.util.ParserModule',
 	'spec.util.HtmlParser',
 	'spec.util.CssParser',
@@ -12,5 +12,5 @@ define('spec.Suite', [
 
 	'spec.context.Application',
 	'spec.context.ModContext'
-]);
+], function() {});
 

@@ -8,7 +8,10 @@ define('context.Executor', ['jQuery', 'lang.Class', 'lang.Log'],
 
 function($, Class, Log) {
 
+'use strict'
+
 var log = new Log('context.Executor');
+
 	
 return new Class({
 
@@ -18,6 +21,7 @@ return new Class({
 		this._timestamps = [];
 	},
 
+
 	_error: function(e) {
 		if (log.isEnabled('debug')) {
 			throw e;
@@ -25,6 +29,7 @@ return new Class({
 			log.error(e);
 		}
 	},
+
 
 	timestamp: function(name) {
 		var stamp = this._getstamp(name);
@@ -37,6 +42,7 @@ return new Class({
 		return stamp;
 	},
 
+
 	_getstamp: function(name) {
 		var stamps = this._timestamps;	
 		for (var i = 0, c = stamps.length; i < c; i++) {
@@ -45,6 +51,7 @@ return new Class({
 			}
 		}
 	},
+
 
 	report: function() {
 		var stamps = this._timestamps,
@@ -101,6 +108,7 @@ return new Class({
 		return lines.join('\n');
 	},
 
+
 	execute: function(name, fn) {
 		this.guid++;
 		if (!fn) {
@@ -122,6 +130,7 @@ return new Class({
 			this.error(e);
 		}
 	},
+
 
 	guid: 1
 	

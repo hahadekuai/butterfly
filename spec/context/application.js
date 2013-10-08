@@ -114,7 +114,7 @@ describe(this.id, function() {
 		}
 
 		var sum = 0;
-		define('myapp6.mod.Test', ['Class'], function(Class) {
+		define('myapp6.mod.Test', ['lang.Class'], function(Class) {
 			return Class({
 				init: function(node, config) {
 					this.config = config;

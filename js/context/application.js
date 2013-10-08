@@ -10,7 +10,10 @@ define('context.Application',
 function($, Class, Log, Event, Executor,
 		Context, ModContext, Autowire) {
 
+'use strict'
+
 var log = new Log('context.Application');
+
 
 var App = Class({
 	
@@ -227,7 +230,9 @@ var App = Class({
 
 });
 
+
 return App;
+
 
 });
 

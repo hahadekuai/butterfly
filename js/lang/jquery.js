@@ -6,6 +6,8 @@
 */
 define('jQuery', function(loader) {
 
+'use strict'
+
 
 var debug = /\bdebug-jquery\b/.test(window.location.search);
 

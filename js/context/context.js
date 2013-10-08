@@ -6,6 +6,9 @@ define('context.Context', ['jQuery', 'lang.Class', 'lang.Log'],
 
 function($, Class, Log) {
 
+'use strict'
+
+
 var Context = Class({
 
 	/**

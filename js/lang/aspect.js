@@ -4,10 +4,14 @@
  */
 define('lang.Aspect', ['lang.Lang'], function(_) {
 
+'use strict'
+
+
 var Aspect = function() {
 	this._list = [];
 	this.isAttached = true;
 };
+
 Aspect.prototype = {
 
 	before: function(target, pointcut, advice) {
@@ -19,6 +23,7 @@ Aspect.prototype = {
 		});
 		return this;
 	},
+	
 
 	after: function(target, pointcut, advice) {
 		intercept(this, target, pointcut, function(o) {
@@ -29,12 +34,14 @@ Aspect.prototype = {
 		return this;
 	},
 
+
 	around: function(target, pointcut, advice) {
 		intercept(this, target, pointcut, function(o) {
 			return advice(o);
 		});
 		return this;
 	},
+
 
 	attach: function(detach) {
 		var list = this._list;
@@ -46,6 +53,7 @@ Aspect.prototype = {
 		this.isAttached = true;
 		return this;
 	},
+
 
 	detach: function() {
 		var list = this._list,
@@ -84,6 +92,7 @@ var intercept = function(self, target, pointcut, callback) {
 	}
 	
 };
+
 
 var interceptItem = function(self, target, name, callback) {
 	var original = target[name];
@@ -124,6 +133,7 @@ var create = function(method) {
 	};
 };
 
+
 var methods = ['before', 'after', 'around'];
 for (var i = 0, c = methods.length; i < c; i++) {
 	create(methods[i]);
@@ -132,6 +142,7 @@ for (var i = 0, c = methods.length; i < c; i++) {
 	
 })();
 //~
+
 
 return Aspect;
 

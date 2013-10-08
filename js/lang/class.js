@@ -5,6 +5,8 @@
  */
 define('lang.Class', ['lang.Lang'], function(_) {
 
+'use strict'
+
 
 /**
  * Из:

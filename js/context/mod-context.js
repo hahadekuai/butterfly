@@ -7,10 +7,14 @@ define('context.ModContext',
 ['jQuery', 'lang.Class', 'lang.Log', 'lang.Event', 'context.Context'], 
 function($, Class, Log, Event, Context) {
 
+'use strict'
+
 var log = new Log('context.ModContext');
+
 
 var guid = $.now(),
 	proxy = function() {};
+
 
 /**
  * @param id
@@ -41,6 +45,7 @@ var ModContext = function(id, config) {
 };
 //~
 
+
 var Attach = new Class({
 
 	init: function(config) {
@@ -52,6 +57,7 @@ var Attach = new Class({
 		// 用于更快速地根据模块查询节点
 		this._cache = {};
 	},
+
 
 	before: function(context) {
 		this.context = context;
@@ -77,6 +83,7 @@ var Attach = new Class({
 		return false;
 	},
 
+
 	/**
 	 * context.start之后注册的模块会走query对节点进行初始化
 	 */
@@ -97,6 +104,7 @@ var Attach = new Class({
 		return nodes.length ? $(nodes) : null;
 	},
 
+
 	resolve: function(node) {
 		var config = this.config,
 			id = config.resolve ? config.resolve(node) : node.data('modId');
@@ -114,6 +122,7 @@ var Attach = new Class({
 		return id;
 	},
 
+
 	bind: function(node, name, type, module, params) {
 		var self = this;
 		if (node.length === 1) {
@@ -124,6 +133,7 @@ var Attach = new Class({
 			});
 		}
 	},
+
 
 	_bind: function(node, name, type, module, params) {
 		var config = this.config,
@@ -162,6 +172,7 @@ var Attach = new Class({
 		config.executor ? config.executor.execute(name, fn) : fn();
 	},
 
+
 	_nodeId: function(node) {
 		var id = node.attr('id');
 		if (!id) {
@@ -170,6 +181,7 @@ var Attach = new Class({
 		}
 		return id;
 	},
+
 
 	/**
 	 * 生成一个代理模块来处理异步加载模块

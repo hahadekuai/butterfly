@@ -4,6 +4,8 @@
  */
 define('lang.Event', ['lang.Lang', 'lang.Log'], function(_, Log) {
 
+'use strict'
+
 
 var log = new Log('lang.Event');
 

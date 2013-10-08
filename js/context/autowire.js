@@ -3,11 +3,15 @@
  *
  * @author qijun.weiqj
  */
-define('context.Autowire', ['loader', 'jQuery', 'lang.Class', 'lang.Log'], 
+define('context.Autowire', ['jQuery', 'lang.Class', 'lang.Log'], 
 
-function(loader, $, Class, Log) {
+function($, Class, Log) {
+
+'use strict'
+
 
 var log = new Log('context.Autowire');
+
 
 var Autowire = new Class({
 	
@@ -81,6 +85,7 @@ var Autowire = new Class({
 	}
 	
 });
+
 
 return Autowire;
 

@@ -10,7 +10,8 @@
 <script src="../vendor/jasmine/jasmine-html.js"></script>
 
 
-<script src="../js/port/loader.js"></script>
+<script src="http://style.c.aliimg.com/fdevlib/js/lofty/port/classic-debug.js"></script>
+<script src="../js/adapter/lofty.js"></script>
 
 <script src="../vendor/jquery.js"></script>
 <script src="../js/lang/jquery.js"></script>
@@ -18,15 +19,21 @@
 <script src="helper.js"></script>
 
 <script>
-butterfly.config({
-	root: '../js',
+lofty.config({
+	amd: true,
 	alias: {
 		Log: 'lang.Log',
 		Lang: 'lang.Lang',
 		Class: 'lang.Class'
 	},
-	path: {
-		'spec/': './'
+	resolve: function(id) {
+		id = id.replace(/\./g, '/')
+			.replace(/([a-z])([A-Z])/g, function(s, m1, m2) {
+				return m1 + '-'	+ m2;
+			}).toLowerCase();
+
+		var path = /^spec\//.test(id) ? '' : 'js/';
+		return 'http://style.c.aliimg.com/app/butterfly/' + path + id + '.js';
 	}
 });
 
