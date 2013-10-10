@@ -29,8 +29,8 @@ lofty('butterfly-lofty-adapter', ['module', 'use'], function(module, use) {
 			mods = [];
 		var check = function() {
 			if (now === depends.length) {
-				// åœ¨loftyå†…éƒ¨,requireç¬¬äºŒä¸ªå‚æ•°å¯èƒ½ä¸æ˜¯factory
-				// æ€ä¹ˆä¼šè¿™æ ·~~~
+				// ÔÚloftyÄÚ²¿,requireµÚ¶ş¸ö²ÎÊı¿ÉÄÜ²»ÊÇfactory
+				// ÔõÃ´»áÕâÑù~~~
 				factory && factory.apply && factory.apply(null, mods);
 			}
 		};
@@ -70,7 +70,7 @@ lofty('butterfly-lofty-adapter', ['module', 'use'], function(module, use) {
 			}
 
 			lofty.on('define', function(mod) {
-				// loftyå†…éƒ¨saveåœ¨defineä¹‹å, è€Œæˆ‘éœ€è¦åœ¨defineäº‹ä»¶ä¸­å°±èƒ½å–åˆ°æ¨¡å—
+				// loftyÄÚ²¿saveÔÚdefineÖ®ºó, ¶øÎÒĞèÒªÔÚdefineÊÂ¼şÖĞ¾ÍÄÜÈ¡µ½Ä£¿é
 				module.save(mod);
 
 				fn({
