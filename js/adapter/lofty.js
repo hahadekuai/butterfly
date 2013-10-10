@@ -4,7 +4,10 @@
 var butterfly = (function() {
 
 
-var exports = null;
+var exports = window.butterfly;
+if (exports && exports.adapter) {
+	return exports;
+}
 
 
 var each = function(iter, fn) {
@@ -51,6 +54,8 @@ lofty('butterfly-lofty-adapter', ['module', 'use'], function(module, use) {
 
 
 	exports = {
+		adapter: true,
+
 		define: define,
 
 		isDefine: function(id) {
